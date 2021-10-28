@@ -18,7 +18,7 @@
   text-align: right;
 }
 
-/* Base */
+/* Content */
 
 /* CSS for full page image: https://www.w3schools.com/howto/howto_css_full_page.asp */
 body {
@@ -55,6 +55,14 @@ h2 {
   text-transform: uppercase;
   font-family: 'Karla';
   padding-bottom: 2em;
+  margin-top: 2em;
+}
+
+.table-85 {
+  width: 85%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Header */
