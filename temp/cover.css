@@ -1,15 +1,45 @@
-/* Custom default button */
-.my-button,
-.my-button:hover,
-.my-button:focus {
+/* Button styling, overriding Bootstrap */
+.my-button {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  border-width: 2px;
+  font-family: 'Karla';
+  font-weight: normal;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
+.my-button:hover {
+  color: white;
+  background-color: #333 !important;
+  border-width: 2px;
+}
 
 /* Base */
+
+/* CSS for full page image: https://www.w3schools.com/howto/howto_css_full_page.asp */
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("images/games1.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .cover-container {
   max-width: 75em;
+}
+
+.small-box {
+  max-width: 40em;
+  padding: auto;
+  margin: auto;
+  text-align: center;
+}
+
+.caption {
+  background-color: black;
+  padding: 0.5em;
+  margin: 1em;
 }
 
 /* Header */
@@ -19,13 +49,12 @@
   background-color: transparent;
   border-bottom: .25rem solid transparent;
   font-family: 'Karla';
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: .1rem;
 }
 
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
+.nav-link:hover {
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
@@ -37,4 +66,20 @@
   color: #fff;
   border-bottom-color: #fff;
   font-weight: 700;
+}
+
+/* Footer */
+footer {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  opacity: 0.8;
+}
+
+.off-white {
+  color: #b0b9bb;
+}
+
+.off-white:hover {
+  color: white;
 }
