@@ -1,19 +1,10 @@
-// Environmental variables
-var dotenv = require('dotenv').config();
-
-var express = require('express');
-var app = express();
+const express = require('express');
+let router = express.Router();
 
 // Database
-var db = require('./config/db-connector')
+var db = require('../config/db-connector')
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
-
-// use res.render to load up an ejs view file
-
-// index page
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
         
     // Define our queries
     query1 = 'DROP TABLE IF EXISTS diagnostic;';
@@ -57,30 +48,4 @@ app.get('/', function(req, res) {
     });
 });
 
-
-
-// about page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
-
-app.get('/employees', function(req, res) {
-    res.render('pages/employees');
-});
-
-app.get('/wishes', function(req, res) {
-    res.render('pages/wishes');
-});
-
-app.get('/gifts', function(req, res) {
-    res.render('pages/gifts');
-});
-
-app.get('/games', function(req, res) {
-    res.render('pages/games');
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}; press Ctrl-C to terminate.`);
-});
+module.exports = router;
