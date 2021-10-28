@@ -1,0 +1,28 @@
+{
+  "name": "Game-Gifters",
+  "version": "1.0.0",
+  "description": "A DBMS for tracking gift exchanges among employees.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rngolam/Game-Gifters.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rngolam/Game-Gifters/issues"
+  },
+  "homepage": "https://github.com/rngolam/Game-Gifters#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ejs": "^3.1.6"
+  },
+  "engines": {
+    "node": "14.16.1"
+  }
+}
