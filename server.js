@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 // Database
-var db = require('./db-connector')
+var db = require('./config/db-connector')
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
