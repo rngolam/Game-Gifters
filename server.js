@@ -64,6 +64,22 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
+app.get('/employees', function(req, res) {
+    res.render('pages/employees');
+});
+
+app.get('/wishes', function(req, res) {
+    res.render('pages/wishes');
+});
+
+app.get('/gifts', function(req, res) {
+    res.render('pages/gifts');
+});
+
+app.get('/games', function(req, res) {
+    res.render('pages/games');
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}; press Ctrl-C to terminate.`);
