@@ -1,3 +1,6 @@
+// Environmental variables
+var dotenv = require('dotenv').config();
+
 var express = require('express');
 var app = express();
 
@@ -61,7 +64,7 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}; press Ctrl-C to terminate.`);
 });
