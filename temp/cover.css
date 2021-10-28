@@ -10,7 +10,7 @@
 
 .my-button:hover {
   color: white;
-  background-color: #333 !important;
+  background-color: rgba(0, 0, 0, 0) !important;
   border-width: 2px;
 }
 
