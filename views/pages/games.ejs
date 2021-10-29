@@ -1,21 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
+
 <head>
   <%- include('../partials/head'); %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/side-styles.css" rel="stylesheet">
+    <title>🎁 Game Gifters | Employees</title>
 </head>
-<body class="container">
 
-<header>
-  <%- include('../partials/header'); %>
-</header>
+<body class="d-flex h-100 text-center text-white bg-dark">
 
-<main>
-<!-- STUFF GOES HERE -->
-</main>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-<footer>
-  <%- include('../partials/footer'); %>
-</footer>
+    <%- include('../partials/header'); %>
+
+      <main class="small-box">
+        <h2>Games</h2>
+
+        <div class="dropdown">
+          <a class="btn my-button fw-bold border-white bg-white dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Select Action
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Add Game</a></li>
+            <li><a class="dropdown-item" href="#">Update Game</a></li>
+          </ul>
+        </div>
+
+        <div class="card text-dark bg-light mb-3">
+          <div class="card-header">Games / <strong>All</strong></div>
+
+          <div class="card-body">
+            <div class="data-desc">
+              <h5 class="card-title">🎮 Game Database</h5>
+              <p style="font-size: 13px;">The following table records a library of up to 500 games curated for the
+                employees to tailor their wishlists,
+                and allows you to add new game titles.</p>
+            </div>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Game ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>1</td>
+                  <td>Rocket League</td>
+                  <td>$9.99</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>2</td>
+                  <td>Divinity: Original Sin 2</td>
+                  <td>$49.99</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>3</td>
+                  <td>Don't Starve</td>
+                  <td>$14.99</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>4</td>
+                  <td>Phasmobia</td>
+                  <td>$13.99</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>5</td>
+                  <td>Destiny 2</td>
+                  <td>$69.99</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                  <td>6</td>
+                  <td>Deep Rock Galactic</td>
+                  <td>$29.99</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+    <%- include('../partials/footer'); %>
+
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

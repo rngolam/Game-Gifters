@@ -1,42 +1,48 @@
+<!--
+    Authors: Richie Ngo-Lam, Sola Chang
+    Project: Game Gifters
+    Group: 101, Phantom Team
+    Description: Game Gifters is a web app that emulates a video game wishlist and tracking system for the employees of a mid-sized company.
+    
+    Credits:
+    1. Boostrap 5.1 (https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+    2. Cover template base by mdo (https://getbootstrap.com/docs/5.1/examples/cover/)
+    3. Temporary logo (https://www.flaticon.com/free-icon/tinder_3845877#)
+    4. Background image on index.html (https://unsplash.com/photos/9SdZxvkGnZM)
+-->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
+
 <head>
   <%- include('../partials/head'); %>
+  <title>🎁 Game Gifters | Gaming Wishlists</title>
 </head>
-<body class="container">
 
-<header>
-  <%- include('../partials/header'); %>
-</header>
+<body class="d-flex h-100 text-center text-white bg-dark">
 
-<main>
-  <div class="jumbotron">
-    <h1>This is great</h1>
-    <p>Welcome to templating using EJS</p>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-    <h2>Database</h2>
-    <%- base %>
-    <p><%= results %></p>
+    <%- include('../partials/header'); %>
 
-    <h2>Variable</h2>
-    <p><%= tagline %></p>
+    <main class="small-box">
+      <h1>Game Gifters.</h1>
+      <p class="lead caption">
+        Game Gifters is a web app that emulates a video game wishlist and tracking system for the employees of a
+        mid-sized company.
+      </p>
+      <p class="lead">
+        <a href="/games" class="btn btn-lg my-button fw-bold border-white bg-white">Browse Games</a>
+      </p>
+    </main>
 
-    <ul>
-      <% mascots.forEach(function(mascot) { %>
-        <li>
-          <strong><%= mascot.name %></strong>
-          representing <%= mascot.organization %>,
-          born <%= mascot.birth_year %>
-        </li>
-      <% }); %>
-    </ul>
+    <%- include('../partials/footer'); %>
+
   </div>
-</main>
 
-<footer>
-  <%- include('../partials/footer'); %>
-</footer>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
