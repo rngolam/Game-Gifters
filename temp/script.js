@@ -2,11 +2,11 @@ var addModal = document.getElementById("modalBox1");
 var updateModal = document.getElementById("modalBox2");
 var filterModal = document.getElementById("modalBox3");
 
-function showAddModal() { // user clicks on action button
+function addEntry() { // user clicks on action button
     addModal.style.display = "block";
 }
 
-function showUpdateModal() { // user clicks on action button
+function updateEntry() { // user clicks on action button
     updateModal.style.display = "block";
 }
 
@@ -23,6 +23,7 @@ window.onclick = function(event) { // user clicks outside of (x)
         filterModal.style.display = "none";
     } 
 }
+
 
 function close1() {
     addModal.style.display = "none";
