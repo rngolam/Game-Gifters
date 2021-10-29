@@ -1,5 +1,4 @@
 /* Button styling, overriding Bootstrap */
-
 .my-button {
   color: #333;
   border-width: 2px;
@@ -18,7 +17,6 @@
 /* Base */
 
 /* CSS for full page image: https://www.w3schools.com/howto/howto_css_full_page.asp */
-
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../assets/images/games1.jpg");
   height: 100%;
@@ -45,7 +43,6 @@ body {
 }
 
 /* Header */
-
 .nav-masthead .nav-link {
   padding: .25rem 0;
   color: rgba(255, 255, 255, .5);
@@ -61,7 +58,7 @@ body {
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
-.nav-masthead .nav-link+.nav-link {
+.nav-masthead .nav-link + .nav-link {
   margin-left: 1rem;
 }
 
@@ -72,7 +69,6 @@ body {
 }
 
 /* Footer */
-
 footer {
   font-size: 10px;
   text-transform: uppercase;
