@@ -48,66 +48,31 @@
                   <th scope="col"></th>
                   <th scope="col">Wish ID</th>
                   <th scope="col">Game ID</th>
+                  <th scope="col">Game Title</th>
                   <th scope="col">Employee ID</th>
+                  <th scope="col">Employee Name</th>
                   <th scope="col">Wish Date</th>
                   <th scope="col">Fulfilled</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>1</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>2020-09-12</td>
-                  <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Yes</span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>2</td>
-                  <td>4</td>
-                  <td>4</td>
-                  <td>2020-10-04</td>
-                  <td><i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>3</td>
-                  <td>3</td>
-                  <td>1</td>
-                  <td>2021-03-29</td>
-                  <td><i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>4</td>
-                  <td>1</td>
-                  <td>4</td>
-                  <td>2021-05-05</td>
-                  <td><i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>5</td>
-                  <td>3</td>
-                  <td>2</td>
-                  <td>2021-05-18</td>
-                  <td><i class="fa fa-check-circle-o green"></i><span class="ms-1">Yes</span></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                  <td>6</td>
-                  <td>5</td>
-                  <td>5</td>
-                  <td>2021-06-21</td>
-                  <td><i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span></td>
-                </tr>
+                <% data.forEach(function(wish) { %>
+                  <tr>
+                      <td></td>
+                      <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                      <td><%= wish.wish_id %></td>
+                      <td><%= wish.game_id %></td>
+                      <td><%= wish.game_title %></td>
+                      <td><%= wish.associated_employee_id %></td>
+                      <td><%= wish.first_name + ' ' + wish.last_name %></td>
+                      <td><%= wish.date_wished %></td>
+                      <td><%= wish.fulfilled %></td>
+                  </tr>
+                <% }); %>
+                
+                <!-- Fulfilled yes/no graphic...save for later
+                <i class="fa fa-check-circle-o green"></i><span class="ms-1">Yes</span>
+                <i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span> -->
               </tbody>
             </table>
           </div>

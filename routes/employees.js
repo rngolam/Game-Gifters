@@ -1,11 +1,18 @@
 const express = require('express');
-let router = express.Router();
+const router = express.Router();
 
 // Database
-var db = require('../config/db-connector')
+const db = require('../config/db-connector')
 
 router.get('/', function(req, res) {
-    res.render('pages/employees');
+
+    const select_query = 'SELECT * FROM employees;';
+
+    db.pool.query(select_query, function(error, results, fields) {
+
+        res.render('pages/employees', {data: results});
+
+    });
 });
 
 module.exports = router;

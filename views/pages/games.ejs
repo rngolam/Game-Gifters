@@ -35,9 +35,14 @@
           <div class="card-body">
             <div class="data-desc">
               <h5 class="card-title">🎮 Game Database</h5>
-              <p style="font-size: 13px;">The following table records a library of up to 500 games curated for the
+              <p style="font-size: 13px;">
+                The following table records a library of up to 500 games curated for the
                 employees to tailor their wishlists,
-                and allows you to add new game titles.</p>
+                and allows you to add new game titles.
+              <br>
+              <br>
+                Note: Steam Store API integration is currently a WIP!
+              </p>
             </div>
 
             <table class="table table-hover">
@@ -45,13 +50,22 @@
                 <tr>
                   <th scope="col"></th>
                   <th scope="col"></th>
-                  <th scope="col">Game ID</th>
+                  <th scope="col">AppID</th>
                   <th scope="col">Title</th>
                   <th scope="col">Price</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <% data.forEach(function(game) { %>
+                  <tr>
+                      <td></td>
+                      <td><a href="#" onclick="updateEntry()">Update</a></td>
+                      <td><%= game.app_id %></td>
+                      <td><%= game.title %></td>
+                      <td><%= game.price %></td>
+                  </tr>
+                <% }); %>
+                <!-- <tr>
                   <td></td>
                   <td><a href="#" onclick="updateEntry()">Update</a></td>
                   <td>1</td>
@@ -92,7 +106,7 @@
                   <td>6</td>
                   <td>Deep Rock Galactic</td>
                   <td>$29.99</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -115,6 +129,10 @@
 
       <form>
         <div class="row g-2">
+          <div class="form-floating col">
+            <input type="text" class="form-control" id="floating1" placeholder="AppID" required>
+            <label for="floating1">AppID</label>
+          </div>
           <div class="form-floating col">
             <input type="text" class="form-control" id="floating1" placeholder="Game Title" required>
             <label for="floating1">Game Title</label>

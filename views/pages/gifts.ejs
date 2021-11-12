@@ -44,46 +44,29 @@
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Gift ID</th>
-                  <th scope="col">Wish ID</th>
-                  <th scope="col">Fulfilled By</th>
-                  <th scope="col">Gift Date</th>
+                  <th scope="col">Associated Wish ID</th>
+                  <th scope="col">Game Title</th>
+                  <th scope="col">Sender Employee ID</th>
+                  <th scope="col">Sender Name</th>
+                  <th scope="col">Recipient Name</th>
+                  <th scope="col">Date Sent</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td></td>
-                  <td>1</td>
-                  <td>3</td>
-                  <td>1</td>
-                  <td>2021-12-23</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>2</td>
-                  <td>1</td>
-                  <td>3</td>
-                  <td>2021-12-18</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>3</td>
-                  <td>2</td>
-                  <td>1</td>
-                  <td>2021-12-03</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>4</td>
-                  <td>4</td>
-                  <td>2</td>
-                  <td>2020-12-03</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>5</td>
-                  <td>5</td>
-                  <td>1</td>
-                  <td>2021-12-02</td>
+                  <% data.forEach(function(gift) { %>
+                    <tr>
+                        <td></td>
+                        <td><%= gift.gift_id %></td>
+                        <td><%= gift.associated_wish_id %></td>
+                        <td><%= gift.game_title %></td>
+                        <td><%= gift.sender_id %></td>
+                        <td><%= gift.sender_first_name + ' ' + gift.sender_last_name %></td>
+                        <td><%= gift.recipient_first_name + ' ' + gift.recipient_last_name %></td>
+                        <td><%= gift.date_sent %></td>
+                    </tr>
+                  <% }); %>
                 </tr>
               </tbody>
             </table>
