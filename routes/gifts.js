@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Database
-var db = require('../config/db-connector')
+const db = require('../config/db-connector')
 
 router.get('/', function(req, res) {
     

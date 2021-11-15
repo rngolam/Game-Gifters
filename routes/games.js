@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Database
-var db = require('../config/db-connector')
+const db = require('../config/db-connector')
 
 router.get('/', function(req, res) {
     
@@ -10,9 +10,18 @@ router.get('/', function(req, res) {
 
     db.pool.query(select_query, function(error, results, fields) {
 
+        // Convert price from cents to dollars
+        for (let result of results) {
+            result.price = convertPrice(result.price)
+        }
+
         res.render('pages/games', {page_name: 'games', data: results});
 
     });
 });
+
+function convertPrice(price) {
+    return price / 100;
+}
 
 module.exports = router;
