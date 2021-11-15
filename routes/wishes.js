@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
     db.pool.query(select_query, function(error, results, fields) {
 
-        res.render('pages/wishes', {data: results});
+        res.render('pages/wishes', {page_name: 'wishes', data: results});
 
     });
 });

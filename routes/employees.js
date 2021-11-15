@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 
     db.pool.query(select_query, function(error, results, fields) {
 
-        res.render('pages/employees', {data: results});
+        res.render('pages/employees', {page_name: 'employees', data: results});
 
     });
 });

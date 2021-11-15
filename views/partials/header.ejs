@@ -2,11 +2,11 @@
     <div>
         <h3 class="float-md-start mb-0"><img src="assets/images/G_logo.png" width="50" height="50"></h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/employees">Employees</a>
-            <a class="nav-link" href="/wishes">Wishes</a>
-            <a class="nav-link" href="/gifts">Gifts</a>
-            <a class="nav-link" href="/games">Games</a>
+            <a class="nav-link <% if (page_name === 'home') { %>active<% } %>" href="/">Home</a>
+            <a class="nav-link <% if (page_name === 'employees') { %>active<% } %>" href="/employees">Employees</a>
+            <a class="nav-link <% if (page_name === 'wishes') { %>active<% } %>" href="/wishes">Wishes</a>
+            <a class="nav-link <% if (page_name === 'gifts') { %>active<% } %>" href="/gifts">Gifts</a>
+            <a class="nav-link <% if (page_name === 'games') { %>active<% } %>" href="/games">Games</a>
         </nav>
     </div>
 </header>
