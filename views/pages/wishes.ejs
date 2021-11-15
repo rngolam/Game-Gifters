@@ -65,7 +65,13 @@
                       <td><%= wish.associated_employee_id %></td>
                       <td><%= wish.first_name + ' ' + wish.last_name %></td>
                       <td><%= wish.date_wished %></td>
-                      <td><%= wish.fulfilled %></td>
+                      <td>
+                        <% if (wish.fulfilled) { %>
+                          <i class="fa fa-check-circle-o green"></i><span class="ms-1">Yes</span>
+                        <% } else { %>
+                          <i class="fa fa-dot-circle-o text-danger"></i><span class="ms-1">No</span>
+                        <% } %>
+                      </td>
                   </tr>
                 <% }); %>
                 
