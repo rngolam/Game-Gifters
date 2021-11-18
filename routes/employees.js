@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function(req, res) {
+function getEmployees(res, db) {
 
-    let db = req.app.get('mysql');
-    let select_query = 'SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth FROM employees';
+    let select_query = 'SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth ' +
+    'FROM employees';
 
     db.pool.query(select_query, function(error, results, fields) {
 
-        res.render('pages/employees', {page_name: 'employees', data: results});
-
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.render('pages/employees', {page_name: 'employees', data: results});
+        }
     });
-});
+}
 
-router.post('/add-employee', function(req, res) {
+function addEmployee(res, data, db) {
 
-    let data = req.body;
-
-    let db = req.app.get('mysql');
     let insert_query = 'INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth) ' +
     'VALUES (?, ?, ?, ?, ?, ?);';
 
@@ -34,8 +35,22 @@ router.post('/add-employee', function(req, res) {
             // Send results of query back
             res.send(results);
         }
-    })
+    });
+}
 
+
+router.get('/', function(req, res) {
+
+    let db = req.app.get('mysql');
+    getEmployees(res, db);
+
+});
+
+router.post('/add-employee', function(req, res) {
+
+    let data = req.body;
+    let db = req.app.get('mysql');
+    addEmployee(res, data, db);
 });
 
 module.exports = router;
