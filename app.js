@@ -11,11 +11,12 @@ app.set('view engine', 'ejs');
 // Set global app db config
 app.set('mysql', mysql);
 
+// Handle JSON and Form Data
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 // Set root directory for static assets
 app.use(express.static('public'));
-
-// Handle JSON and Form Data
-app.use(express.urlencoded({extended: true}))
 
 // Set up routes
 const index = require('./routes/index');
