@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-// Database
-const db = require('../config/db-connector')
-
 router.get('/', function(req, res) {
     
-    const select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
+    let db = req.app.get('mysql');
+    let select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
     'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished, fulfilled ' +
     'FROM wishes ' +
     'INNER JOIN games ON wishes.game_id=games.app_id ' +

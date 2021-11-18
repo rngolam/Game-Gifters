@@ -1,15 +1,23 @@
 // Environmental variables
-var dotenv = require('dotenv').config();
+require('dotenv').config();
 
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const mysql = require('./config/db-connector')
 
-// set the view engine to ejs
+// Set the view engine to ejs
 app.set('view engine', 'ejs');
+
+// Set global app db config
+app.set('mysql', mysql);
 
 // Set root directory for static assets
 app.use(express.static('public'));
 
+// Handle JSON and Form Data
+app.use(express.urlencoded({extended: true}))
+
+// Set up routes
 const index = require('./routes/index');
 const employees = require('./routes/employees');
 const games = require('./routes/games');
@@ -22,7 +30,7 @@ app.use('/games', games);
 app.use('/gifts', gifts);
 app.use('/wishes', wishes);
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}; press Ctrl-C to terminate.`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}; press Ctrl-C to terminate.`);
 });
