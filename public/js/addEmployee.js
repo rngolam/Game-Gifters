@@ -6,21 +6,23 @@ addEmployeeForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     // Get values from form fields
-    let firstNameValue = document.getElementById('firstName').value;
-    let lastNameValue = document.getElementById('lastName').value;
-    let emailValue = document.getElementById('email').value;
-    let departmentValue = document.getElementById('department').value;
-    let phoneValue = document.getElementById('phone').value;
-    let birthdateValue = document.getElementById('birthdate').value;
+    let firstNameInput = document.getElementById('firstName');
+    let lastNameInput = document.getElementById('lastName');
+    let emailInput = document.getElementById('email');
+    let departmentInput = document.getElementById('department');
+    let phoneInput = document.getElementById('phone');
+    let birthdateInput = document.getElementById('birthdate');
 
     let formData = {
-        firstName: firstNameValue,
-        lastName: lastNameValue,
-        email: emailValue,
-        department: departmentValue,
-        phone: phoneValue,
-        birthdate: birthdateValue
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        email: emailInput.value,
+        department: departmentInput.value,
+        phone: phoneInput.value,
+        birthdate: birthdateInput.value
     }
+
+    let formFields = [firstNameInput, lastNameInput, emailInput, departmentInput, phoneInput, birthdateInput]
 
     // Set up AJAX request
     let req = new XMLHttpRequest();
@@ -33,6 +35,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
             
             let responseData = JSON.parse(req.response);
             addRowToTable(formData, responseData);
+            clearForm(formFields);
             close1();
         
         }
@@ -77,4 +80,8 @@ addRowToTable = (formData, responseData) => {
 
     employeeTable.appendChild(row);
 
+}
+
+clearForm = (fields) => {
+    fields.forEach(field => field.value = '');
 }
