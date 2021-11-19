@@ -13,7 +13,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
     let phoneValue = document.getElementById('phone').value;
     let birthdateValue = document.getElementById('birthdate').value;
 
-    let data = {
+    let formData = {
         firstName: firstNameValue,
         lastName: lastNameValue,
         email: emailValue,
@@ -30,7 +30,10 @@ addEmployeeForm.addEventListener('submit', function(event) {
     req.onreadystatechange = () => {
 
         if (req.readyState == 4 && req.status == 200) {
-            console.log('Success!');
+            
+            let responseData = JSON.parse(req.response);
+            addRowToTable(formData, responseData);
+            close1();
         
         }
         
@@ -39,6 +42,39 @@ addEmployeeForm.addEventListener('submit', function(event) {
         }
     }
 
-    req.send(JSON.stringify(data));
+    req.send(JSON.stringify(formData));
 
 });
+
+addRowToTable = (formData, responseData) => {
+
+    let employeeTable = document.getElementById('employee-table-body');
+    let insertedRowId = responseData.insertId;
+    
+    let row = document.createElement('tr');
+    let padCell = document.createElement('td');
+    let updateCell = document.createElement('td');
+    let idCell = document.createElement('td');
+    let firstNameCell = document.createElement('td');
+    let lastNameCell = document.createElement('td');
+    let departmentCell = document.createElement('td');
+    let emailCell = document.createElement('td');
+    let phoneCell = document.createElement('td');
+    let dobCell = document.createElement('td');
+
+    // Fill cells with data
+    updateCell.innerHTML = '<a href="#" onclick="updateEntry()">Update</a>';
+    idCell.innerText = insertedRowId;
+    firstNameCell.innerText = formData.firstName;
+    lastNameCell.innerText = formData.lastName;
+    departmentCell.innerText = formData.department;
+    emailCell.innerText = formData.email;
+    phoneCell.innerText = formData.phone;
+    dobCell.innerText = formData.birthdate;
+
+    cells = [padCell, updateCell, idCell, firstNameCell, lastNameCell, departmentCell, emailCell, phoneCell, dobCell];
+    cells.forEach(cell => row.appendChild(cell));
+
+    employeeTable.appendChild(row);
+
+}
