@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `wishes` (
   `game_id` int(8) NOT NULL,
   `wished_by` int(11) NOT NULL,
   `date_wished` date NOT NULL,
-  `fulfilled` tinyint(1) NOT NULL DEFAULT '0',
+  `fulfilled` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`wish_id`),
   UNIQUE KEY `game_id` (`game_id`,`wished_by`),
   KEY `fk_employee` (`wished_by`),

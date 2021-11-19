@@ -1,4 +1,4 @@
-let addEmployeeForm = document.getElementById('add-wish-form');
+const addEmployeeForm = document.getElementById('add-wish-form');
 
 addEmployeeForm.addEventListener('submit', function(event) {
 
@@ -6,24 +6,24 @@ addEmployeeForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     // Get values from form fields
-    let gameIDInput = document.getElementById('gameID');
-    let employeeFirstNameInput = document.getElementById('employeeFirstName');
-    let employeeLastNameInput = document.getElementById('employeeLastName');
-    let dateWishedInput = document.getElementById('dateWished');
-    let fulfilledInput = document.getElementById('fulfilled');
+    const gameIDInput = document.getElementById('gameID');
+    const employeeFirstNameInput = document.getElementById('employeeFirstName');
+    const employeeLastNameInput = document.getElementById('employeeLastName');
+    const dateWishedInput = document.getElementById('dateWished');
+    const fulfilledInput = document.getElementById('fulfilled');
 
-    let formData = {
-        gameID: gameIDInput.value,
+    const formData = {
+        gameID: getHiddenGameID(),
         employeeFirstName: employeeFirstNameInput.value,
         employeeLastName: employeeLastNameInput.value,
         dateWished: dateWishedInput.value,
         fulfilled: fulfilledInput.checked
     }
 
-    let formFields = [gameIDInput, employeeFirstNameInput, employeeLastNameInput, dateWishedInput, fulfilledInput]
+    const formFields = [gameIDInput, employeeFirstNameInput, employeeLastNameInput, dateWishedInput, fulfilledInput]
 
     // Set up AJAX request
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('POST', '/wishes/add-wish', true);
     req.setRequestHeader('Content-type', 'application/json');
 
@@ -31,7 +31,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
         if (req.readyState == 4 && req.status == 200) {
             
-            let responseData = JSON.parse(req.response);
+            const responseData = JSON.parse(req.response);
             addRowToTable(formData, responseData);
             clearForm(formFields);
             close1();
@@ -49,19 +49,19 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 addRowToTable = (formData, responseData) => {
 
-    let wishesTable = document.getElementById('wishes-table-body');
-    let insertedRowId = responseData.insertId;
+    const wishesTable = document.getElementById('wishes-table-body');
+    const insertedRowId = responseData.insertId;
     
-    let row = document.createElement('tr');
-    let padCell = document.createElement('th');
-    let deleteCheckboxCell = document.createElement('td');
-    let wishIDCell = document.createElement('td');
-    let gameIDCell = document.createElement('td');
-    let gameTitleCell = document.createElement('td');
-    let associatedEmployeeIDCell = document.createElement('td');
-    let employeeNameCell = document.createElement('td');
-    let dateWishedCell = document.createElement('td');
-    let fulfilledCell = document.createElement('td');
+    const row = document.createElement('tr');
+    const padCell = document.createElement('th');
+    const deleteCheckboxCell = document.createElement('td');
+    const wishIDCell = document.createElement('td');
+    const gameIDCell = document.createElement('td');
+    const gameTitleCell = document.createElement('td');
+    const associatedEmployeeIDCell = document.createElement('td');
+    const employeeNameCell = document.createElement('td');
+    const dateWishedCell = document.createElement('td');
+    const fulfilledCell = document.createElement('td');
 
     // Fill cells with data
     deleteCheckboxCell.innerHTML = '<input class="form-check-input" type="checkbox">'
@@ -84,6 +84,17 @@ addRowToTable = (formData, responseData) => {
 
     wishesTable.appendChild(row);
 
+}
+
+
+getHiddenGameID = () => {
+
+    // Get currently selected game title string
+    const title = $('#gameID').val();
+
+    // First retrieves datalist option node in DOM where value = title, then access
+    // the option's hidden data-value attribute
+    return $('#gameTitles [value="' + title + '"]').data('value');
 }
 
 clearForm = (fields) => {
