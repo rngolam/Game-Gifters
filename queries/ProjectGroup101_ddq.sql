@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
 
 -- Dumping structure for table heroku_833f8f811c7ce79.games
 CREATE TABLE IF NOT EXISTS `games` (
-  `app_id` int(7) ZEROFILL NOT NULL DEFAULT 00000000,
+  `app_id` int(8) NOT NULL,
   `title` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`app_id`)
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `games` (
 -- Dumping structure for table heroku_833f8f811c7ce79.wishes
 CREATE TABLE IF NOT EXISTS `wishes` (
   `wish_id` int(11) NOT NULL AUTO_INCREMENT,
-  `game_id` int(7) ZEROFILL NOT NULL,
+  `game_id` int(8) NOT NULL,
   `wished_by` int(11) NOT NULL,
   `date_wished` date NOT NULL,
   `fulfilled` tinyint(1) NOT NULL DEFAULT '0',
@@ -91,29 +91,25 @@ INSERT INTO `games` (`app_id`, `title`, `price`) VALUES
 	(435150, 'Divinity: Original Sin 2', 44.99),
 	(548430, 'Deep Rock Galactic', 29.99),
 	(739630, 'Phasmophobia', 13.99),
-	(1085660, 'Destiny 2', 69.99),
-  (00005, 'test', 0.99);
+	(1085660, 'Destiny 2', 69.99);
 /*!40000 ALTER TABLE `games` ENABLE KEYS */;
 
 -- Dumping data for table heroku_833f8f811c7ce79.wishes: ~0 rows (approximately)
 /*!40000 ALTER TABLE `wishes` DISABLE KEYS */;
 INSERT INTO `wishes` (`game_id`, `wished_by`, `date_wished`, `fulfilled`) VALUES
-	(322330, 35, '2020-09-12', 1),
-	(739630, 35, '2020-10-04', 0),
-	(322330, 5, '2021-03-29', 0),
-	(252950, 35, '2021-05-05', 0),
-	(322330, 15, '2021-05-18', 1),
-	(1085660, 45, '2021-06-21', 0);
+	(322330, 4, '2020-09-12', 1),
+	(739630, 4, '2020-10-04', 0),
+	(322330, 1, '2021-03-29', 0),
+	(252950, 4, '2021-05-05', 0),
+	(322330, 2, '2021-05-18', 1),
+	(1085660, 5, '2021-06-21', 0);
 /*!40000 ALTER TABLE `wishes` ENABLE KEYS */;
 
 -- Dumping data for table heroku_833f8f811c7ce79.gifts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `gifts` DISABLE KEYS */;
-INSERT INTO `gifts` (`gift_id`, `wish_id`, `fulfilled_by`, `date_sent`) VALUES
-	(5, 25, 5, '2021-12-23'),
-	(15, 5, 25, '2021-12-18'),
-	(25, 15, 5, '2021-12-03'),
-	(35, 35, 15, '2020-12-03'),
-	(45, 45, 5, '2021-12-02');
+INSERT INTO `gifts` (`wish_id`, `fulfilled_by`, `date_sent`) VALUES
+	(1, 2, '2021-12-23'),
+	(5, 5, '2021-12-18');
 /*!40000 ALTER TABLE `gifts` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
