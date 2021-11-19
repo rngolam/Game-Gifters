@@ -94,17 +94,15 @@
       <h2>New Wish</h2>
       <p>Add a new employee wish to the database.</p><br>
 
-      <form>
+      <form id="add-wish-form">
         <div class="row mb-3">
-          <label for="datalist" class="col-sm-2 col-form-label">Game Title</label>
+          <label for="datalist" class="col-sm-2 col-form-label">Search for a game...</label>
           <div class="col-sm-10">
-            <input class="form-control" list="datalistOptions" id="datalist" placeholder="Type to search..." required>
+            <input class="form-control" list="datalistOptions" id="datalist" placeholder="Game Title" required>
             <datalist id="datalistOptions">
-              <option value="Don't Starve Together">
-              <option value="Divinity: Original Sin 2">
-              <option value="Cat Quest 2">
-              <option value="Phasmobia">
-              <option value="100% Orange Juice">
+              <% games.forEach(function(game) { %>
+                <option id="<%= game.app_id %>" value="<%= game.title %>"></option>
+              <% }) %>
             </datalist>
           </div>
         </div>

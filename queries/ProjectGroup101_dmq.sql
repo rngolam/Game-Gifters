@@ -1,7 +1,7 @@
 /* colon : character denotes the variables that will have data from the backend programming language */
 
 -- Get all rows in the Employees table to populate the Employees page
-SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth FROM employees
+SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth FROM employees;
 
 -- Get all rows in the Games table to populate the Games page
 SELECT * FROM games;
@@ -37,7 +37,7 @@ VALUES (:game_id_input, :wished_by_input, :date_wished_from_date_input, :fulfill
 
 -- Add a new Gift
 INSERT INTO gifts (wish_id, fulfilled_by, date_sent)
-VALUES (:wish_id_input, :fulfilled_by_input, :date_sent_from_date_input)
+VALUES (:wish_id_input, :fulfilled_by_input, :date_sent_from_date_input);
 
 -- Update an Employee's data based on submission of the Update Employee form
 UPDATE employees
@@ -47,14 +47,14 @@ department=:department_from_dropdown_input,
 email=:email_input,
 phone=:phone_input,
 date_of_birth=:date_of_birth_from_date_input
-WHERE employee_id=:employee_id_from_update_form
+WHERE employee_id=:employee_id_from_update_form;
 
 -- Update a Game's metadata based on submission of the Update Game form
 UPDATE games
 SET app_id=:app_id_input,
 title=:title_input,
 price=:price_input
-WHERE app_id=:app_id_from_update_form
+WHERE app_id=:app_id_from_update_form;
 
 -- Delete a Wish
 DELETE FROM wishes WHERE wish_id=:wish_id_checked_on_wishes_page;
