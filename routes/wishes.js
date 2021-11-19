@@ -38,6 +38,47 @@ getGames = (res, db, context, complete) => {
     });
 }
 
+addWish = (res, data, db) => {
+
+    // Get employee
+    let employee_search_query = 'SELECT employee_id FROM employees ' +
+    'WHERE first_name = ? AND last_name = ?';
+
+    let inserts = [data.employeeFirstName, data.employeeLastName]
+
+    db.pool.query(employee_search_query, inserts, function(error, results, fields) {
+
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        
+        } else {
+            
+            data.fulfilled = data.fulfilled || 0;
+            let employee_id = results[0].employee_id;
+
+            let insert_query = 'INSERT INTO wishes (game_id, wished_by, date_wished, fulfilled) ' +
+            'VALUES (?, ?, ?, ?)';
+
+            let inserts = [data.gameID, employee_id, data.dateWished, data.fulfilled]
+
+            db.pool.query(insert_query, inserts, function(error, results, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                
+                } else {
+
+                    res.send(results);
+
+                }
+            })
+        }
+    })
+
+}
+
 
 router.get('/', function(req, res) {
     
@@ -55,5 +96,13 @@ router.get('/', function(req, res) {
         }
     }
 });
+
+router.post('/add-wish', function(req, res) {
+
+    let data = req.body;
+    let db = req.app.get('mysql');
+    addWish(res, data, db);
+
+})
 
 module.exports = router;

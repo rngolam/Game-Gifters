@@ -54,7 +54,7 @@
                   <th scope="col">Fulfilled</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="wishes-table-body">
                 <% data.forEach(function(wish) { %>
                   <tr>
                       <td></td>
@@ -96,12 +96,12 @@
 
       <form id="add-wish-form">
         <div class="row mb-3">
-          <label for="datalist" class="col-sm-2 col-form-label">Search for a game...</label>
+          <label for="gameTitle" class="col-sm-2 col-form-label">Search for a game...</label>
           <div class="col-sm-10">
-            <input class="form-control" list="datalistOptions" id="datalist" placeholder="Game Title" required>
-            <datalist id="datalistOptions">
+            <input class="form-control" list="gameTitles" id="gameID" placeholder="Game Title" required>
+            <datalist id="gameTitles">
               <% games.forEach(function(game) { %>
-                <option id="<%= game.app_id %>" value="<%= game.title %>"></option>
+                <option value="<%= game.app_id %>"><%= game.title %></option>
               <% }) %>
             </datalist>
           </div>
@@ -109,23 +109,23 @@
 
         <div class="row g-2" style="padding-top: 1.6em;">
           <div class="col-md form-floating">
-            <input type="text" class="form-control" id="floating1" placeholder="First Name" required>
-            <label for="floating1">Employee First Name</label>
+            <input type="text" class="form-control" id="employeeFirstName" placeholder="First Name" required>
+            <label for="employeeFirstName">Employee First Name</label>
           </div>
           <div class="col-md form-floating">
-            <input type="text" class="form-control" id="floating2" placeholder="Last Name" required>
-            <label for="floating2">Employee Last Name</label>
+            <input type="text" class="form-control" id="employeeLastName" placeholder="Last Name" required>
+            <label for="employeeLastName">Employee Last Name</label>
           </div>
           <div class="form-floating col">
-            <input type="date" class="form-control" id="today" placeholder="Date Wished">
-            <label for="today">Wish Date</label>
+            <input type="date" class="form-control" id="dateWished" placeholder="Date Wished">
+            <label for="dateWished">Wish Date</label>
           </div>
         </div>
 
         <div class="row g-2" style="padding: 1.2em;">
           <div class="col-md form-check form-switch" style="text-align: left;">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Wish fulfilled</label>
+            <input class="form-check-input" type="checkbox" id="fulfilled">
+            <label class="form-check-label" for="fulfilled">Wish fulfilled</label>
           </div>
         </div>
 
@@ -186,6 +186,7 @@
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/addWish.js"></script>
 
   <!-- Custom Scripts -->
   <script>
@@ -193,7 +194,7 @@
       document.getElementById("modalBox2").style.display = "block";
     }
 
-    document.querySelector("#today").valueAsDate = new Date();
+    document.querySelector("#dateWished").valueAsDate = new Date();
   </script>
 
 
