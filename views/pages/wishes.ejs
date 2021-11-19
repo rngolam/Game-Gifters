@@ -96,13 +96,15 @@
 
       <form id="add-wish-form">
         <div class="row mb-3">
-          <label for="gameTitle" class="col-sm-2 col-form-label">Search for a game...</label>
+          <label for="gameTitle" class="col-sm-2 col-form-label">Game Title</label>
           <div class="col-sm-10">
-            <input class="form-control" list="gameTitles" id="gameID" placeholder="Game Title" required>
+            <input class="form-control" list="gameTitles" id="gameID" placeholder="Search for a game..." autocomplete="off" required>
             <datalist id="gameTitles">
-              <% games.forEach(function(game) { %>
-                <option value="<%= game.app_id %>"><%= game.title %></option>
-              <% }) %>
+              <select>
+                <% games.forEach(function(game) { %>
+                  <option value="<%= game.app_id %>"><%= game.title %></option>
+                <% }) %>
+              </select>
             </datalist>
           </div>
         </div>
