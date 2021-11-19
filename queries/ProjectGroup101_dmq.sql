@@ -36,8 +36,14 @@ INSERT INTO wishes (game_id, wished_by, date_wished, fulfilled)
 VALUES (:game_id_input, :wished_by_input, :date_wished_from_date_input, :fulfilled_from_toggle_switch_input);
 
 -- Add a new Gift
+-- Conditional insert: Employee cannot send gift to themselves
+-- dual = dummy table
 INSERT INTO gifts (wish_id, fulfilled_by, date_sent)
-VALUES (:wish_id_input, :fulfilled_by_input, :date_sent_from_date_input);
+SELECT (:wish_id_input, :fulfilled_by_input, :date_sent_from_date_input); FROM dual
+WHERE NOT EXISTS
+(SELECT * FROM wishes
+INNER JOIN employees AS recipient ON wishes.wished_by=recipient.employee_id
+WHERE wishes.wish_id=:wish_id_input AND :fulfilled_by_input);
 
 -- Update an Employee's data based on submission of the Update Employee form
 UPDATE employees
@@ -72,6 +78,10 @@ WHERE app_id=:app_id_from_update_button;
 SELECT * FROM employees WHERE department=:department_checked;
 -- ... we can use a loop in the backend language along with the UNION operator to string multiple queries together
 -- and filter by multiple departments if more than 1 box is checked
+
+-- Get an Employee by first and last name
+SELECT employee_id FROM employees 
+WHERE first_name = :first_name_from_input AND last_name = :last_name_from_input;
 
 -- Get Wishes filtered by Employee name
 SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id,
