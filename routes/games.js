@@ -14,11 +14,6 @@ function getGames(res, db) {
         
         } else {
             
-            // Convert price from cents to dollars
-            for (let result of results) {
-                result.price = convertPrice(result.price)
-            }            
-            
             res.render('pages/games', {page_name: 'games', data: results});
         
         }
@@ -30,7 +25,7 @@ function addGame(res, data, db) {
     let insert_query = 'INSERT INTO games (app_id, title, price) ' +
     'VALUES (?, ?, ?);';
 
-    let inserts = [data.appID, data.title, data.price * 100];
+    let inserts = [data.appID, data.title, data.price];
     
     db.pool.query(insert_query, inserts, function(error, results, fields) {
         
@@ -52,7 +47,6 @@ router.get('/', function(req, res) {
 
     let db = req.app.get('mysql');
     getGames(res, db);
-
 });
 
 router.post('/add-game', function(req, res) {
@@ -61,7 +55,5 @@ router.post('/add-game', function(req, res) {
     let db = req.app.get('mysql');
     addGame(res, data, db);
 });
-
-convertPrice = (price) => price / 100;
 
 module.exports = router;

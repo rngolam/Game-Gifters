@@ -18,12 +18,17 @@ app.use(express.urlencoded({extended: true}));
 // Set root directory for static assets
 app.use(express.static('public'));
 
+// Diagnostic
+const resetTables = require('./routes/resetTables');
+
 // Set up routes
 const index = require('./routes/index');
 const employees = require('./routes/employees');
 const games = require('./routes/games');
 const gifts = require('./routes/gifts');
 const wishes = require('./routes/wishes');
+
+app.use('/reset-tables', resetTables);
 
 app.use('/', index);
 app.use('/employees', employees);
