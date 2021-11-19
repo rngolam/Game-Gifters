@@ -55,7 +55,7 @@
                   <th scope="col">Price</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="games-table-body">
                 <% data.forEach(function(game) { %>
                   <tr>
                       <td></td>
@@ -85,19 +85,19 @@
       <h2>New Game</h2>
       <p>Add a new game that can be wished for in the database.</p><br>
 
-      <form>
+      <form ID="add-game-form">
         <div class="row g-2">
           <div class="form-floating col">
-            <input type="text" class="form-control" id="floating1" placeholder="AppID" required>
-            <label for="floating2">AppID</label>
+            <input type="text" class="form-control" id="appID" placeholder="AppID" required>
+            <label for="appID">AppID</label>
           </div>
           <div class="form-floating col">
-            <input type="text" class="form-control" id="floating2" placeholder="Game Title" required>
-            <label for="floating2">Game Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Game Title" required>
+            <label for="title">Game Title</label>
           </div>
           <div class="form-floating col">
-            <input type="number" step="0.01" class="form-control" id="floating3" placeholder="Price" required>
-            <label for="floating3">Price</label>
+            <input type="number" step="0.01" class="form-control" id="price" placeholder="Price" required>
+            <label for="price">Price</label>
           </div>
         </div>
 
@@ -128,7 +128,7 @@
             <label for="floating2">Game Title</label>
           </div>
           <div class="form-floating col">
-            <input type="number" step="0.01" class="form-control" id="floating3" value="49.99" required>
+            <input type="number" step="0.01" class="form-control" id="price" value="49.99" required>
             <label for="floating3">Price</label>
           </div>
         </div>
@@ -144,6 +144,7 @@
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/addGame.js"></script>
 
 </body>
 

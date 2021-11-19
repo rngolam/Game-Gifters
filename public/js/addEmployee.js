@@ -51,7 +51,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 addRowToTable = (formData, responseData) => {
 
-    let employeeTable = document.getElementById('employee-table-body');
+    let employeeTable = document.getElementById('employees-table-body');
     let insertedRowId = responseData.insertId;
     
     let row = document.createElement('tr');
