@@ -43,22 +43,19 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
                           <th scope="col">Employee ID</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
                           <th scope="col">Department</th>
                           <th scope="col">Email</th>
                           <th scope="col">Phone</th>
                           <th scope="col">Birthdate</th>
+                          <th colspan="2" scope="col"></th>
                         </tr>
                       </thead>
                       <tbody id="employees-table-body">
                           <% data.forEach(function(employee) { %>
                             <tr>
-                                <td></td>
-                                <td><a href="#" onclick="updateEntry()">Update</a></td>
                                 <td><%= employee.employee_id %></td>
                                 <td><%= employee.first_name %></td>
                                 <td><%= employee.last_name %></td>
@@ -66,6 +63,7 @@
                                 <td><%= employee.email %></td>
                                 <td><%= employee.phone %></td>
                                 <td><%= employee.formatted_date_of_birth %></td>
+                                <td colspan="2"><a href="#" onclick="updateEntry()">Update</a></td>
                             </tr>
                           <% }); %>
                 </table>
@@ -85,14 +83,14 @@
               <h2>New Employee</h2>
               <p>Add a new Employee to the database.</p><br>
 
-              <form id="add-employee-form">
+              <form id="add-employee-form" form auto>
                   <div class="row g-2">
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required>
+                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" autocomplete="off" required>
                           <label for="firstName">First Name</label>
                       </div>
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Smith" required>
+                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Smith" autocomplete="off" required>
                           <label for="lastName">Last Name</label>
                       </div>
                   </div>
@@ -100,7 +98,7 @@
                   <div class="row g-2" style="padding-top: 1.6em;">
                       <div class="col-md">
                       <div class="form-floating">
-                          <input type="email" class="form-control" name="email" id="email" placeholder="jsmith@example.com">
+                          <input type="email" class="form-control" name="email" id="email" placeholder="jsmith@example.com" autocomplete="off">
                           <label for="email">Email Address</label>
                       </div>
                       </div>
@@ -122,11 +120,11 @@
                           </div>
                       </div>
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="phone" id="phone" placeholder="111-111-1111">
+                          <input type="text" class="form-control" name="phone" id="phone" placeholder="111-111-1111" autocomplete="off">
                           <label for="phone">Phone Number</label>
                       </div>
                       <div class="form-floating col">
-                          <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="01/01/2000">
+                          <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="01/01/2000" required>
                           <label for="birthdate">Birthdate</label>
                       </div>
                   </div>
@@ -249,6 +247,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/addEmployee.js"></script>
+  <script src="js/convertDateString.js"></script>
 
 </body>
 

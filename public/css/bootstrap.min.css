@@ -4690,6 +4690,7 @@ textarea.form-control-lg {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    width: max-content;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
@@ -11660,5 +11661,3 @@ textarea.form-control-lg {
         display: none !important
     }
 }
-
-/*# sourceMappingURL=bootstrap.min.css.map */

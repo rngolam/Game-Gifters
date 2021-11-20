@@ -1,4 +1,4 @@
-let addEmployeeForm = document.getElementById('add-employee-form');
+const addEmployeeForm = document.getElementById('add-employee-form');
 
 addEmployeeForm.addEventListener('submit', function(event) {
 
@@ -6,14 +6,14 @@ addEmployeeForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     // Get values from form fields
-    let firstNameInput = document.getElementById('firstName');
-    let lastNameInput = document.getElementById('lastName');
-    let emailInput = document.getElementById('email');
-    let departmentInput = document.getElementById('department');
-    let phoneInput = document.getElementById('phone');
-    let birthdateInput = document.getElementById('birthdate');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    const emailInput = document.getElementById('email');
+    const departmentInput = document.getElementById('department');
+    const phoneInput = document.getElementById('phone');
+    const birthdateInput = document.getElementById('birthdate');
 
-    let formData = {
+    const formData = {
         firstName: firstNameInput.value,
         lastName: lastNameInput.value,
         email: emailInput.value,
@@ -22,22 +22,20 @@ addEmployeeForm.addEventListener('submit', function(event) {
         birthdate: birthdateInput.value
     }
 
-    let formFields = [firstNameInput, lastNameInput, emailInput, departmentInput, phoneInput, birthdateInput]
+    const formFields = [firstNameInput, lastNameInput, emailInput, departmentInput, phoneInput, birthdateInput]
 
     // Set up AJAX request
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('POST', '/employees/add-employee', true);
     req.setRequestHeader('Content-type', 'application/json');
 
     req.onreadystatechange = () => {
 
         if (req.readyState == 4 && req.status == 200) {
-            
-            let responseData = JSON.parse(req.response);
+            const responseData = JSON.parse(req.response);
             addRowToTable(formData, responseData);
             clearForm(formFields);
             close1();
-        
         }
         
         else if (req.readyState == 4 && req.status != 200) {
@@ -51,31 +49,30 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 addRowToTable = (formData, responseData) => {
 
-    let employeeTable = document.getElementById('employees-table-body');
-    let insertedRowId = responseData.insertId;
+    const employeeTable = document.getElementById('employees-table-body');
+    const insertedRowId = responseData.insertId;
     
-    let row = document.createElement('tr');
-    let padCell = document.createElement('td');
-    let updateCell = document.createElement('td');
-    let idCell = document.createElement('td');
-    let firstNameCell = document.createElement('td');
-    let lastNameCell = document.createElement('td');
-    let departmentCell = document.createElement('td');
-    let emailCell = document.createElement('td');
-    let phoneCell = document.createElement('td');
-    let dobCell = document.createElement('td');
+    const row = document.createElement('tr');
+    const idCell = document.createElement('td');
+    const firstNameCell = document.createElement('td');
+    const lastNameCell = document.createElement('td');
+    const departmentCell = document.createElement('td');
+    const emailCell = document.createElement('td');
+    const phoneCell = document.createElement('td');
+    const dobCell = document.createElement('td');
+    const updateCell = document.createElement('td');
 
     // Fill cells with data
-    updateCell.innerHTML = '<a href="#" onclick="updateEntry()">Update</a>';
     idCell.innerText = insertedRowId;
     firstNameCell.innerText = formData.firstName;
     lastNameCell.innerText = formData.lastName;
     departmentCell.innerText = formData.department;
     emailCell.innerText = formData.email;
     phoneCell.innerText = formData.phone;
-    dobCell.innerText = formData.birthdate;
+    dobCell.innerText = convertDateString(formData.birthdate);
+    updateCell.innerHTML = '<a href="#" onclick="updateEntry()">Update</a>';
 
-    cells = [padCell, updateCell, idCell, firstNameCell, lastNameCell, departmentCell, emailCell, phoneCell, dobCell];
+    cells = [idCell, firstNameCell, lastNameCell, departmentCell, emailCell, phoneCell, dobCell, updateCell];
     cells.forEach(cell => row.appendChild(cell));
 
     employeeTable.appendChild(row);

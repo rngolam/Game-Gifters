@@ -7,11 +7,13 @@ SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth FROM
 SELECT * FROM games;
 
 -- Get all rows in the Wishes table along with their associated game title and name of employee who made the wish
+-- ordered by oldest, unfulfilled wishes first
 SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id,
-employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished, fulfilled
+employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled
 FROM wishes
 INNER JOIN games ON wishes.game_id=games.app_id
-INNER JOIN employees ON wishes.wished_by=employees.employee_id;
+INNER JOIN employees ON wishes.wished_by=employees.employee_id
+ORDER BY fulfilled, date_wished;
 
 -- Get all rows in the Gifts table along with their associated game title, sender name, and recipient name
 SELECT gift_id, gifts.wish_id AS associated_wish_id, games.title AS game_title,

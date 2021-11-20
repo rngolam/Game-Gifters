@@ -4,10 +4,11 @@ const router = express.Router();
 getWishes = (res, db, context, complete) => {
 
     const select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
-    'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished, fulfilled ' +
+    'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled ' +
     'FROM wishes ' +
     'INNER JOIN games ON wishes.game_id=games.app_id ' +
-    'INNER JOIN employees ON wishes.wished_by=employees.employee_id;';
+    'INNER JOIN employees ON wishes.wished_by=employees.employee_id ' +
+    'ORDER BY fulfilled, date_wished;';
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -59,10 +60,10 @@ addWish = (res, data, db) => {
             
         data.fulfilled = data.fulfilled || 0;
 
-        const insert_query = 'INSERT INTO wishes (game_id, wished_by, date_wished, fulfilled) ' +
-        'VALUES (?, ?, ?, ?)';
+        const insert_query = 'INSERT INTO wishes (game_id, wished_by, date_wished) ' +
+        'VALUES (?, ?, ?)';
 
-        const inserts = [data.gameID, data.employeeID, data.dateWished, data.fulfilled]
+        const inserts = [data.gameID, data.employeeID, data.dateWished]
 
         db.pool.query(insert_query, inserts, function(error, results, fields) {
 
