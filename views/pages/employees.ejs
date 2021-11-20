@@ -88,11 +88,11 @@
               <form id="add-employee-form">
                   <div class="row g-2">
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" required>
+                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required>
                           <label for="firstName">First Name</label>
                       </div>
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name" required>
+                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Smith" required>
                           <label for="lastName">Last Name</label>
                       </div>
                   </div>
@@ -100,7 +100,7 @@
                   <div class="row g-2" style="padding-top: 1.6em;">
                       <div class="col-md">
                       <div class="form-floating">
-                          <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                          <input type="email" class="form-control" name="email" id="email" placeholder="jsmith@example.com">
                           <label for="email">Email Address</label>
                       </div>
                       </div>
@@ -109,24 +109,24 @@
                   <div class="form-group row g-2" style="padding-top: 1.6em;">
                       <div class="form-floating col">
                           <div class="form-floating">
-                          <select class="form-select" id="department" required>
-                              <option selected>Select a department</option>
-                              <option value="Engineering">Engineering</option>
-                              <option value="Finance">Finance</option>
-                              <option value="Human Resources">Human Resources</option>
-                              <option value="Marketing">Marketing</option>
-                              <option value="Operations">Operations</option>
-                              <option value="IT">Technology & IT</option>
-                          </select>
-                          <label for="department">Department</label>
+                            <select class="form-select" id="department">
+                                <option value="" selected>Select a department</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Operations">Operations</option>
+                                <option value="IT">Technology & IT</option>
+                            </select>
+                            <label for="department">Department</label>
                           </div>
                       </div>
                       <div class="form-floating col">
-                          <input type="text" class="form-control" name="phone" id="phone" placeholder="123-456-7890">
+                          <input type="text" class="form-control" name="phone" id="phone" placeholder="111-111-1111">
                           <label for="phone">Phone Number</label>
                       </div>
                       <div class="form-floating col">
-                          <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="Birthdate">
+                          <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="01/01/2000">
                           <label for="birthdate">Birthdate</label>
                       </div>
                   </div>
