@@ -95,8 +95,11 @@
       <p>Add a new employee wish to the database.</p><br>
 
       <form id="add-wish-form">
+        
         <div class="row mb-3">
-          <label for="gameTitle" class="col-sm-2 col-form-label">Game Title</label>
+          
+          <label for="gameID" class="col-sm-2 col-form-label">Game Title</label>
+          
           <div class="col-sm-10">
             <input class="form-control" list="gameTitles" id="gameID" placeholder="Search for a game..." autocomplete="off" required>
             <datalist id="gameTitles">
@@ -107,15 +110,21 @@
           </div>
         </div>
 
+        
         <div class="row g-2" style="padding-top: 1.6em;">
-          <div class="col-md form-floating">
-            <input type="text" class="form-control" id="employeeFirstName" placeholder="First Name" required>
-            <label for="employeeFirstName">Employee First Name</label>
+        
+          <label for="employeeID" class="col-sm-2 col-form-label">Employee Name</label>
+
+          <div class="form-floating col">
+            <input class="form-control" list="employeeNames" id="employeeID" placeholder="Search for an employee..." autocomplete="off" required>
+            
+            <datalist id="employeeNames">
+              <% employees.forEach(function(employee) { %>
+                <option data-value="<%= employee.employee_id %>" value="<%= employee.first_name + ' ' + employee.last_name %>"></option>
+              <% }) %>
+            </datalist>
           </div>
-          <div class="col-md form-floating">
-            <input type="text" class="form-control" id="employeeLastName" placeholder="Last Name" required>
-            <label for="employeeLastName">Employee Last Name</label>
-          </div>
+
           <div class="form-floating col">
             <input type="date" class="form-control" id="dateWished" placeholder="Date Wished">
             <label for="dateWished">Wish Date</label>
@@ -125,7 +134,7 @@
         <div class="row g-2" style="padding: 1.2em;">
           <div class="col-md form-check form-switch" style="text-align: left;">
             <input class="form-check-input" type="checkbox" id="fulfilled">
-            <label class="form-check-label" for="fulfilled">Wish fulfilled</label>
+            <label class="form-check-label" for="fulfilled">Wish Fulfilled</label>
           </div>
         </div>
 
