@@ -47,21 +47,19 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
                   <th scope="col">AppID</th>
                   <th scope="col">Title</th>
                   <th scope="col">Price</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody id="games-table-body">
                 <% data.forEach(function(game) { %>
                   <tr>
-                      <td></td>
-                      <td><a href="#" onclick="updateEntry()">Update</a></td>
                       <td><%= game.app_id %></td>
                       <td><%= game.title %></td>
                       <td>$<%= game.price %></td>
+                      <td><a href="#" onclick="updateEntry()">Update</a></td>
                   </tr>
                 <% }); %>
               </tbody>
@@ -87,15 +85,15 @@
       <form id="add-game-form">
         <div class="row g-2">
           <div class="form-floating col">
-            <input type="text" class="form-control" id="appID" placeholder="1145360" required>
+            <input type="text" class="form-control" id="appID" placeholder="1145360" autocomplete="off" required>
             <label for="appID">AppID</label>
           </div>
           <div class="form-floating col">
-            <input type="text" class="form-control" id="title" placeholder="Hades" required>
+            <input type="text" class="form-control" id="title" placeholder="Hades" autocomplete="off" required>
             <label for="title">Game Title</label>
           </div>
           <div class="form-floating col">
-            <input type="number" step="0.01" class="form-control" id="price" placeholder="24.99" required>
+            <input type="number" step="0.01" class="form-control" id="price" placeholder="24.99" autocomplete="off" required>
             <label for="price">Price (USD)</label>
           </div>
         </div>

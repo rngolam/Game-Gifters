@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-getWishes = (res, db, context, complete) => {
+function getWishes (res, db, context, complete) {
 
     const select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
     'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled ' +
@@ -22,9 +22,10 @@ getWishes = (res, db, context, complete) => {
     });
 }
 
-getGames = (res, db, context, complete) => {
+function getGames(res, db, context, complete) {
 
-    const select_query = 'SELECT app_id, title FROM games;';
+    const select_query = 'SELECT app_id, title FROM games ' +
+    'ORDER by title;';
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -39,9 +40,10 @@ getGames = (res, db, context, complete) => {
     });
 }
 
-getEmployees = (res, db, context, complete) => {
+function getEmployees(res, db, context, complete) {
 
-    const select_query = 'SELECT employee_id, first_name, last_name FROM employees';
+    const select_query = 'SELECT employee_id, first_name, last_name FROM employees '
+    'ORDER by first_namee, last_name, employee_id;';
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -56,7 +58,7 @@ getEmployees = (res, db, context, complete) => {
     });    
 }
 
-addWish = (res, data, db) => {
+function addWish(res, data, db) {
             
         data.fulfilled = data.fulfilled || 0;
 
@@ -84,7 +86,7 @@ router.get('/', function(req, res) {
     
     const db = req.app.get('mysql');
     let callbackCount = 0
-    let context = {page_name: 'wishes'}
+    const context = {page_name: 'wishes'}
 
     getWishes(res, db, context, complete);
     getGames(res, db, context, complete);

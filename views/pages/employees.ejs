@@ -50,7 +50,7 @@
                           <th scope="col">Email</th>
                           <th scope="col">Phone</th>
                           <th scope="col">Birthdate</th>
-                          <th colspan="2" scope="col"></th>
+                          <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody id="employees-table-body">
@@ -63,7 +63,7 @@
                                 <td><%= employee.email %></td>
                                 <td><%= employee.phone %></td>
                                 <td><%= employee.formatted_date_of_birth %></td>
-                                <td colspan="2"><a href="#" onclick="updateEntry()">Update</a></td>
+                                <td><a href="#" onclick="updateEntry()">Update</a></td>
                             </tr>
                           <% }); %>
                 </table>

@@ -1,4 +1,4 @@
-let resetTableQuery = 'SET FOREIGN_KEY_CHECKS=0; ' +
+const resetTableQuery = 'SET FOREIGN_KEY_CHECKS=0; ' +
 'DROP TABLE IF EXISTS employees, games, gifts, wishes; ' +
 
 'SET FOREIGN_KEY_CHECKS=1; ' +

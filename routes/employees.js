@@ -3,8 +3,10 @@ const router = express.Router();
 
 function getEmployees(res, db) {
 
-    let select_query = 'SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth ' +
-    'FROM employees';
+    const select_query = 'SELECT employee_id, first_name, last_name, department, email, phone, ' + 
+    'DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth ' +
+    'FROM employees ' +
+    'ORDER BY last_name, first_name, employee_id;';
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -53,15 +55,15 @@ function addEmployee(res, data, db) {
 
 router.get('/', function(req, res) {
 
-    let db = req.app.get('mysql');
+    const db = req.app.get('mysql');
     getEmployees(res, db);
 
 });
 
 router.post('/add-employee', function(req, res) {
 
-    let data = req.body;
-    let db = req.app.get('mysql');
+    const data = req.body;
+    const db = req.app.get('mysql');
     addEmployee(res, data, db);
 });
 
