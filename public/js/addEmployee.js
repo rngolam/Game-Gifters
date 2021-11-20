@@ -50,9 +50,10 @@ addEmployeeForm.addEventListener('submit', function(event) {
 function addRowToTable(formData, responseData) {
 
     const employeeTable = document.getElementById('employees-table-body');
+    const row = employeeTable.insertRow(0)
+    row.style.backgroundColor = '#c7e5ff';
+
     const insertedRowId = responseData.insertId;
-    
-    const row = document.createElement('tr');
     const idCell = document.createElement('td');
     const firstNameCell = document.createElement('td');
     const lastNameCell = document.createElement('td');
@@ -74,8 +75,6 @@ function addRowToTable(formData, responseData) {
 
     cells = [idCell, firstNameCell, lastNameCell, departmentCell, emailCell, phoneCell, dobCell, updateCell];
     cells.forEach(cell => row.appendChild(cell));
-
-    employeeTable.appendChild(row);
 
 }
 

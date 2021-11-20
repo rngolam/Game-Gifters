@@ -42,7 +42,6 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col"></th>
                   <th scope="col">Gift ID</th>
                   <th scope="col">Associated Wish ID</th>
                   <th scope="col">Game Title</th>
@@ -54,17 +53,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
                   <% data.forEach(function(gift) { %>
                     <tr>
-                        <td></td>
                         <td><%= gift.gift_id %></td>
                         <td><%= gift.associated_wish_id %></td>
                         <td><%= gift.game_title %></td>
                         <td><%= gift.sender_id %></td>
                         <td><%= gift.sender_first_name + ' ' + gift.sender_last_name %></td>
                         <td><%= gift.recipient_first_name + ' ' + gift.recipient_last_name %></td>
-                        <td><%= gift.formatted_date_sent %></td>
+                        <td><%= gift.date_sent_formatted %></td>
                     </tr>
                   <% }); %>
                 </tr>

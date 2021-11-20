@@ -49,9 +49,11 @@ addEmployeeForm.addEventListener('submit', function(event) {
 function addRowToTable (formData, responseData) {
 
     const wishesTable = document.getElementById('wishes-table-body');
+    const row = wishesTable.insertRow(0)
+    row.style.backgroundColor = '#c7e5ff';
+
     const insertedRowId = responseData.insertId;
     
-    const row = document.createElement('tr');
     const padCell = document.createElement('th');
     const deleteCheckboxCell = document.createElement('td');
     const wishIDCell = document.createElement('td');
@@ -81,9 +83,6 @@ function addRowToTable (formData, responseData) {
 
     cells = [padCell, deleteCheckboxCell, wishIDCell, gameIDCell, gameTitleCell, associatedEmployeeIDCell, employeeNameCell, dateWishedCell, fulfilledCell];
     cells.forEach(cell => row.appendChild(cell));
-
-    wishesTable.appendChild(row);
-
 }
 
 function getHiddenID (listID, formID) {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-function getWishes (res, db, context, complete) {
+function getWishes(res, db, context, complete) {
 
     const select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
     'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled ' +
@@ -59,8 +59,6 @@ function getEmployees(res, db, context, complete) {
 }
 
 function addWish(res, data, db) {
-            
-        data.fulfilled = data.fulfilled || 0;
 
         const insert_query = 'INSERT INTO wishes (game_id, wished_by, date_wished) ' +
         'VALUES (?, ?, ?)';
@@ -105,7 +103,6 @@ router.post('/add-wish', function(req, res) {
     const data = req.body;
     const db = req.app.get('mysql');
     addWish(res, data, db);
-
 })
 
 module.exports = router;

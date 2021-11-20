@@ -45,8 +45,9 @@ addEmployeeForm.addEventListener('submit', function(event) {
 function addRowToTable(formData) {
 
     const gamesTable = document.getElementById('games-table-body');
+    const row = gamesTable.insertRow(0)
+    row.style.backgroundColor = '#c7e5ff';
     
-    const row = document.createElement('tr');
     const idCell = document.createElement('td');
     const titleCell = document.createElement('td');
     const priceCell = document.createElement('td');
@@ -60,9 +61,6 @@ function addRowToTable(formData) {
 
     cells = [idCell, titleCell, priceCell, updateCell];
     cells.forEach(cell => row.appendChild(cell));
-
-    gamesTable.appendChild(row);
-
 }
 
 function clearForm (fields) {
