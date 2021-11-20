@@ -2659,6 +2659,10 @@ textarea.form-control-lg {
     /* transition: opacity .1s ease-in-out, transform .1s ease-in-out */
 }
 
+.row.mb-3>.form-floating>label {
+    transform: scale(.85) translateY(-.5rem) translateX(1rem);
+}
+
 @media (prefers-reduced-motion:reduce) {
     .form-floating>label {
         transition: none
