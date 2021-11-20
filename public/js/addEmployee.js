@@ -47,7 +47,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 });
 
-addRowToTable = (formData, responseData) => {
+function addRowToTable(formData, responseData) {
 
     const employeeTable = document.getElementById('employees-table-body');
     const insertedRowId = responseData.insertId;
@@ -79,6 +79,6 @@ addRowToTable = (formData, responseData) => {
 
 }
 
-clearForm = (fields) => {
+function clearForm (fields) {
     fields.forEach(field => field.value = '');
 }

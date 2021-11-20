@@ -1,10 +1,15 @@
 /* colon : character denotes the variables that will have data from the backend programming language */
 
--- Get all rows in the Employees table to populate the Employees page
-SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth FROM employees;
+-- Get all rows in the Employees table to populate the Employees page,
+-- ordered by last name
+SELECT employee_id, first_name, last_name, department, email, phone,
+DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth
+FROM employees
+ORDER BY last_name, first_name, employee_id;
 
--- Get all rows in the Games table to populate the Games page
-SELECT * FROM games;
+-- Get all rows in the Games table to populate the Games page, sorted by title
+SELECT app_id, title, price from games
+ORDER by title;
 
 -- Get all rows in the Wishes table along with their associated game title and name of employee who made the wish
 -- ordered by oldest, unfulfilled wishes first
@@ -34,8 +39,8 @@ INSERT INTO games (app_id, title, price)
 VALUES (:app_id_input, :title_input, :price_input);
 
 -- Add a new Wish
-INSERT INTO wishes (game_id, wished_by, date_wished, fulfilled)
-VALUES (:game_id_input, :wished_by_input, :date_wished_from_date_input, :fulfilled_from_toggle_switch_input);
+INSERT INTO wishes (game_id, wished_by, date_wished)
+VALUES (:game_id_input, :wished_by_input, :date_wished_from_date_input);
 
 -- Add a new Gift
 -- Conditional insert: Employee cannot send gift to themselves

@@ -46,7 +46,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 });
 
-addRowToTable = (formData, responseData) => {
+function addRowToTable (formData, responseData) {
 
     const wishesTable = document.getElementById('wishes-table-body');
     const insertedRowId = responseData.insertId;
@@ -86,7 +86,7 @@ addRowToTable = (formData, responseData) => {
 
 }
 
-getHiddenID = (listID, formID) => {
+function getHiddenID (listID, formID) {
 
     // Get currently selected datalist option string
     const selectedString = $('#' + formID).val();
@@ -96,6 +96,6 @@ getHiddenID = (listID, formID) => {
     return $('#' + listID + ' ' + '[value="' + selectedString + '"]').data('value');
 }
 
-clearForm = (fields) => {
+function clearForm (fields) {
     fields.forEach(field => field.value = '');
 }

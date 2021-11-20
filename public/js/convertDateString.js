@@ -1,5 +1,5 @@
 // Expects date string in YYYY-MM-DD format
-convertDateString = (dateString) => {
+function convertDateString(dateString) {
 
     if (!dateString) {
         return;

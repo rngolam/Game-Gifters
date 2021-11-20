@@ -34,18 +34,9 @@ function addEmployee(res, data, db) {
         
         // Log error
         if (error) {
-        
             console.log(error);
             res.sendStatus(400);
-        
         } else {
-
-            let select_query = 'SELECT *, DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth ' +
-            'FROM employees';
-
-            console.log(results);
-            console.log(fields);
-
             // Send results of query back
             res.send(results);
         }

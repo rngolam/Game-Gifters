@@ -27,8 +27,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
         if (req.readyState == 4 && req.status == 200) {
             
-            const responseData = JSON.parse(req.response);
-            addRowToTable(formData, responseData);
+            addRowToTable(formData);
             clearForm(formFields);
             close1();
         
@@ -43,7 +42,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 });
 
-addRowToTable = (formData, responseData) => {
+function addRowToTable(formData) {
 
     const gamesTable = document.getElementById('games-table-body');
     
@@ -66,6 +65,6 @@ addRowToTable = (formData, responseData) => {
 
 }
 
-clearForm = (fields) => {
+function clearForm (fields) {
     fields.forEach(field => field.value = '');
 }
