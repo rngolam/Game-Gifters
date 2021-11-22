@@ -77,16 +77,16 @@ function addGift(res, data, db) {
 
     const inserts = [data.wishID, data.senderID, data.dateSent]
 
-    db.pool.query(insert_query, inserts, function(error, results, fields) {
+    db.pool.query(insert_query, inserts, function(error, insert_results, fields) {
 
-        db.pool.query(update_fulfilled_query, data.wishID, function(error, results, fields) {
+        db.pool.query(update_fulfilled_query, data.wishID, function(error, update_results, fields) {
             
             if (error) {
                 console.log(error);
                 res.sendStatus(400);
             
             } else {
-                res.send(results);
+                res.send(insert_results);
             }   
         })
     })
