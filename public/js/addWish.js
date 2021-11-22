@@ -54,7 +54,6 @@ function addRowToTable (formData, responseData) {
 
     const insertedRowId = responseData.insertId;
     
-    const padCell = document.createElement('th');
     const deleteCheckboxCell = document.createElement('td');
     const wishIDCell = document.createElement('td');
     const gameIDCell = document.createElement('td');
@@ -81,7 +80,7 @@ function addRowToTable (formData, responseData) {
     //     fulfilledCell.innerHTML = '<span class="fa fa-dot-circle-o text-danger"></span><span class="ms-1">No</span>'
     // }
 
-    cells = [padCell, deleteCheckboxCell, wishIDCell, gameIDCell, gameTitleCell, associatedEmployeeIDCell, employeeNameCell, dateWishedCell, fulfilledCell];
+    cells = [deleteCheckboxCell, wishIDCell, gameIDCell, gameTitleCell, associatedEmployeeIDCell, employeeNameCell, dateWishedCell, fulfilledCell];
     cells.forEach(cell => row.appendChild(cell));
 }
 

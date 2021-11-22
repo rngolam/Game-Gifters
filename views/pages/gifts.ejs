@@ -51,7 +51,7 @@
                   <th scope="col">Date Sent</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="gifts-table-body">
                 <tr>
                   <% data.forEach(function(gift) { %>
                     <tr>
@@ -85,59 +85,61 @@
       <h2>New Gift</h2>
       <p>Add a new employee gift to the database.</p><br>
 
-      <form>
-        <div class="row g-2">
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="floating1" placeholder="Sola" required>
-            <label for="floating1">Sender First Name</label>
-          </div>
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="floating2" placeholder="Chang" required>
-            <label for="floating2">Sender Last Name</label>
+      <form id="add-gift-form">
+
+        <div class="row g-2" style="padding-top: 1.6em;">
+          <div class="col-md">
+              <div class="form-floating">
+                <select class="form-select" id="wishID" required>
+                    <option value="" selected>Select a wish to fulfill</option>
+                    <% unfulfilledWishes.forEach(function(wish) { %>
+                      <option value="<%= wish.wish_id %>">[<%= wish.wish_id %>] <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %></option>                    
+                    <% }); %>
+                </select>
+                <label for="wishID">Wish</label>
+              </div>
           </div>
         </div>
 
-        <div class="row g-2" style="padding-bottom: 1em;">
+        <div class="form-group row g-2" style="padding-top: 1.6em;">
           <div class="form-floating col">
-            <input type="text" class="form-control" id="floating1" placeholder="Nathan" required>
-            <label for="floating1">Recipient First Name</label>
+            <div class="form-floating">
+              <select class="form-select" id="senderID">
+                  <option value="" selected>Select a sender (optional)</option>
+                  <% employees.forEach(function(employee) { %>
+                    <option value="<%= employee.employee_id %>">[<%= employee.employee_id %>] <%= employee.first_name %> <%= employee.last_name %></option>                    
+                  <% }); %>
+              </select>
+              <label for="wishID">Sender</label>
+            </div>
           </div>
+          
           <div class="form-floating col">
-            <input type="text" class="form-control" id="floating2" placeholder="Perkins" required>
-            <label for="floating2">Recipient Last Name</label>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="datalist" class="col-sm-2 col-form-label">Game Title</label>
-          <div class="form-floating col">
-            <input class="form-control" list="datalistOptions" id="datalist" placeholder="Type to search..." required>
-            <datalist id="datalistOptions">
-              <option value="Don't Starve Together">
-              <option value="Divinity: Original Sin 2">
-              <option value="Cat Quest 2">
-              <option value="Phasmobia">
-              <option value="100% Orange Juice">
-            </datalist>
-          </div>
-
-          <div class="form-floating col">
-            <input type="date" class="form-control" placeholder="Gift Date">
-            <label for="floating6">Gift Date</label>
+            <input type="date" class="form-control" name="dateSent" id="dateSent" required>
+            <label for="dateSent">Date Sent</label>
           </div>
         </div>
 
         <div class="col-auto" style="padding-top: 3em;">
           <button type="submit" class="btn btn-primary mb-3">Add Gift</button>
         </div>
+
       </form>
-      <br>
+    
     </div>
   </div>
+
+  <!-- <script>
+    var unfulfilledWishes = <%- JSON.stringify(unfulfilledWishes) %>
+  </script> -->
 
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/addGift.js"></script>
+  <script src="js/convertDateString.js"></script>
+  <!-- <script src="js/populateAddGiftFields.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script> -->
 
 </body>
 

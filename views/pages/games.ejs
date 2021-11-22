@@ -58,7 +58,7 @@
                   <tr>
                       <td><%= game.app_id %></td>
                       <td><%= game.title %></td>
-                      <td>$<%= game.price %></td>
+                      <td>$<%= game.price.toFixed(2) %></td>
                       <td><a href="#" onclick="updateEntry()">Update</a></td>
                   </tr>
                 <% }); %>

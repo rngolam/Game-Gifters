@@ -25,10 +25,15 @@ function getGifts(res, db, context, complete) {
     });
 }
 
-function getGames(res, db, context, complete) {
+function getUnfulfilledWishes(res, db, context, complete) {
 
-    const select_query = 'SELECT app_id, title FROM games ' +
-    'ORDER by title;';
+    const select_query = `SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id,
+    employees.first_name, employees.last_name
+    FROM wishes
+    INNER JOIN games ON wishes.game_id=games.app_id
+    INNER JOIN employees ON wishes.wished_by=employees.employee_id
+    WHERE fulfilled=0
+    ORDER BY first_name, last_name, associated_employee_id, game_title;`;
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -37,16 +42,16 @@ function getGames(res, db, context, complete) {
             res.sendStatus(400);
         
         } else {
-            context.games = results;
+            context.unfulfilledWishes = results;
             complete();        
         }
-    });
+    });    
 }
 
 function getEmployees(res, db, context, complete) {
 
     const select_query = 'SELECT employee_id, first_name, last_name FROM employees '
-    'ORDER by first_namee, last_name, employee_id;';
+    'ORDER by first_name, last_name, employee_id;';
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -61,6 +66,32 @@ function getEmployees(res, db, context, complete) {
     });    
 }
 
+function addGift(res, data, db) {
+
+    const insert_query = `INSERT INTO gifts (wish_id, fulfilled_by, date_sent)
+    VALUES (?, ?, ?);`
+
+    const update_fulfilled_query = `UPDATE wishes
+    SET fulfilled=1
+    WHERE wish_id=?`
+
+    const inserts = [data.wishID, data.senderID, data.dateSent]
+
+    db.pool.query(insert_query, inserts, function(error, results, fields) {
+
+        db.pool.query(update_fulfilled_query, data.wishID, function(error, results, fields) {
+            
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            
+            } else {
+                res.send(results);
+            }   
+        })
+    })
+}
+
 router.get('/', function(req, res) {
     
     const db = req.app.get('mysql');
@@ -68,7 +99,7 @@ router.get('/', function(req, res) {
     const context = {page_name: 'gifts'}
 
     getGifts(res, db, context, complete);
-    getGames(res, db, context, complete);
+    getUnfulfilledWishes(res, db, context, complete);
     getEmployees(res, db, context, complete);
 
     function complete() {
@@ -78,5 +109,12 @@ router.get('/', function(req, res) {
         }
     }
 });
+
+router.post('/add-gift', function(req, res) {
+
+    const data = req.body;
+    const db = req.app.get('mysql');
+    addGift(res, data, db);
+})
 
 module.exports = router;

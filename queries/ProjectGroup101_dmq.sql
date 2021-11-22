@@ -28,7 +28,8 @@ FROM gifts
 INNER JOIN wishes ON gifts.wish_id=wishes.wish_id
 INNER JOIN games ON wishes.game_id=games.app_id
 LEFT JOIN employees AS sender ON gifts.fulfilled_by=sender.employee_id
-INNER JOIN employees AS recipient ON wishes.wished_by=recipient.employee_id;
+INNER JOIN employees AS recipient ON wishes.wished_by=recipient.employee_id
+WHERE wishes.fulfilled=0;
 
 -- Add a new Employee
 INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth)
