@@ -29,6 +29,8 @@ addGiftForm.addEventListener('submit', function(event) {
             
             const responseData = JSON.parse(req.response);
             addRowToTable(formData, responseData);
+            
+            wishIDInput.options[wishIDInput.selectedIndex].remove();
             clearForm(formFields);
             close1();
         
