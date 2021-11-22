@@ -59,7 +59,7 @@
                         <td><%= gift.associated_wish_id %></td>
                         <td><%= gift.game_title %></td>
                         <td><%= gift.sender_id %></td>
-                        <td><%= gift.sender_first_name + ' ' + gift.sender_last_name %></td>
+                        <td><% if (gift.sender_id) { %><%= gift.sender_first_name + ' ' + gift.sender_last_name %><% } %></td>
                         <td><%= gift.recipient_first_name + ' ' + gift.recipient_last_name %></td>
                         <td><%= gift.date_sent_formatted %></td>
                     </tr>
@@ -93,7 +93,10 @@
                 <select class="form-select" id="wishID" required>
                     <option value="" selected>Select a wish to fulfill</option>
                     <% unfulfilledWishes.forEach(function(wish) { %>
-                      <option value="<%= wish.wish_id %>">[<%= wish.wish_id %>] <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %></option>                    
+                      <option value="<%= wish.wish_id %>" data-game="<%= wish.game_title %>"
+                        data-recipient="<%= wish.first_name %> <%= wish.last_name %>">
+                        [<%= wish.wish_id %>] <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %>
+                      </option>                    
                     <% }); %>
                 </select>
                 <label for="wishID">Wish</label>
@@ -107,7 +110,10 @@
               <select class="form-select" id="senderID">
                   <option value="" selected>Select a sender (optional)</option>
                   <% employees.forEach(function(employee) { %>
-                    <option value="<%= employee.employee_id %>">[<%= employee.employee_id %>] <%= employee.first_name %> <%= employee.last_name %></option>                    
+                    <option value="<%= employee.employee_id %>"
+                      data-sender="<%= employee.first_name %> <%= employee.last_name %>">
+                      [<%= employee.employee_id %>] <%= employee.first_name %> <%= employee.last_name %>
+                    </option>                    
                   <% }); %>
               </select>
               <label for="wishID">Sender</label>

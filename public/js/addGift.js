@@ -1,14 +1,14 @@
-const addGiftForm = document.getElementById('add-gift-form');
+const addGiftForm = document.querySelector('#add-gift-form');
+
+// Get values from form fields
+const wishIDInput = document.querySelector('#wishID');
+const senderIDInput = document.querySelector('#senderID');
+const dateSentInput = document.querySelector('#dateSent');
 
 addGiftForm.addEventListener('submit', function(event) {
 
     // Prevent form from submitting
     event.preventDefault();
-
-    // Get values from form fields
-    const wishIDInput = document.getElementById('wishID');
-    const senderIDInput = document.getElementById('senderID');
-    const dateSentInput = document.getElementById('dateSent');
 
     const formData = {
         wishID: wishIDInput.value,
@@ -22,8 +22,6 @@ addGiftForm.addEventListener('submit', function(event) {
     const req = new XMLHttpRequest();
     req.open('POST', '/gifts/add-gift', true);
     req.setRequestHeader('Content-type', 'application/json');
-
-    console.log(formData);
 
     req.onreadystatechange = () => {
 
@@ -47,7 +45,7 @@ addGiftForm.addEventListener('submit', function(event) {
 
 function addRowToTable (formData, responseData) {
 
-    const giftsTable = document.getElementById('gifts-table-body');
+    const giftsTable = document.querySelector('#gifts-table-body');
     const row = giftsTable.insertRow(0)
     row.style.backgroundColor = '#c7e5ff';
 
@@ -64,24 +62,14 @@ function addRowToTable (formData, responseData) {
     // Fill cells with data
     giftIDCell.innerText = insertedRowId;
     wishIDCell.innerText = formData.wishID;
-    gameTitleCell.innerText = 'TODO';
+    gameTitleCell.innerText = wishIDInput.options[wishIDInput.selectedIndex].getAttribute('data-game');
     senderIDCell.innerText = formData.senderID;
-    senderNameCell.innerText = 'TODO';
-    recipientNameCell.innerText = 'TODO';
+    senderNameCell.innerText = senderIDInput.options[senderIDInput.selectedIndex].getAttribute('data-sender');
+    recipientNameCell.innerText = wishIDInput.options[wishIDInput.selectedIndex].getAttribute('data-recipient');
     dateSentCell.innerText = convertDateString(formData.dateSent);
 
     cells = [giftIDCell, wishIDCell, gameTitleCell, senderIDCell, senderNameCell, recipientNameCell, dateSentCell];
     cells.forEach(cell => row.appendChild(cell));
-}
-
-function getHiddenID (listID, formID) {
-
-    // Get currently selected datalist option string
-    const selectedString = $('#' + formID).val();
-
-    // First retrieves datalist option node in DOM where the displayed label = value, then access
-    // the option's hidden data-value attribute
-    return $('#' + listID + ' ' + '[value="' + selectedString + '"]').data('value');
 }
 
 function clearForm (fields) {
