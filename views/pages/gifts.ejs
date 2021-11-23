@@ -95,7 +95,7 @@
                     <% unfulfilledWishes.forEach(function(wish) { %>
                       <option value="<%= wish.wish_id %>" data-game="<%= wish.game_title %>"
                         data-recipient="<%= wish.first_name %> <%= wish.last_name %>">
-                        [<%= wish.wish_id %>] <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %>
+                        <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %> [<%= wish.wish_id %>]
                       </option>                    
                     <% }); %>
                 </select>
@@ -112,7 +112,7 @@
                   <% employees.forEach(function(employee) { %>
                     <option value="<%= employee.employee_id %>"
                       data-sender="<%= employee.first_name %> <%= employee.last_name %>">
-                      [<%= employee.employee_id %>] <%= employee.first_name %> <%= employee.last_name %>
+                      <%= employee.first_name %> <%= employee.last_name %> [<%= employee.employee_id %>]
                     </option>                    
                   <% }); %>
               </select>

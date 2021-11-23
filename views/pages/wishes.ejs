@@ -93,8 +93,22 @@
       <p>Add a new employee wish to the database.</p><br>
 
       <form id="add-wish-form">
+
+        <div class="row mb-3" style="padding-top: 1.6em;">
+          <div class="form-floating col-md">
+            <select class="form-select" id="employeeID" required>
+                <option value="" selected>Select an employee</option>
+                <% employees.forEach(function(employee) { %>
+                  <option value="<%= employee.employee_id %>" data-employee="<%= employee.first_name + ' ' + employee.last_name %>">
+                    <%= employee.first_name %> <%= employee.last_name %> [<%= employee.employee_id %>]
+                  </option>               
+                <% }); %>
+            </select>
+            <label for="employeeID">Employee</label>
+          </div>
+        </div>
         
-        <div class="row mb-3">
+        <!-- <div class="row g-2">
           <div class="form-floating col">
             <input class="form-control" list="gameTitles" id="gameID" placeholder="Search for a game..." autocomplete="off" required>
             <label for="gameID">Game Title</label>
@@ -105,20 +119,31 @@
             </datalist>
           </div>
         </div>
-        
-        <div class="row g-2" style="padding-top: 1.6em;">
-          
-          <div class="form-floating col">
-            <input class="form-control" list="employeeNames" id="employeeID" placeholder="Search for an employee..." autocomplete="off" required>
-            <label for="employeeID">Employee Name</label>
-            <datalist id="employeeNames">
-              
-              <% employees.forEach(function(employee) { %>
-                <option data-value="<%= employee.employee_id %>" value="<%= employee.first_name + ' ' + employee.last_name %>"></option>
-              <% }) %>
-              
-            </datalist>
+
+        <div class="form-floating col">
+          <input class="form-control" list="employeeNames" id="employeeID" placeholder="Search for an employee..." autocomplete="off" required>
+          <label for="employeeID">Employee Name</label>
+          <datalist id="employeeNames">
             
+            <% employees.forEach(function(employee) { %>
+              <option data-value="<%= employee.employee_id %>" value="<%= employee.first_name + ' ' + employee.last_name %>"></option>
+            <% }) %>
+            
+          </datalist>
+          
+        </div> -->
+        
+        <div class="row g-2" style="padding-top: 1.6em;">  
+          <div class="form-floating col">
+            <select class="form-select" id="gameID" required>
+                <option value="" selected>Select a game</option>
+                <% games.forEach(function(game) { %>
+                  <option value="<%= game.app_id %>" data-title="<%= game.title %>">
+                    <%= game.title %> [<%= game.app_id %>]
+                  </option>               
+                <% }); %>
+            </select>
+            <label for="gameID">Game</label>
           </div>
 
           <div class="form-floating col">

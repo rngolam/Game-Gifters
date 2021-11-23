@@ -80,10 +80,6 @@ function addGift(res, data, db) {
 
     db.pool.query(insert_query, inserts, function(error, insert_results, fields) {
 
-        console.log(error)
-        console.log(insert_results)
-        console.log(fields)
-
         db.pool.query(update_fulfilled_query, data.wishID, function(error, update_results, fields) {
             
             if (error) {

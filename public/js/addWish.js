@@ -1,22 +1,19 @@
 const addEmployeeForm = document.getElementById('add-wish-form');
 
+// Get values from form fields
+const gameIDInput = document.querySelector('#gameID');
+const employeeIDInput = document.querySelector('#employeeID');
+const dateWishedInput = document.querySelector('#dateWished');
+
 addEmployeeForm.addEventListener('submit', function(event) {
 
     // Prevent form from submitting
     event.preventDefault();
 
-    // Get values from form fields
-    const gameIDInput = document.getElementById('gameID');
-    const employeeIDInput = document.getElementById('employeeID');
-    // const employeeFirstNameInput = document.getElementById('employeeFirstName');
-    // const employeeLastNameInput = document.getElementById('employeeLastName');
-    const dateWishedInput = document.getElementById('dateWished');
-    // const fulfilledInput = document.getElementById('fulfilled');
-
     const formData = {
-        gameID: getHiddenID('gameTitles', 'gameID'),
-        employeeID: getHiddenID('employeeNames', 'employeeID'),
-        dateWished: dateWishedInput.value,
+        gameID: gameIDInput.value,
+        employeeID: employeeIDInput.value,
+        dateWished: dateWishedInput.value
     }
 
     const formFields = [gameIDInput, employeeIDInput, dateWishedInput]
@@ -48,7 +45,7 @@ addEmployeeForm.addEventListener('submit', function(event) {
 
 function addRowToTable (formData, responseData) {
 
-    const wishesTable = document.getElementById('wishes-table-body');
+    const wishesTable = document.querySelector('#wishes-table-body');
     const row = wishesTable.insertRow(0)
     row.style.backgroundColor = '#c7e5ff';
 
@@ -68,9 +65,9 @@ function addRowToTable (formData, responseData) {
     deleteCheckboxCell.scope = 'row';
     wishIDCell.innerText = insertedRowId;
     gameIDCell.innerText = formData.gameID;
-    gameTitleCell.innerText = document.getElementById('gameID').value;
+    gameTitleCell.innerText = gameIDInput.options[gameIDInput.selectedIndex].getAttribute('data-title');
     associatedEmployeeIDCell.innerText = formData.employeeID;
-    employeeNameCell.innerText =  document.getElementById('employeeID').value
+    employeeNameCell.innerText =  employeeIDInput.options[employeeIDInput.selectedIndex].getAttribute('data-employee');
     dateWishedCell.innerText = convertDateString(formData.dateWished);
     fulfilledCell.innerHTML = '<span class="fa fa-dot-circle-o text-danger"></span><span class="ms-1">No</span>'
     
