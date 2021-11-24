@@ -56,7 +56,17 @@
                 </div>
 
                 <div class="card text-dark bg-light mb-3">
-                    <div class="card-header">Wishes / <strong>All</strong></div>
+                    <div class="card-header">Wishes / 
+                            <strong>
+                            <% if (locals.searchQuery) { %>
+                                Filter:
+                            </strong>
+                                <%= searchQuery %> | <a href="/wishes">Clear Filter</a>
+                            <% } else { %>
+                                All
+                            </strong>
+                            <% } %>
+                    </div>
 
                     <div class="card-body">
                         <div class="data-desc">
@@ -250,6 +260,7 @@
                                 id="firstNameSearch"
                                 name="firstName"
                                 placeholder="John"
+                                autocomplete="off"
                             />
                             <label for="firstNameSearch">First Name</label>
                         </div>
@@ -260,6 +271,7 @@
                                 id="lastNameSearch"
                                 name="lastName"
                                 placeholder="Smith"
+                                autocomplete="off"
                             />
                             <label for="lastNameSearch">Last Name</label>
                         </div>

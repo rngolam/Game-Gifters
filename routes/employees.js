@@ -26,7 +26,7 @@ function getEmployees(res, db) {
 function addEmployee(res, data, db) {
 
     const insert_query = `INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth)
-    'VALUES (?, ?, ?, ?, ?, ?);`;
+    VALUES (?, ?, ?, ?, ?, ?);`;
 
     const inserts = [data.firstName, data.lastName, data.department, data.email, data.phone, data.birthdate];
     
