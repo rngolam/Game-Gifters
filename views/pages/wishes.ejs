@@ -238,36 +238,36 @@
                 <span class="close" onclick="close3()">&times;</span><br />
 
                 <h2>Filter Wishes</h2>
-                <p>Display wishes from a specific employee.</p>
+                <p>Enter a whole or partial employee name to search for associated wishes.</p>
                 <br />
 
-                <form>
+                <form id="filter-by-name" method="GET" action="/wishes">
                     <div class="row g-2">
                         <div class="form-floating col">
                             <input
                                 type="text"
                                 class="form-control"
-                                id="floating1"
-                                placeholder="First name"
-                                required
+                                id="firstNameSearch"
+                                name="firstName"
+                                placeholder="John"
                             />
-                            <label for="floating1">First Name</label>
+                            <label for="firstNameSearch">First Name</label>
                         </div>
                         <div class="form-floating col">
                             <input
                                 type="text"
                                 class="form-control"
-                                id="floating2"
-                                placeholder="Last name"
-                                required
+                                id="lastNameSearch"
+                                name="lastName"
+                                placeholder="Smith"
                             />
-                            <label for="floating2">Last Name</label>
+                            <label for="lastNameSearch">Last Name</label>
                         </div>
                     </div>
 
                     <div class="col-auto" style="padding-top: 3em">
                         <button type="submit" class="btn btn-primary mb-3">
-                            Submit
+                            Search
                         </button>
                     </div>
                 </form>
