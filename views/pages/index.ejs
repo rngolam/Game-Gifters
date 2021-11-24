@@ -13,37 +13,42 @@
 
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+    <head>
+        <%- include('../partials/head'); %>
+        <link href="css/main-styles.css" rel="stylesheet" />
+        <title>🎁 Game Gifters | Gaming Wishlists</title>
+    </head>
 
-<head>
-  <%- include('../partials/head'); %>
-  <link href="css/main-styles.css" rel="stylesheet">
-  <title>🎁 Game Gifters | Gaming Wishlists</title>
-</head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%- include('../partials/header'); %>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+            <main class="small-box">
+                <h1>Game Gifters.</h1>
+                <p class="lead caption">
+                    Game Gifters is a web app that emulates a video game
+                    wishlist and tracking system for the employees of a
+                    mid-sized company.
+                </p>
+                <p class="lead">
+                    <a
+                        href="/games"
+                        class="
+                            btn btn-lg
+                            my-button
+                            fw-bold
+                            border-white
+                            bg-white
+                        "
+                        >Browse Games</a
+                    >
+                </p>
+            </main>
 
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%- include('../partials/footer'); %>
+        </div>
 
-    <%- include('../partials/header'); %>
-
-    <main class="small-box">
-      <h1>Game Gifters.</h1>
-      <p class="lead caption">
-        Game Gifters is a web app that emulates a video game wishlist and tracking system for the employees of a
-        mid-sized company.
-      </p>
-      <p class="lead">
-        <a href="/games" class="btn btn-lg my-button fw-bold border-white bg-white">Browse Games</a>
-      </p>
-    </main>
-
-    <%- include('../partials/footer'); %>
-
-  </div>
-
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

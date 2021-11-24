@@ -1,148 +1,216 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+    <head>
+        <%- include('../partials/head'); %>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
+        <link href="css/side-styles.css" rel="stylesheet" />
+        <title>🎁 Game Gifters | Games</title>
+    </head>
 
-<head>
-  <%- include('../partials/head'); %>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/side-styles.css" rel="stylesheet">
-    <title>🎁 Game Gifters | Games</title>
-</head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%- include('../partials/header'); %>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+            <main class="small-box">
+                <h2>Games</h2>
 
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <div class="dropdown">
+                    <a
+                        class="
+                            btn
+                            my-button
+                            fw-bold
+                            border-white
+                            bg-white
+                            dropdown-toggle
+                        "
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        Select Action
+                    </a>
 
-    <%- include('../partials/header'); %>
+                    <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuLink"
+                    >
+                        <li>
+                            <a class="dropdown-item" onclick="addEntry()"
+                                >Add Game</a
+                            >
+                        </li>
+                    </ul>
+                </div>
 
-      <main class="small-box">
-        <h2>Games</h2>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header">Games / <strong>All</strong></div>
 
-        <div class="dropdown">
-          <a class="btn my-button fw-bold border-white bg-white dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Select Action
-          </a>
+                    <div class="card-body">
+                        <div class="data-desc">
+                            <h5 class="card-title">🎮 Game Database</h5>
+                            <p style="font-size: 13px">
+                                The following table records a library of up to
+                                500 games curated for the employees to tailor
+                                their wishlists, and allows you to add new game
+                                titles.
+                                <br />
+                                <br />
+                                Note: Steam Store API integration is currently a
+                                WIP!
+                            </p>
+                        </div>
 
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" onclick="addEntry()">Add Game</a></li>
-          </ul>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">AppID</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="games-table-body">
+                                <% games.forEach(function(game) { %>
+                                <tr>
+                                    <td><%= game.app_id %></td>
+                                    <td><%= game.title %></td>
+                                    <td>$<%= game.price.toFixed(2) %></td>
+                                    <td>
+                                        <a href="#" onclick="updateEntry()"
+                                            >Update</a
+                                        >
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('../partials/footer'); %>
         </div>
 
-        <div class="card text-dark bg-light mb-3">
-          <div class="card-header">Games / <strong>All</strong></div>
+        <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
-          <div class="card-body">
-            <div class="data-desc">
-              <h5 class="card-title">🎮 Game Database</h5>
-              <p style="font-size: 13px;">
-                The following table records a library of up to 500 games curated for the
-                employees to tailor their wishlists,
-                and allows you to add new game titles.
-              <br>
-              <br>
-                Note: Steam Store API integration is currently a WIP!
-              </p>
+        <!-- Add Game Modal -->
+        <div id="modalBox1" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="close1()">&times;</span><br />
+
+                <h2>New Game</h2>
+                <p>Add a new game that can be wished for in the database.</p>
+                <br />
+
+                <form id="add-game-form">
+                    <div class="row g-2">
+                        <div class="form-floating col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="appID"
+                                placeholder="1145360"
+                                autocomplete="off"
+                                required
+                            />
+                            <label for="appID">AppID</label>
+                        </div>
+                        <div class="form-floating col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="title"
+                                placeholder="Hades"
+                                autocomplete="off"
+                                required
+                            />
+                            <label for="title">Game Title</label>
+                        </div>
+                        <div class="form-floating col">
+                            <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                class="form-control"
+                                id="price"
+                                placeholder="24.99"
+                                autocomplete="off"
+                                required
+                            />
+                            <label for="price">Price (USD)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 3em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Add Game
+                        </button>
+                    </div>
+                </form>
+                <br />
             </div>
-
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">AppID</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Price</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody id="games-table-body">
-                <% data.forEach(function(game) { %>
-                  <tr>
-                      <td><%= game.app_id %></td>
-                      <td><%= game.title %></td>
-                      <td>$<%= game.price.toFixed(2) %></td>
-                      <td><a href="#" onclick="updateEntry()">Update</a></td>
-                  </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-
-    <%- include('../partials/footer'); %>
-
-  </div>
-
-  <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
-
-  <!-- Add Game Modal -->
-  <div id="modalBox1" class="modal">
-    <div class="modal-content form-desc">
-      <span class="close" onclick="close1()">&times;</span><br>
-
-      <h2>New Game</h2>
-      <p>Add a new game that can be wished for in the database.</p><br>
-
-      <form id="add-game-form">
-        <div class="row g-2">
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="appID" placeholder="1145360" autocomplete="off" required>
-            <label for="appID">AppID</label>
-          </div>
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="title" placeholder="Hades" autocomplete="off" required>
-            <label for="title">Game Title</label>
-          </div>
-          <div class="form-floating col">
-            <input type="number" min="0" step="0.01" class="form-control" id="price" placeholder="24.99" autocomplete="off" required>
-            <label for="price">Price (USD)</label>
-          </div>
         </div>
 
-        <div class="col-auto" style="padding-top: 3em;">
-          <button type="submit" class="btn btn-primary mb-3">Add Game</button>
+        <!-- Update Game Modal -->
+        <div id="modalBox2" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="close2()">&times;</span><br />
+
+                <h2>Update Game</h2>
+                <p>Change information of an existing game in the database.</p>
+                <br />
+
+                <form>
+                    <div class="row g-2">
+                        <div class="form-floating col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="floating1"
+                                value="435150"
+                                required
+                            />
+                            <label for="floating1">AppID</label>
+                        </div>
+                        <div class="form-floating col">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="floating2"
+                                value="Divinity: Original Sin 2"
+                                required
+                            />
+                            <label for="floating2">Game Title</label>
+                        </div>
+                        <div class="form-floating col">
+                            <input
+                                type="number"
+                                step="0.01"
+                                class="form-control"
+                                id="price"
+                                value="49.99"
+                                required
+                            />
+                            <label for="floating3">Price</label>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 3em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Update Game
+                        </button>
+                    </div>
+                </form>
+                <br />
+            </div>
         </div>
-      </form>
-      <br>
-    </div>
-  </div>
 
-  <!-- Update Game Modal -->
-  <div id="modalBox2" class="modal">
-    <div class="modal-content form-desc">
-      <span class="close" onclick="close2()">&times;</span><br>
-
-      <h2>Update Game</h2>
-      <p>Change information of an existing game in the database.</p><br>
-
-      <form>
-        <div class="row g-2">
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="floating1" value="435150" required>
-            <label for="floating1">AppID</label>
-          </div>
-          <div class="form-floating col">
-            <input type="text" class="form-control" id="floating2" value="Divinity: Original Sin 2" required>
-            <label for="floating2">Game Title</label>
-          </div>
-          <div class="form-floating col">
-            <input type="number" step="0.01" class="form-control" id="price" value="49.99" required>
-            <label for="floating3">Price</label>
-          </div>
-        </div>
-
-        <div class="col-auto" style="padding-top: 3em;">
-          <button type="submit" class="btn btn-primary mb-3">Update Game</button>
-        </div>
-      </form>
-      <br>
-    </div>
-  </div>
-
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/addGame.js"></script>
-
-</body>
-
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/addGame.js"></script>
+    </body>
 </html>

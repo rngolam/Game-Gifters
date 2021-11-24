@@ -16,7 +16,7 @@ function getWishes(res, db, context, complete) {
             console.log(error);
             res.sendStatus(400)
         } else {
-            context.data = results;
+            context.wishes = results;
             complete();
         }
     });

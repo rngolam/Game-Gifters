@@ -1,255 +1,447 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+    <head>
+        <%- include('../partials/head'); %>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
+        <link href="css/side-styles.css" rel="stylesheet" />
+        <title>🎁 Game Gifters | Employees</title>
+    </head>
 
-<head>
-  <%- include('../partials/head'); %>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/side-styles.css" rel="stylesheet">
-    <title>🎁 Game Gifters | Employees</title>
-</head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%- include('../partials/header'); %>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+            <main class="small-box">
+                <h2>Employees</h2>
 
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <div class="dropdown">
+                    <a
+                        class="
+                            btn
+                            my-button
+                            fw-bold
+                            border-white
+                            bg-white
+                            dropdown-toggle
+                        "
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        Select Action
+                    </a>
 
-    <%- include('../partials/header'); %>
-
-      <main class="small-box">
-
-        <h2>Employees</h2>
-
-        <div class="dropdown">
-            <a class="btn my-button fw-bold border-white bg-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Action
-            </a>
-            
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" onclick="addEntry()">Add Employee</a></li>
-                <!-- <li><a class="dropdown-item" onclick="updateEntry()">Update Employee</a></li> -->
-                <li><a class="dropdown-item" onclick="filter()">Filter</a></li>
-            </ul>
-        </div>
-
-        <div class="card text-dark bg-light mb-3">
-            <div class="card-header">Employees / <strong>All</strong></div>
-
-            <div class="card-body">
-                <div class="data-desc">
-                    <h5 class="card-title">💼 Employee Database</h5>
-                    <p style="font-size: 13px;">The following table records all Employees working at a mid-sized company of up to 200 employees, 
-                        and allows you to add, update, and filter the entries.</p>
+                    <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuLink"
+                    >
+                        <li>
+                            <a class="dropdown-item" onclick="addEntry()"
+                                >Add Employee</a
+                            >
+                        </li>
+                        <li>
+                            <a class="dropdown-item" onclick="filter()"
+                                >Filter</a
+                            >
+                        </li>
+                    </ul>
                 </div>
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                          <th scope="col">Employee ID</th>
-                          <th scope="col">First Name</th>
-                          <th scope="col">Last Name</th>
-                          <th scope="col">Department</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">Phone</th>
-                          <th scope="col">Birthdate</th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody id="employees-table-body">
-                          <% data.forEach(function(employee) { %>
-                            <tr>
-                                <td><%= employee.employee_id %></td>
-                                <td><%= employee.first_name %></td>
-                                <td><%= employee.last_name %></td>
-                                <td><%= employee.department %></td>
-                                <td><%= employee.email %></td>
-                                <td><%= employee.phone %></td>
-                                <td><%= employee.formatted_date_of_birth %></td>
-                                <td><a href="#" onclick="updateEntry()">Update</a></td>
-                            </tr>
-                          <% }); %>
-                      </tbody>
-                </table>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header">
+                        Employees / <strong>All</strong>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="data-desc">
+                            <h5 class="card-title">💼 Employee Database</h5>
+                            <p style="font-size: 13px">
+                                The following table records all Employees
+                                working at a mid-sized company of up to 200
+                                employees, and allows you to add, update, and
+                                filter the entries.
+                            </p>
+                        </div>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Birthdate</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="employees-table-body">
+                                <% employees.forEach(function(employee) { %>
+                                <tr>
+                                    <td><%= employee.employee_id %></td>
+                                    <td><%= employee.first_name %></td>
+                                    <td><%= employee.last_name %></td>
+                                    <td><%= employee.department %></td>
+                                    <td><%= employee.email %></td>
+                                    <td><%= employee.phone %></td>
+                                    <td>
+                                        <%= employee.formatted_date_of_birth %>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="updateEntry()"
+                                            >Update</a
+                                        >
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('../partials/footer'); %>
+
+            <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
+
+            <!-- Add Employee Modal -->
+            <div id="modalBox1" class="modal">
+                <div class="modal-content form-desc">
+                    <span class="close" onclick="close1()">&times;</span><br />
+
+                    <h2>New Employee</h2>
+                    <p>Add a new Employee to the database.</p>
+                    <br />
+
+                    <form id="add-employee-form" form auto>
+                        <div class="row g-2">
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="firstName"
+                                    id="firstName"
+                                    placeholder="John"
+                                    autocomplete="off"
+                                    required
+                                />
+                                <label for="firstName">First Name</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="lastName"
+                                    id="lastName"
+                                    placeholder="Smith"
+                                    autocomplete="off"
+                                    required
+                                />
+                                <label for="lastName">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-2" style="padding-top: 1.6em">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        name="email"
+                                        id="email"
+                                        placeholder="jsmith@example.com"
+                                        autocomplete="off"
+                                    />
+                                    <label for="email">Email Address</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-group row g-2"
+                            style="padding-top: 1.6em"
+                        >
+                            <div class="form-floating col">
+                                <div class="form-floating">
+                                    <select class="form-select" id="department">
+                                        <option value="" selected>
+                                            Select a department
+                                        </option>
+                                        <option value="Engineering">
+                                            Engineering
+                                        </option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Human Resources">
+                                            Human Resources
+                                        </option>
+                                        <option value="Marketing">
+                                            Marketing
+                                        </option>
+                                        <option value="Operations">
+                                            Operations
+                                        </option>
+                                        <option value="IT">
+                                            Information Technology
+                                        </option>
+                                    </select>
+                                    <label for="department">Department</label>
+                                </div>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="phone"
+                                    id="phone"
+                                    placeholder="111-111-1111"
+                                    autocomplete="off"
+                                />
+                                <label for="phone">Phone Number</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    name="birthdate"
+                                    id="birthdate"
+                                    required
+                                />
+                                <label for="birthdate">Birthdate</label>
+                            </div>
+                        </div>
+
+                        <div class="col-auto" style="padding-top: 3em">
+                            <button type="submit" class="btn btn-primary mb-3">
+                                Add Employee
+                            </button>
+                        </div>
+                    </form>
+                    <br />
+                </div>
+            </div>
+
+            <!-- Update Employee Modal -->
+            <div id="modalBox2" class="modal">
+                <div class="modal-content form-desc">
+                    <span class="close" onclick="close2()">&times;</span><br />
+
+                    <h2>Update Employee</h2>
+                    <p>
+                        Change information of an existing employee in the
+                        database.
+                    </p>
+                    <br />
+
+                    <form>
+                        <div class="row g-2">
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floating1"
+                                    value="Sola"
+                                    required
+                                />
+                                <label for="floating1">First Name</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floating2"
+                                    value="Chang"
+                                    required
+                                />
+                                <label for="floating2">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-2" style="padding-top: 1.6em">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="floating3"
+                                        value="sola@gamegifters.co"
+                                    />
+                                    <label for="floating3">Email address</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="form-group row g-2"
+                            style="padding-top: 1.6em"
+                        >
+                            <div class="form-floating col">
+                                <div class="form-floating">
+                                    <select
+                                        class="form-select"
+                                        id="floating4"
+                                        required
+                                    >
+                                        <option>Select a department</option>
+                                        <option value="engineering" selected>
+                                            Engineering
+                                        </option>
+                                        <option value="finance">Finance</option>
+                                        <option value="hr">
+                                            Human Resources
+                                        </option>
+                                        <option value="marketing">
+                                            Marketing
+                                        </option>
+                                        <option value="operations">
+                                            Operations
+                                        </option>
+                                        <option value="it">
+                                            Technology & IT
+                                        </option>
+                                    </select>
+                                    <label for="floating4">Department</label>
+                                </div>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floating5"
+                                    value="206-771-4410"
+                                />
+                                <label for="floating5">Phone Number</label>
+                            </div>
+                            <div class="form-floating col">
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    value="1992-08-08"
+                                />
+                                <label for="floating6">Birthdate</label>
+                            </div>
+                        </div>
+
+                        <div class="col-auto" style="padding-top: 3em">
+                            <button type="submit" class="btn btn-primary mb-3">
+                                Update Employee
+                            </button>
+                        </div>
+                    </form>
+                    <br />
+                </div>
+            </div>
+
+            <!-- Filter Modal -->
+            <div id="modalBox3" class="modal">
+                <div class="modal-content form-desc">
+                    <span class="close" onclick="close3()">&times;</span><br />
+
+                    <h2>Filter Employees</h2>
+                    <p>
+                        Display employees based on the department they work in.
+                    </p>
+                    <br />
+
+                    <form>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox1"
+                                value="option1"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox1"
+                                >Engineering</label
+                            >
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox2"
+                                value="option2"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox2"
+                                >Finance</label
+                            >
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox3"
+                                value="option3"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox3"
+                                >HR</label
+                            >
+                        </div>
+                        <br /><br />
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox4"
+                                value="option4"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox4"
+                                >Marketing</label
+                            >
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox5"
+                                value="option5"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox5"
+                                >Operations</label
+                            >
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="inlineCheckbox6"
+                                value="option6"
+                            />
+                            <label
+                                class="form-check-label"
+                                for="inlineCheckbox6"
+                                >IT</label
+                            >
+                        </div>
+
+                        <div class="col-auto" style="padding-top: 3em">
+                            <button type="submit" class="btn btn-primary mb-3">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                    <br />
+                </div>
             </div>
         </div>
-      </main>
 
-    <%- include('../partials/footer'); %>
-
-       <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
-        
-        <!-- Add Employee Modal -->
-        <div id="modalBox1" class="modal">
-          <div class="modal-content form-desc">
-              <span class="close" onclick="close1()">&times;</span><br>
-
-              <h2>New Employee</h2>
-              <p>Add a new Employee to the database.</p><br>
-
-              <form id="add-employee-form" form auto>
-                  <div class="row g-2">
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" autocomplete="off" required>
-                          <label for="firstName">First Name</label>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Smith" autocomplete="off" required>
-                          <label for="lastName">Last Name</label>
-                      </div>
-                  </div>
-
-                  <div class="row g-2" style="padding-top: 1.6em;">
-                      <div class="col-md">
-                      <div class="form-floating">
-                          <input type="email" class="form-control" name="email" id="email" placeholder="jsmith@example.com" autocomplete="off">
-                          <label for="email">Email Address</label>
-                      </div>
-                      </div>
-                  </div>
-
-                  <div class="form-group row g-2" style="padding-top: 1.6em;">
-                      <div class="form-floating col">
-                          <div class="form-floating">
-                            <select class="form-select" id="department">
-                                <option value="" selected>Select a department</option>
-                                <option value="Engineering">Engineering</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Human Resources">Human Resources</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Operations">Operations</option>
-                                <option value="IT">Information Technology</option>
-                            </select>
-                            <label for="department">Department</label>
-                          </div>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" name="phone" id="phone" placeholder="111-111-1111" autocomplete="off">
-                          <label for="phone">Phone Number</label>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="date" class="form-control" name="birthdate" id="birthdate" required>
-                          <label for="birthdate">Birthdate</label>
-                      </div>
-                  </div>
-
-                  <div class="col-auto" style="padding-top: 3em;">
-                      <button type="submit" class="btn btn-primary mb-3">Add Employee</button>
-                  </div>
-              </form>
-              <br>
-          </div>
-      </div>
-
-      <!-- Update Employee Modal -->
-      <div id="modalBox2" class="modal">
-          <div class="modal-content form-desc">
-              <span class="close" onclick="close2()">&times;</span><br>
-
-              <h2>Update Employee</h2>
-              <p>Change information of an existing employee in the database.</p><br>
-
-              <form>
-                  <div class="row g-2">
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" id="floating1" value="Sola" required>
-                          <label for="floating1">First Name</label>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" id="floating2" value="Chang" required>
-                          <label for="floating2">Last Name</label>
-                      </div>
-                  </div>
-
-                  <div class="row g-2" style="padding-top: 1.6em;">
-                      <div class="col-md">
-                      <div class="form-floating">
-                          <input type="email" class="form-control" id="floating3" value="sola@gamegifters.co">
-                          <label for="floating3">Email address</label>
-                      </div>
-                      </div>
-                  </div>
-
-                  <div class="form-group row g-2" style="padding-top: 1.6em;">
-                      <div class="form-floating col">
-                          <div class="form-floating">
-                          <select class="form-select" id="floating4" required>
-                              <option>Select a department</option>
-                              <option value="engineering" selected>Engineering</option>
-                              <option value="finance">Finance</option>
-                              <option value="hr">Human Resources</option>
-                              <option value="marketing">Marketing</option>
-                              <option value="operations">Operations</option>
-                              <option value="it">Technology & IT</option>
-                          </select>
-                          <label for="floating4">Department</label>
-                          </div>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="text" class="form-control" id="floating5" value="206-771-4410">
-                          <label for="floating5">Phone Number</label>
-                      </div>
-                      <div class="form-floating col">
-                          <input type="date" class="form-control" value="1992-08-08">
-                          <label for="floating6">Birthdate</label>
-                      </div>
-                  </div>
-
-                  <div class="col-auto" style="padding-top: 3em;">
-                      <button type="submit" class="btn btn-primary mb-3">Update Employee</button>
-                  </div>
-              </form>
-              <br>
-          </div>
-      </div>
-
-      <!-- Filter Modal -->
-      <div id="modalBox3" class="modal">
-          <div class="modal-content form-desc">
-              <span class="close" onclick="close3()">&times;</span><br>
-
-              <h2>Filter Employees</h2>
-              <p>Display employees based on the department they work in.</p><br>
-
-              <form>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <label class="form-check-label" for="inlineCheckbox1">Engineering</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                      <label class="form-check-label" for="inlineCheckbox2">Finance</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                      <label class="form-check-label" for="inlineCheckbox3">HR</label>
-                  </div>
-                  <br><br>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                      <label class="form-check-label" for="inlineCheckbox4">Marketing</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-                      <label class="form-check-label" for="inlineCheckbox5">Operations</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-                      <label class="form-check-label" for="inlineCheckbox6">IT</label>
-                  </div>
-
-                  <div class="col-auto" style="padding-top: 3em;">
-                      <button type="submit" class="btn btn-primary mb-3">Submit</button>
-                  </div>
-              </form>
-              <br>
-          </div>
-      </div>
-  </div>
-
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/addEmployee.js"></script>
-  <script src="js/convertDateString.js"></script>
-
-</body>
-
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/addEmployee.js"></script>
+        <script src="js/convertDateString.js"></script>
+    </body>
 </html>

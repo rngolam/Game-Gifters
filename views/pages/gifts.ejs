@@ -1,152 +1,192 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
+    <head>
+        <%- include('../partials/head'); %>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+        />
+        <link href="css/side-styles.css" rel="stylesheet" />
+        <title>🎁 Game Gifters | Gifts</title>
+    </head>
 
-<head>
-  <%- include('../partials/head'); %>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/side-styles.css" rel="stylesheet">
-    <title>🎁 Game Gifters | Gifts</title>
-</head>
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%- include('../partials/header'); %>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+            <main class="small-box">
+                <h2>Gifts</h2>
 
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <div class="dropdown">
+                    <a
+                        class="
+                            btn
+                            my-button
+                            fw-bold
+                            border-white
+                            bg-white
+                            dropdown-toggle
+                        "
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        Select Action
+                    </a>
 
-    <%- include('../partials/header'); %>
+                    <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuLink"
+                    >
+                        <li>
+                            <a class="dropdown-item" onclick="addEntry()"
+                                >Add Gift</a
+                            >
+                        </li>
+                    </ul>
+                </div>
 
-      <main class="small-box">
-        <h2>Gifts</h2>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-header">Gifts / <strong>All</strong></div>
 
-        <div class="dropdown">
-          <a class="btn my-button fw-bold border-white bg-white dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Select Action
-          </a>
+                    <div class="card-body">
+                        <div class="data-desc">
+                            <h5 class="card-title">🎁 Gift Database</h5>
+                            <p style="font-size: 13px">
+                                The following table records a list of gifts that
+                                have been given by employees to fulfill the wish
+                                of other employees, and allows you to add,
+                                delete, and filter the entries.
+                            </p>
+                        </div>
 
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" onclick="addEntry()">Add Gift</a></li>
-          </ul>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Gift ID</th>
+                                    <th scope="col">Associated Wish ID</th>
+                                    <th scope="col">Game Title</th>
+                                    <th scope="col">Sender Employee ID</th>
+                                    <th scope="col">Sender Name</th>
+                                    <th scope="col">Recipient Name</th>
+                                    <th scope="col">Date Sent</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gifts-table-body">
+                                <% gifts.forEach(function(gift) { %>
+                                <tr>
+                                    <td><%= gift.gift_id %></td>
+                                    <td><%= gift.associated_wish_id %></td>
+                                    <td><%= gift.game_title %></td>
+                                    <td><%= gift.sender_id %></td>
+                                    <td>
+                                        <% if (gift.sender_id) { %> <%=
+                                        gift.sender_first_name + ' ' +
+                                        gift.sender_last_name %> <% } %>
+                                    </td>
+                                    <td>
+                                        <%= gift.recipient_first_name + ' ' +
+                                        gift.recipient_last_name %>
+                                    </td>
+                                    <td><%= gift.date_sent_formatted %></td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+
+            <%- include('../partials/footer'); %>
         </div>
 
-        <div class="card text-dark bg-light mb-3">
-          <div class="card-header">Gifts / <strong>All</strong></div>
+        <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
-          <div class="card-body">
-            <div class="data-desc">
-              <h5 class="card-title">🎁 Gift Database</h5>
-              <p style="font-size: 13px;">The following table records a list of gifts that have been given by employees
-                to fulfill the wish of other employees,
-                and allows you to add, delete, and filter the entries.</p>
+        <!-- Add Gift Modal -->
+        <div id="modalBox1" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="close1()">&times;</span><br />
+
+                <h2>New Gift</h2>
+                <p>Add a new employee gift to the database.</p>
+                <br />
+
+                <form id="add-gift-form">
+                    <div class="row g-2" style="padding-top: 1.6em">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select
+                                    class="form-select"
+                                    id="wishID"
+                                    required
+                                >
+                                    <option value="" selected>
+                                        Select a wish to fulfill
+                                    </option>
+                                    <% unfulfilledWishes.forEach(function(wish)
+                                    { %>
+                                    <option
+                                        value="<%= wish.wish_id %>"
+                                        data-game="<%= wish.game_title %>"
+                                        data-recipient="<%= wish.first_name %> <%= wish.last_name %>"
+                                    >
+                                        <%= wish.game_title %> for <%=
+                                        wish.first_name %> <%= wish.last_name %>
+                                        [<%= wish.wish_id %>]
+                                    </option>
+                                    <% }); %>
+                                </select>
+                                <label for="wishID">Wish</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row g-2" style="padding-top: 1.6em">
+                        <div class="form-floating col">
+                            <div class="form-floating">
+                                <select class="form-select" id="senderID">
+                                    <option value="" selected>
+                                        Select a sender (optional)
+                                    </option>
+                                    <% employees.forEach(function(employee) { %>
+                                    <option
+                                        value="<%= employee.employee_id %>"
+                                        data-sender="<%= employee.first_name %> <%= employee.last_name %>"
+                                    >
+                                        <%= employee.first_name %> <%=
+                                        employee.last_name %> [<%=
+                                        employee.employee_id %>]
+                                    </option>
+                                    <% }); %>
+                                </select>
+                                <label for="wishID">Sender</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating col">
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="dateSent"
+                                id="dateSent"
+                                required
+                            />
+                            <label for="dateSent">Date Sent</label>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 3em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Add Gift
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Gift ID</th>
-                  <th scope="col">Associated Wish ID</th>
-                  <th scope="col">Game Title</th>
-                  <th scope="col">Sender Employee ID</th>
-                  <th scope="col">Sender Name</th>
-                  <th scope="col">Recipient Name</th>
-                  <th scope="col">Date Sent</th>
-                </tr>
-              </thead>
-              <tbody id="gifts-table-body">
-                <tr>
-                  <% data.forEach(function(gift) { %>
-                    <tr>
-                        <td><%= gift.gift_id %></td>
-                        <td><%= gift.associated_wish_id %></td>
-                        <td><%= gift.game_title %></td>
-                        <td><%= gift.sender_id %></td>
-                        <td><% if (gift.sender_id) { %><%= gift.sender_first_name + ' ' + gift.sender_last_name %><% } %></td>
-                        <td><%= gift.recipient_first_name + ' ' + gift.recipient_last_name %></td>
-                        <td><%= gift.date_sent_formatted %></td>
-                    </tr>
-                  <% }); %>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-
-    <%- include('../partials/footer'); %>
-
-  </div>
-
-  <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
-
-  <!-- Add Gift Modal -->
-  <div id="modalBox1" class="modal">
-    <div class="modal-content form-desc">
-      <span class="close" onclick="close1()">&times;</span><br>
-
-      <h2>New Gift</h2>
-      <p>Add a new employee gift to the database.</p><br>
-
-      <form id="add-gift-form">
-
-        <div class="row g-2" style="padding-top: 1.6em;">
-          <div class="col-md">
-              <div class="form-floating">
-                <select class="form-select" id="wishID" required>
-                    <option value="" selected>Select a wish to fulfill</option>
-                    <% unfulfilledWishes.forEach(function(wish) { %>
-                      <option value="<%= wish.wish_id %>" data-game="<%= wish.game_title %>"
-                        data-recipient="<%= wish.first_name %> <%= wish.last_name %>">
-                        <%= wish.game_title %> for <%= wish.first_name %> <%= wish.last_name %> [<%= wish.wish_id %>]
-                      </option>                    
-                    <% }); %>
-                </select>
-                <label for="wishID">Wish</label>
-              </div>
-          </div>
         </div>
 
-        <div class="form-group row g-2" style="padding-top: 1.6em;">
-          <div class="form-floating col">
-            <div class="form-floating">
-              <select class="form-select" id="senderID">
-                  <option value="" selected>Select a sender (optional)</option>
-                  <% employees.forEach(function(employee) { %>
-                    <option value="<%= employee.employee_id %>"
-                      data-sender="<%= employee.first_name %> <%= employee.last_name %>">
-                      <%= employee.first_name %> <%= employee.last_name %> [<%= employee.employee_id %>]
-                    </option>                    
-                  <% }); %>
-              </select>
-              <label for="wishID">Sender</label>
-            </div>
-          </div>
-          
-          <div class="form-floating col">
-            <input type="date" class="form-control" name="dateSent" id="dateSent" required>
-            <label for="dateSent">Date Sent</label>
-          </div>
-        </div>
-
-        <div class="col-auto" style="padding-top: 3em;">
-          <button type="submit" class="btn btn-primary mb-3">Add Gift</button>
-        </div>
-
-      </form>
-    
-    </div>
-  </div>
-
-  <!-- <script>
-    var unfulfilledWishes = <%- JSON.stringify(unfulfilledWishes) %>
-  </script> -->
-
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/addGift.js"></script>
-  <script src="js/convertDateString.js"></script>
-  <!-- <script src="js/populateAddGiftFields.js"></script>
-  <script src="js/jquery-3.6.0.min.js"></script> -->
-
-</body>
-
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/addGift.js"></script>
+        <script src="js/convertDateString.js"></script>
+    </body>
 </html>

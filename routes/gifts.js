@@ -17,7 +17,7 @@ function getGifts(res, db, context, complete) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            context.data = results;
+            context.gifts = results;
             complete();
         }
     });
