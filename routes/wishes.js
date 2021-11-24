@@ -3,12 +3,12 @@ const router = express.Router();
 
 function getWishes(res, db, context, complete) {
 
-    const select_query = 'SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id, ' +
-    'employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled ' +
-    'FROM wishes ' +
-    'INNER JOIN games ON wishes.game_id=games.app_id ' +
-    'INNER JOIN employees ON wishes.wished_by=employees.employee_id ' +
-    'ORDER BY fulfilled, date_wished;';
+    const select_query = `SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id,
+    employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled
+    FROM wishes
+    INNER JOIN games ON wishes.game_id=games.app_id
+    INNER JOIN employees ON wishes.wished_by=employees.employee_id
+    ORDER BY fulfilled, date_wished;`;
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -24,8 +24,8 @@ function getWishes(res, db, context, complete) {
 
 function getGames(res, db, context, complete) {
 
-    const select_query = 'SELECT app_id, title FROM games ' +
-    'ORDER by title;';
+    const select_query = `SELECT app_id, title FROM games
+    ORDER by title;`;
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -42,8 +42,8 @@ function getGames(res, db, context, complete) {
 
 function getEmployees(res, db, context, complete) {
 
-    const select_query = 'SELECT employee_id, first_name, last_name FROM employees '
-    'ORDER by first_namee, last_name, employee_id;';
+    const select_query = `SELECT employee_id, first_name, last_name FROM employees
+    ORDER by first_name, last_name, employee_id;`;
 
     db.pool.query(select_query, function(error, results, fields) {
 
@@ -60,8 +60,8 @@ function getEmployees(res, db, context, complete) {
 
 function addWish(res, data, db) {
 
-        const insert_query = 'INSERT INTO wishes (game_id, wished_by, date_wished) ' +
-        'VALUES (?, ?, ?)';
+        const insert_query = `INSERT INTO wishes (game_id, wished_by, date_wished)
+        'VALUES (?, ?, ?)`;
 
         const inserts = [data.gameID, data.employeeID, data.dateWished]
 
