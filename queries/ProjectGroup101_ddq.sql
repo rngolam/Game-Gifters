@@ -76,7 +76,7 @@ INSERT INTO `employees` (`first_name`, `last_name`, `department`, `email`, `phon
 	('Mark', 'Otto', 'Marketing', 'mark@gamegifters.co', '206-112-3847', '1991-03-22'),
 	('Jacob', 'Thornton', 'Finance', 'jake@gamegifters.co', '691-555-1774', '1993-11-04'),
 	('Richard', 'Ngo-Lam', 'Engineering', 'richie@gamegifters.co', '010-142-6220', '1998-07-16'),
-	('Sola', 'Chang', 'Design', 'sola@gamegifters.co', '206-771-4410', '1992-08-08'),
+	('Sola', 'Chang', 'Engineering', 'sola@gamegifters.co', '206-771-4410', '1992-08-08'),
 	('Nathan', 'Perkins', 'Engineering', 'nathan@gamegifters.co', '717-205-3412', '1990-01-15');
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 

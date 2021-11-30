@@ -130,7 +130,6 @@ router.post("/add-wish", function (req, res) {
 
 router.delete("/delete-wish", function (req, res) {
     const data = req.body;
-    console.log(data)
     const db = req.app.get("mysql");
     deleteWish(res, data, db);
 });

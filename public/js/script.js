@@ -2,8 +2,9 @@ function addEntry() { // user clicks on action button
     document.getElementById("modalBox1").style.display = "block";
 }
 
-function updateEntry() { // user clicks on action button
+function updateEntry(id) { // user clicks on action button
     document.getElementById("modalBox2").style.display = "block";
+    populateEmployeeFields(id);
 }
 
 function filter() { // user clicks on action button

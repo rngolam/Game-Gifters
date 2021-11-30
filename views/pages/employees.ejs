@@ -42,11 +42,11 @@
                                 >Add Employee</a
                             >
                         </li>
-                        <li>
+                        <!-- <li>
                             <a class="dropdown-item" onclick="filter()"
                                 >Filter</a
                             >
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -92,7 +92,7 @@
                                         <%= employee.formatted_date_of_birth %>
                                     </td>
                                     <td>
-                                        <a href="#" onclick="updateEntry()"
+                                        <a href="#" onclick="updateEntry(<%= employee.employee_id %>)"
                                             >Update</a
                                         >
                                     </td>
@@ -236,27 +236,25 @@
                     </p>
                     <br />
 
-                    <form>
+                    <form id="update-employee-form">
                         <div class="row g-2">
                             <div class="form-floating col">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="floating1"
-                                    value="Sola"
+                                    id="update-first-name"
                                     required
                                 />
-                                <label for="floating1">First Name</label>
+                                <label for="update-first-name">First Name</label>
                             </div>
                             <div class="form-floating col">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="floating2"
-                                    value="Chang"
+                                    id="update-last-name"
                                     required
                                 />
-                                <label for="floating2">Last Name</label>
+                                <label for="update-last-name">Last Name</label>
                             </div>
                         </div>
 
@@ -266,10 +264,9 @@
                                     <input
                                         type="email"
                                         class="form-control"
-                                        id="floating3"
-                                        value="sola@gamegifters.co"
+                                        id="update-email"
                                     />
-                                    <label for="floating3">Email address</label>
+                                    <label for="update-email">Email address</label>
                                 </div>
                             </div>
                         </div>
@@ -282,46 +279,45 @@
                                 <div class="form-floating">
                                     <select
                                         class="form-select"
-                                        id="floating4"
+                                        id="update-department"
                                         required
                                     >
-                                        <option>Select a department</option>
-                                        <option value="engineering" selected>
+                                        <option value="" selected>Select a department</option>
+                                        <option value="Engineering">
                                             Engineering
                                         </option>
-                                        <option value="finance">Finance</option>
-                                        <option value="hr">
+                                        <option value="Finance">Finance</option>
+                                        <option value="Human Resources">
                                             Human Resources
                                         </option>
-                                        <option value="marketing">
+                                        <option value="Marketing">
                                             Marketing
                                         </option>
-                                        <option value="operations">
+                                        <option value="Operations">
                                             Operations
                                         </option>
-                                        <option value="it">
-                                            Technology & IT
+                                        <option value="IT">
+                                            Information Technology
                                         </option>
                                     </select>
-                                    <label for="floating4">Department</label>
+                                    <label for="update-department">Department</label>
                                 </div>
                             </div>
                             <div class="form-floating col">
                                 <input
                                     type="text"
                                     class="form-control"
-                                    id="floating5"
-                                    value="206-771-4410"
+                                    id="update-phone"
                                 />
-                                <label for="floating5">Phone Number</label>
+                                <label for="update-phone">Phone Number</label>
                             </div>
                             <div class="form-floating col">
                                 <input
                                     type="date"
                                     class="form-control"
-                                    value="1992-08-08"
+                                    id="update-birthdate"
                                 />
-                                <label for="floating6">Birthdate</label>
+                                <label for="update-birthdate">Birthdate</label>
                             </div>
                         </div>
 
@@ -438,10 +434,17 @@
             </div>
         </div>
 
+        <% if (employees) { %>
+            <script>
+                let employeeInfo = <%- JSON.stringify(employees) %>;
+            </script>
+        <% } %>
+
         <!-- Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/script.js"></script>
         <script src="js/addEmployee.js"></script>
+        <script src="js/populateUpdateEmployeeFields.js"></script>
         <script src="js/convertDateString.js"></script>
     </body>
 </html>
