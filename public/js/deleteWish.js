@@ -8,6 +8,12 @@ deleteWishForm.addEventListener('submit', function(event) {
     // Get selected IDs
     const deleteIDs = []
     const toDelete = document.querySelectorAll('input[name=deleteRow]:checked')
+
+    if (toDelete.length === 0) {
+        close2();
+        return;
+    }
+
     toDelete.forEach(row => deleteIDs.push(row.value));
 
     formData = {

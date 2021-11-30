@@ -3,12 +3,12 @@ const router = express.Router();
 
 function getEmployees(res, db) {
 
-    const select_query = `SELECT employee_id, first_name, last_name, department, email, phone,
+    const selectQuery = `SELECT employee_id, first_name, last_name, department, email, phone,
     DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth
     FROM employees
     ORDER BY last_name, first_name, employee_id;`;
 
-    db.pool.query(select_query, function(error, results, fields) {
+    db.pool.query(selectQuery, function(error, results, fields) {
 
         if (error) {
         
@@ -25,13 +25,36 @@ function getEmployees(res, db) {
 
 function addEmployee(res, data, db) {
 
-    const insert_query = `INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth)
+    const insertQuery = `INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth)
     VALUES (?, ?, ?, ?, ?, ?);`;
 
     const inserts = [data.firstName, data.lastName, data.department, data.email, data.phone, data.birthdate];
     
-    db.pool.query(insert_query, inserts, function(error, results, fields) {
+    db.pool.query(insertQuery, inserts, function(error, results, fields) {
         
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
+function updateEmployee(res, data, db) {
+
+    const updateQuery = `UPDATE employees
+    SET first_name=?,
+    last_name=?,
+    department=?,
+    email=?,
+    phone=?,
+    date_of_birth=?
+    WHERE employee_id=?;`;
+
+    const inserts = [data.firstName, data.lastName, data.department, data.email, data.phone, data.birthdate, data.employeeID];
+
+    db.pool.query(updateQuery, inserts, function(error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -53,6 +76,12 @@ router.post('/add-employee', function(req, res) {
     const data = req.body;
     const db = req.app.get('mysql');
     addEmployee(res, data, db);
+});
+
+router.put("/update-employee", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    updateEmployee(res, data, db);
 });
 
 module.exports = router;

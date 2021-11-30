@@ -71,7 +71,7 @@ function addRowToTable(formData, responseData) {
     emailCell.innerText = formData.email;
     phoneCell.innerText = formData.phone;
     dobCell.innerText = convertDateString(formData.birthdate);
-    updateCell.innerHTML = '<a href="#" onclick="updateEntry()">Update</a>';
+    updateCell.innerHTML = `<a href="#" onclick="updateEntry(${insertedRowId})">Update</a>`;
 
     cells = [idCell, firstNameCell, lastNameCell, departmentCell, emailCell, phoneCell, dobCell, updateCell];
     cells.forEach(cell => row.appendChild(cell));
