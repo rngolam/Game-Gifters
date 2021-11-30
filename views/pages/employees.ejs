@@ -92,7 +92,9 @@
                                         <%= employee.formatted_date_of_birth %>
                                     </td>
                                     <td>
-                                        <a href="#" onclick="updateEntry(<%= employee.employee_id %>)"
+                                        <a
+                                            href="#"
+                                            onclick="updateEntry(<%= employee.employee_id %>)"
                                             >Update</a
                                         >
                                     </td>
@@ -245,7 +247,9 @@
                                     id="update-first-name"
                                     required
                                 />
-                                <label for="update-first-name">First Name</label>
+                                <label for="update-first-name"
+                                    >First Name</label
+                                >
                             </div>
                             <div class="form-floating col">
                                 <input
@@ -266,7 +270,9 @@
                                         class="form-control"
                                         id="update-email"
                                     />
-                                    <label for="update-email">Email address</label>
+                                    <label for="update-email"
+                                        >Email address</label
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -282,7 +288,9 @@
                                         id="update-department"
                                         required
                                     >
-                                        <option value="" selected>Select a department</option>
+                                        <option value="" selected>
+                                            Select a department
+                                        </option>
                                         <option value="Engineering">
                                             Engineering
                                         </option>
@@ -300,7 +308,9 @@
                                             Information Technology
                                         </option>
                                     </select>
-                                    <label for="update-department">Department</label>
+                                    <label for="update-department"
+                                        >Department</label
+                                    >
                                 </div>
                             </div>
                             <div class="form-floating col">
@@ -435,9 +445,9 @@
         </div>
 
         <% if (employees) { %>
-            <script>
-                let employeeInfo = <%- JSON.stringify(employees) %>;
-            </script>
+        <script>
+            let employeeInfo = <%- JSON.stringify(employees) %>;
+        </script>
         <% } %>
 
         <!-- Bootstrap Bundle with Popper -->

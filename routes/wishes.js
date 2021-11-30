@@ -91,9 +91,9 @@ function addWish(res, data, db) {
 }
 
 function deleteWish(res, data, db) {
-    const placeholders = data.deleteIDs.map(id => `?`);
+    const placeholders = data.deleteIDs.map((id) => `?`);
     const deleteQuery = `DELETE FROM wishes WHERE wish_id IN (${placeholders})`;
-    const inserts = data.deleteIDs
+    const inserts = data.deleteIDs;
 
     db.pool.query(deleteQuery, inserts, function (error, results, fields) {
         if (error) {

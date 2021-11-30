@@ -1,37 +1,39 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 function getEmployees(res, db) {
-
     const selectQuery = `SELECT employee_id, first_name, last_name, department, email, phone,
     DATE_FORMAT(date_of_birth, "%c/%e/%Y") AS formatted_date_of_birth
     FROM employees
     ORDER BY last_name, first_name, employee_id;`;
 
-    db.pool.query(selectQuery, function(error, results, fields) {
-
+    db.pool.query(selectQuery, function (error, results, fields) {
         if (error) {
-        
             console.log(error);
             res.sendStatus(400);
-        
         } else {
-            
-            res.render('pages/employees', {page_name: 'employees', employees: results});
-        
+            res.render("pages/employees", {
+                page_name: "employees",
+                employees: results,
+            });
         }
     });
 }
 
 function addEmployee(res, data, db) {
-
     const insertQuery = `INSERT INTO employees (first_name, last_name, department, email, phone, date_of_birth)
     VALUES (?, ?, ?, ?, ?, ?);`;
 
-    const inserts = [data.firstName, data.lastName, data.department, data.email, data.phone, data.birthdate];
-    
-    db.pool.query(insertQuery, inserts, function(error, results, fields) {
-        
+    const inserts = [
+        data.firstName,
+        data.lastName,
+        data.department,
+        data.email,
+        data.phone,
+        data.birthdate,
+    ];
+
+    db.pool.query(insertQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -42,7 +44,6 @@ function addEmployee(res, data, db) {
 }
 
 function updateEmployee(res, data, db) {
-
     const updateQuery = `UPDATE employees
     SET first_name=?,
     last_name=?,
@@ -52,9 +53,17 @@ function updateEmployee(res, data, db) {
     date_of_birth=?
     WHERE employee_id=?;`;
 
-    const inserts = [data.firstName, data.lastName, data.department, data.email, data.phone, data.birthdate, data.employeeID];
+    const inserts = [
+        data.firstName,
+        data.lastName,
+        data.department,
+        data.email,
+        data.phone,
+        data.birthdate,
+        data.employeeID,
+    ];
 
-    db.pool.query(updateQuery, inserts, function(error, results, fields) {
+    db.pool.query(updateQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -64,17 +73,14 @@ function updateEmployee(res, data, db) {
     });
 }
 
-
-router.get('/', function(req, res) {
-
-    const db = req.app.get('mysql');
+router.get("/", function (req, res) {
+    const db = req.app.get("mysql");
     getEmployees(res, db);
 });
 
-router.post('/add-employee', function(req, res) {
-
+router.post("/add-employee", function (req, res) {
     const data = req.body;
-    const db = req.app.get('mysql');
+    const db = req.app.get("mysql");
     addEmployee(res, data, db);
 });
 

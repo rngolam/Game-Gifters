@@ -1,44 +1,44 @@
 // Environmental variables
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const methodOverride = require('method-override')
-const mysql = require('./config/db-connector')
+const methodOverride = require("method-override");
+const mysql = require("./config/db-connector");
 
 // Set the view engine to ejs
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 // Set global app db config
-app.set('mysql', mysql);
+app.set("mysql", mysql);
 
 // Handle JSON and Form Data
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // override with the X-HTTP-Method-Override header in the request
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride("X-HTTP-Method-Override"));
 
 // Set root directory for static assets
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // Diagnostic
-const resetTables = require('./routes/resetTables');
+const resetTables = require("./routes/resetTables");
 
 // Set up routes
-const index = require('./routes/index');
-const employees = require('./routes/employees');
-const games = require('./routes/games');
-const gifts = require('./routes/gifts');
-const wishes = require('./routes/wishes');
+const index = require("./routes/index");
+const employees = require("./routes/employees");
+const games = require("./routes/games");
+const gifts = require("./routes/gifts");
+const wishes = require("./routes/wishes");
 
-app.use('/reset-tables', resetTables);
+app.use("/reset-tables", resetTables);
 
-app.use('/', index);
-app.use('/employees', employees);
-app.use('/games', games);
-app.use('/gifts', gifts);
-app.use('/wishes', wishes);
+app.use("/", index);
+app.use("/employees", employees);
+app.use("/games", games);
+app.use("/gifts", gifts);
+app.use("/wishes", wishes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
