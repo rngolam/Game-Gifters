@@ -94,12 +94,14 @@
                             <tbody id="wishes-table-body">
                                 <% wishes.forEach(function(wish) { %>
                                 <tr>
-                                    <th scope="row">
+                                    <td>
                                         <input
-                                            class="form-check-input"
-                                            type="checkbox"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="deleteRow"
+                                        value="<%= wish.wish_id %>"
                                         />
-                                    </th>
+                                    </td>
                                     <td><%= wish.wish_id %></td>
                                     <td><%= wish.game_id %></td>
                                     <td><%= wish.game_title %></td>
@@ -220,12 +222,11 @@
                 <p>Are you sure you want to remove the selected Wishes?</p>
                 <br />
 
-                <form>
+                <form id="delete-wish-form">
                     <div class="d-grid gap-2 d-md-block">
                         <button
                             class="btn btn-outline-danger"
-                            type="button"
-                            onclick="close2()"
+                            type="submit"
                         >
                             Yes
                         </button>
