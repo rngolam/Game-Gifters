@@ -14,6 +14,8 @@ deleteWishForm.addEventListener('submit', function(event) {
         deleteIDs: deleteIDs
     }
 
+    console.log(formData)
+
     // Set up AJAX request
     const req = new XMLHttpRequest();
     req.open('POST', '/wishes/delete-wish', true);

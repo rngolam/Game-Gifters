@@ -91,10 +91,11 @@ function addWish(res, data, db) {
 }
 
 function deleteWish(res, data, db) {
-    const deleteQuery = `DELETE FROM wishes WHERE wish_id IN (?)`
-    const stringOfIDs = data.deleteIDs.join()
+    const placeholders = data.deleteIDs.map(id => `?`);
+    const deleteQuery = `DELETE FROM wishes WHERE wish_id IN (${placeholders})`;
+    const inserts = data.deleteIDs
 
-    db.pool.query(deleteQuery, stringOfIDs, function (error, results, fields) {
+    db.pool.query(deleteQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -129,6 +130,7 @@ router.post("/add-wish", function (req, res) {
 
 router.delete("/delete-wish", function (req, res) {
     const data = req.body;
+    console.log(data)
     const db = req.app.get("mysql");
     deleteWish(res, data, db);
 });
