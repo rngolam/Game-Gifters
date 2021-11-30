@@ -45,10 +45,10 @@ function getWishes(req, res, db, context, complete) {
 }
 
 function getGames(res, db, context, complete) {
-    const select_query = `SELECT app_id, title FROM games
+    const selectQuery = `SELECT app_id, title FROM games
     ORDER by title;`;
 
-    db.pool.query(select_query, function (error, results, fields) {
+    db.pool.query(selectQuery, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -60,10 +60,10 @@ function getGames(res, db, context, complete) {
 }
 
 function getEmployees(res, db, context, complete) {
-    const select_query = `SELECT employee_id, first_name, last_name FROM employees
+    const selectQuery = `SELECT employee_id, first_name, last_name FROM employees
     ORDER by first_name, last_name, employee_id;`;
 
-    db.pool.query(select_query, function (error, results, fields) {
+    db.pool.query(selectQuery, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -75,12 +75,26 @@ function getEmployees(res, db, context, complete) {
 }
 
 function addWish(res, data, db) {
-    const insert_query = `INSERT INTO wishes (game_id, wished_by, date_wished)
+    const insertQuery = `INSERT INTO wishes (game_id, wished_by, date_wished)
         VALUES (?, ?, ?)`;
 
     const inserts = [data.gameID, data.employeeID, data.dateWished];
 
-    db.pool.query(insert_query, inserts, function (error, results, fields) {
+    db.pool.query(insertQuery, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
+function deleteWish(res, data, db) {
+    const deleteQuery = `DELETE FROM wishes WHERE wish_id IN (?)`
+    const stringOfIDs = data.deleteIDs.join()
+
+    db.pool.query(deleteQuery, stringOfIDs, function (error, results, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -111,6 +125,12 @@ router.post("/add-wish", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addWish(res, data, db);
+});
+
+router.delete("/delete-wish", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    deleteWish(res, data, db);
 });
 
 module.exports = router;

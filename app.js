@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
+const methodOverride = require('method-override')
 const mysql = require('./config/db-connector')
 
 // Set the view engine to ejs
@@ -14,6 +15,9 @@ app.set('mysql', mysql);
 // Handle JSON and Form Data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 // Set root directory for static assets
 app.use(express.static('public'));
