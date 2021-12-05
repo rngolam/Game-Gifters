@@ -23,7 +23,7 @@ deleteWishForm.addEventListener("submit", function (event) {
 
     // Set up AJAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/wishes/delete-wish", true);
+    req.open("POST", "/wishes/", true);
     req.setRequestHeader("Content-type", "application/json");
     req.setRequestHeader("X-HTTP-Method-Override", "DELETE");
 

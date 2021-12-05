@@ -5,13 +5,11 @@
         <title>🎁 Game Gifters | Employees</title>
 
         <% scripts.forEach(function(script) { %>
-            <script src="js/<%= script %>" async></script>
-        <% }) %>
-
-        <% if (employees) { %>
-            <script>
-                let employeeInfo = <%- JSON.stringify(employees) %>;
-            </script>
+        <script src="js/<%= script %>" async></script>
+        <% }) %> <% if (employees) { %>
+        <script>
+            let employeeInfo = <%- JSON.stringify(employees) %>;
+        </script>
         <% } %>
     </head>
 
@@ -43,7 +41,9 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="showModal('addModal')"
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('addModal')"
                                 >Add Employee</a
                             >
                         </li>
@@ -118,7 +118,9 @@
             <!-- Add Employee Modal -->
             <div id="addModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="closeModal('addModal')">&times;</span><br />
+                    <span class="close" onclick="closeModal('addModal')"
+                        >&times;</span
+                    ><br />
 
                     <h2>New Employee</h2>
                     <p>Add a new Employee to the database.</p>
@@ -234,7 +236,9 @@
             <!-- Update Employee Modal -->
             <div id="updateModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="closeModal('updateModal')">&times;</span><br />
+                    <span class="close" onclick="closeModal('updateModal')"
+                        >&times;</span
+                    ><br />
 
                     <h2>Update Employee</h2>
                     <p>
@@ -348,7 +352,9 @@
             <!-- Filter Modal -->
             <div id="filterModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="closeModal('filterModal')">&times;</span><br />
+                    <span class="close" onclick="closeModal('filterModal')"
+                        >&times;</span
+                    ><br />
 
                     <h2>Filter Employees</h2>
                     <p>

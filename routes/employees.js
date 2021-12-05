@@ -86,13 +86,13 @@ router.get("/", function (req, res) {
     getEmployees(res, db);
 });
 
-router.post("/add-employee", function (req, res) {
+router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addEmployee(res, data, db);
 });
 
-router.put("/update-employee", function (req, res) {
+router.put("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     updateEmployee(res, data, db);

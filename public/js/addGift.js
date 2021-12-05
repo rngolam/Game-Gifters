@@ -19,7 +19,7 @@ addGiftForm.addEventListener("submit", function (event) {
 
     // SsenderAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/gifts/add-gift", true);
+    req.open("POST", "/gifts/", true);
     req.setRequestHeader("Content-type", "application/json");
 
     req.onreadystatechange = () => {

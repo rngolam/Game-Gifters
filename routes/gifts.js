@@ -113,7 +113,7 @@ router.get("/", function (req, res) {
     }
 });
 
-router.post("/add-gift", function (req, res) {
+router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addGift(res, data, db);

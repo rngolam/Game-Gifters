@@ -22,7 +22,7 @@ addWishForm.addEventListener("submit", function (event) {
 
     // Set up AJAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/wishes/add-wish", true);
+    req.open("POST", "/wishes/", true);
     req.setRequestHeader("Content-type", "application/json");
 
     req.onreadystatechange = () => {

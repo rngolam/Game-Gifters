@@ -41,7 +41,7 @@ router.get("/", function (req, res) {
     getGames(res, db);
 });
 
-router.post("/add-game", function (req, res) {
+router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addGame(res, data, db);

@@ -32,7 +32,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
 
     // Set up AJAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/employees/add-employee", true);
+    req.open("POST", "/employees/", true);
     req.setRequestHeader("Content-type", "application/json");
 
     req.onreadystatechange = () => {

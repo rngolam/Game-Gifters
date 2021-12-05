@@ -5,7 +5,7 @@
         <title>🎁 Game Gifters | Games</title>
 
         <% scripts.forEach(function(script) { %>
-            <script src="js/<%= script %>" async></script>
+        <script src="js/<%= script %>" async></script>
         <% }) %>
     </head>
 
@@ -37,7 +37,9 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="showModal('addModal')"
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('addModal')"
                                 >Add Game</a
                             >
                         </li>
@@ -78,7 +80,9 @@
                                     <td><%= game.title %></td>
                                     <td>$<%= game.price.toFixed(2) %></td>
                                     <td>
-                                        <a href="#" onclick="showModal('updateModal')"
+                                        <a
+                                            href="#"
+                                            onclick="showModal('updateModal')"
                                             >Update</a
                                         >
                                     </td>
@@ -98,7 +102,9 @@
         <!-- Add Game Modal -->
         <div id="addModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('addModal')"
+                    >&times;</span
+                ><br />
 
                 <h2>New Game</h2>
                 <p>Add a new game that can be wished for in the database.</p>
@@ -156,7 +162,9 @@
         <!-- Update Game Modal -->
         <div id="updateModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('updateModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('updateModal')"
+                    >&times;</span
+                ><br />
 
                 <h2>Update Game</h2>
                 <p>Change information of an existing game in the database.</p>

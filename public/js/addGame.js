@@ -19,7 +19,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
 
     // Set up AJAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/games/add-game", true);
+    req.open("POST", "/games/", true);
     req.setRequestHeader("Content-type", "application/json");
 
     req.onreadystatechange = () => {

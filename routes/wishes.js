@@ -129,13 +129,13 @@ router.get("/", function (req, res) {
     }
 });
 
-router.post("/add-wish", function (req, res) {
+router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addWish(res, data, db);
 });
 
-router.delete("/delete-wish", function (req, res) {
+router.delete("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     deleteWish(res, data, db);
