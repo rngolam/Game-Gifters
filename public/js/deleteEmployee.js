@@ -1,6 +1,6 @@
-const deleteWishForm = document.querySelector("#delete-wish-form");
+const deleteEmployeeForm = document.querySelector("#delete-employee-form");
 
-deleteWishForm.addEventListener("submit", function (event) {
+deleteEmployeeForm.addEventListener("submit", function (event) {
     // Prevent form from submitting
     event.preventDefault();
 
@@ -21,7 +21,7 @@ deleteWishForm.addEventListener("submit", function (event) {
 
     // Set up AJAX request
     const req = new XMLHttpRequest();
-    req.open("POST", "/wishes/", true);
+    req.open("POST", "/employees/", true);
     req.setRequestHeader("Content-type", "application/json");
     req.setRequestHeader("X-HTTP-Method-Override", "DELETE");
 

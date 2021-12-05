@@ -47,6 +47,11 @@
                                 >Add Employee</a
                             >
                         </li>
+                        <li>
+                            <a class="dropdown-item" onclick="showModal('deleteModal')"
+                                >Delete Employee</a
+                            >
+                        </li>
                         <!-- <li>
                             <a class="dropdown-item" onclick="filter()"
                                 >Filter</a
@@ -74,6 +79,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">🗑️</th>
                                     <th scope="col">Employee ID</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
@@ -87,6 +93,14 @@
                             <tbody id="employees-table-body">
                                 <% employees.forEach(function(employee) { %>
                                 <tr>
+                                    <td>
+                                        <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="deleteRow"
+                                        value="<%= employee.employee_id %>"
+                                        >
+                                    </td>
                                     <td><%= employee.employee_id %></td>
                                     <td><%= employee.first_name %></td>
                                     <td><%= employee.last_name %></td>
@@ -342,6 +356,36 @@
                         <div class="col-auto" style="padding-top: 3em">
                             <button type="submit" class="btn btn-primary mb-3">
                                 Update Employee
+                            </button>
+                        </div>
+                    </form>
+                    <br />
+                </div>
+            </div>
+
+            <!-- Delete Employee Modal -->
+            <div id="deleteModal" class="modal">
+                <div class="modal-content form-desc">
+                    <span class="close" onclick="closeModal('deleteModal')">&times;</span><br />
+
+                    <h2>Remove Employee</h2>
+                    <p>Are you sure you want to remove the selected Employees?</p>
+                    <br />
+
+                    <form id="delete-employee-form">
+                        <div class="d-grid gap-2 d-md-block">
+                            <button
+                                class="btn btn-outline-danger"
+                                type="submit"
+                            >
+                                Yes
+                            </button>
+                            <button
+                                class="btn btn-outline-primary"
+                                type="button"
+                                onclick="closeModal('deleteModal')"
+                            >
+                                No
                             </button>
                         </div>
                     </form>

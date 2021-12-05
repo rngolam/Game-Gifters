@@ -56,6 +56,7 @@ function addRowToTable(formData, insertedRowId) {
     const row = employeeTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
 
+    const deleteCheckboxCell = document.createElement("td");
     const idCell = document.createElement("td");
     const firstNameCell = document.createElement("td");
     const lastNameCell = document.createElement("td");
@@ -66,6 +67,8 @@ function addRowToTable(formData, insertedRowId) {
     const updateCell = document.createElement("td");
 
     // Fill cells with data
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
+    deleteCheckboxCell.scope = "row";
     idCell.innerText = insertedRowId;
     firstNameCell.innerText = formData.firstName;
     lastNameCell.innerText = formData.lastName;
@@ -77,6 +80,7 @@ function addRowToTable(formData, insertedRowId) {
     updateCell.innerHTML = `<a href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateEmployeeFields)">Update</a>`;
 
     cells = [
+        deleteCheckboxCell,
         idCell,
         firstNameCell,
         lastNameCell,

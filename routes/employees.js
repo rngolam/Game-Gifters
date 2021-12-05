@@ -16,6 +16,7 @@ function getEmployees(res, db) {
                 "modals.js",
                 "addEmployee.js",
                 "updateEmployee.js",
+                "deleteEmployee.js",
                 "convertDateString.js",
                 "clearForm.js"
             ];
@@ -81,6 +82,21 @@ function updateEmployee(res, data, db) {
     });
 }
 
+function deleteEmployee(res, data, db) {
+    const placeholders = data.deleteIDs.map((id) => `?`);
+    const deleteQuery = `DELETE FROM employees WHERE employee_id IN (${placeholders})`;
+    const inserts = data.deleteIDs;
+
+    db.pool.query(deleteQuery, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     getEmployees(res, db);
@@ -96,6 +112,12 @@ router.put("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     updateEmployee(res, data, db);
+});
+
+router.delete("/", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    deleteEmployee(res, data, db);
 });
 
 module.exports = router;
