@@ -3,6 +3,16 @@
     <head>
         <%- include('../partials/head'); %>
         <title>🎁 Game Gifters | Employees</title>
+
+        <% scripts.forEach(function(script) { %>
+            <script src="js/<%= script %>" async></script>
+        <% }) %>
+
+        <% if (employees) { %>
+            <script>
+                let employeeInfo = <%- JSON.stringify(employees) %>;
+            </script>
+        <% } %>
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -438,18 +448,5 @@
                 </div>
             </div>
         </div>
-
-        <% if (employees) { %>
-        <script>
-            let employeeInfo = <%- JSON.stringify(employees) %>;
-        </script>
-        <% } %>
-
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/addEmployee.js"></script>
-        <script src="js/updateEmployee.js"></script>
-        <script src="js/convertDateString.js"></script>
     </body>
 </html>

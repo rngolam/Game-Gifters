@@ -10,7 +10,12 @@ function getGames(res, db) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.render("pages/games", { page_name: "games", games: results });
+            const scripts = ["script.js", "addGame.js"];
+            res.render("pages/games", {
+                page_name: "games",
+                games: results,
+                scripts: scripts,
+            });
         }
     });
 }

@@ -3,6 +3,14 @@
     <head>
         <%- include('../partials/head'); %>
         <title>🎁 Game Gifters | Gifts</title>
+
+        <% scripts.forEach(function(script) { %>
+            <script src="js/<%= script %>" async></script>
+        <% }) %>
+
+        <script src="js/script.js" async></script>
+        <script src="js/addGift.js" async></script>
+        <script src="js/convertDateString.js" async></script>
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -177,11 +185,5 @@
                 </form>
             </div>
         </div>
-
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/addGift.js"></script>
-        <script src="js/convertDateString.js"></script>
     </body>
 </html>

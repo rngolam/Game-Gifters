@@ -10,7 +10,7 @@ function getWishes(req, res, db, context, complete) {
         req.query.firstName = req.query.firstName || "";
         req.query.lastName = req.query.lastName || "";
 
-        context.searchQuery = `'${req.query.firstName}' '${req.query.lastName}'`;
+        context.searchQuery = `'${req.query.firstName} ${req.query.lastName}'`;
 
         select_query = `SELECT wish_id, game_id, games.title AS game_title, wished_by AS associated_employee_id,
         employees.first_name, employees.last_name, DATE_FORMAT(date_wished, "%c/%e/%Y") AS date_wished_formatted, fulfilled
@@ -108,7 +108,8 @@ function deleteWish(res, data, db) {
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     let callbackCount = 0;
-    const context = { page_name: "wishes" };
+    const scripts = ["script.js", "addWish.js", "deleteWish.js", "convertDateString.js"]
+    const context = { page_name: "wishes" , scripts: scripts};
 
     getWishes(req, res, db, context, complete);
     getGames(res, db, context, complete);

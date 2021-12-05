@@ -93,7 +93,8 @@ function addGift(res, data, db) {
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     let callbackCount = 0;
-    const context = { page_name: "gifts" };
+    const scripts = ["script.js", "addGift.js", "convertDateString.js"]
+    const context = { page_name: "gifts", scripts: scripts };
 
     getGifts(res, db, context, complete);
     getUnfulfilledWishes(res, db, context, complete);
