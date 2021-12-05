@@ -1,29 +1,23 @@
 <!--
-    Authors: Richie Ngo-Lam, Sola Chang
-    Project: Game Gifters
-    Group: 101, Phantom Team
-    Description: Game Gifters is a web app that emulates a video game wishlist and tracking system for the employees of a mid-sized company.
-    
     Credits:
     1. Boostrap 5.1 (https://getbootstrap.com/docs/5.1/getting-started/introduction/)
     2. Cover template base by mdo (https://getbootstrap.com/docs/5.1/examples/cover/)
-    3. Temporary logo (https://www.flaticon.com/free-icon/tinder_3845877#)
-    4. Background image on index.html (https://unsplash.com/photos/9SdZxvkGnZM)
+    3. Temporary logo (https://www.flaticon.com/free-icon/gift-box_837891)
+    4. Background image (https://unsplash.com/photos/9SdZxvkGnZM)
 -->
 
 <!DOCTYPE html>
 <html lang="en" class="h-100">
     <head>
         <%- include('../partials/head'); %>
-        <link href="css/main-styles.css" rel="stylesheet" />
         <title>🎁 Game Gifters | Gaming Wishlists</title>
     </head>
 
-    <body class="d-flex h-100 text-center text-white bg-dark">
+    <body class="d-flex h-100 text-center text-white bg-dark splash">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <%- include('../partials/header'); %>
 
-            <main class="small-box">
+            <main class="small-box splash">
                 <h1>Game Gifters.</h1>
                 <p class="lead caption">
                     Game Gifters is a web app that emulates a video game
@@ -35,7 +29,7 @@
                         href="/games"
                         class="
                             btn btn-lg
-                            my-button
+                            splash-button
                             fw-bold
                             border-white
                             bg-white
