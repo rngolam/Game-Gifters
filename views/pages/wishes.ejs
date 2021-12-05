@@ -37,17 +37,17 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="addEntry()"
+                            <a class="dropdown-item" onclick="showModal('addModal')"
                                 >Add Wish</a
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" onclick="deleteEntry()"
+                            <a class="dropdown-item" onclick="showModal('deleteModal')"
                                 >Delete Wish</a
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" onclick="filter()"
+                            <a class="dropdown-item" onclick="showModal('filterModal')"
                                 >Filter</a
                             >
                         </li>
@@ -99,7 +99,7 @@
                                         type="checkbox"
                                         name="deleteRow"
                                         value="<%= wish.wish_id %>"
-                                        />
+                                        >
                                     </td>
                                     <td><%= wish.wish_id %></td>
                                     <td><%= wish.game_id %></td>
@@ -140,9 +140,9 @@
         <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
         <!-- Add Wish Modal -->
-        <div id="modalBox1" class="modal">
+        <div id="addModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close1()">&times;</span><br />
+                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
 
                 <h2>New Wish</h2>
                 <p>Add a new employee wish to the database.</p>
@@ -213,9 +213,9 @@
         </div>
 
         <!-- Delete Wish Modal -->
-        <div id="modalBox2" class="modal">
+        <div id="deleteModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close2()">&times;</span><br />
+                <span class="close" onclick="closeModal('deleteModal')">&times;</span><br />
 
                 <h2>Remove Wish</h2>
                 <p>Are you sure you want to remove the selected Wishes?</p>
@@ -232,7 +232,7 @@
                         <button
                             class="btn btn-outline-primary"
                             type="button"
-                            onclick="close2()"
+                            onclick="closeModal('deleteModal')"
                         >
                             No
                         </button>
@@ -243,9 +243,9 @@
         </div>
 
         <!-- Filter Modal -->
-        <div id="modalBox3" class="modal">
+        <div id="filterModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close3()">&times;</span><br />
+                <span class="close" onclick="closeModal('filterModal')">&times;</span><br />
 
                 <h2>Filter Wishes</h2>
                 <p>Enter a whole or partial employee name to search for associated wishes.</p>
@@ -293,8 +293,6 @@
                 // user clicks on action button
                 document.getElementById("modalBox2").style.display = "block";
             }
-
-            document.querySelector("#dateWished").valueAsDate = new Date();
         </script>
     </body>
 </html>

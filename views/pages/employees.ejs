@@ -43,7 +43,7 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="addEntry()"
+                            <a class="dropdown-item" onclick="showModal('addModal')"
                                 >Add Employee</a
                             >
                         </li>
@@ -99,7 +99,7 @@
                                     <td>
                                         <a
                                             href="#"
-                                            onclick="updateEntry(<%= employee.employee_id %>)"
+                                            onclick="showModal('updateModal', <%= employee.employee_id %>, populateUpdateEmployeeFields)"
                                             >Update</a
                                         >
                                     </td>
@@ -116,9 +116,9 @@
             <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
             <!-- Add Employee Modal -->
-            <div id="modalBox1" class="modal">
+            <div id="addModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="close1()">&times;</span><br />
+                    <span class="close" onclick="closeModal('addModal')">&times;</span><br />
 
                     <h2>New Employee</h2>
                     <p>Add a new Employee to the database.</p>
@@ -232,9 +232,9 @@
             </div>
 
             <!-- Update Employee Modal -->
-            <div id="modalBox2" class="modal">
+            <div id="updateModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="close2()">&times;</span><br />
+                    <span class="close" onclick="closeModal('updateModal')">&times;</span><br />
 
                     <h2>Update Employee</h2>
                     <p>
@@ -291,7 +291,6 @@
                                     <select
                                         class="form-select"
                                         id="update-department"
-                                        required
                                     >
                                         <option value="" selected>
                                             Select a department
@@ -347,9 +346,9 @@
             </div>
 
             <!-- Filter Modal -->
-            <div id="modalBox3" class="modal">
+            <div id="filterModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="close3()">&times;</span><br />
+                    <span class="close" onclick="closeModal('filterModal')">&times;</span><br />
 
                     <h2>Filter Employees</h2>
                     <p>

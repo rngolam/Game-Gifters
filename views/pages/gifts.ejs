@@ -8,9 +8,6 @@
             <script src="js/<%= script %>" async></script>
         <% }) %>
 
-        <script src="js/script.js" async></script>
-        <script src="js/addGift.js" async></script>
-        <script src="js/convertDateString.js" async></script>
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -41,7 +38,7 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="addEntry()"
+                            <a class="dropdown-item" onclick="showModal('addModal')"
                                 >Add Gift</a
                             >
                         </li>
@@ -105,9 +102,9 @@
         <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
         <!-- Add Gift Modal -->
-        <div id="modalBox1" class="modal">
+        <div id="addModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close1()">&times;</span><br />
+                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
 
                 <h2>New Gift</h2>
                 <p>Add a new employee gift to the database.</p>

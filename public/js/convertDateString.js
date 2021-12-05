@@ -1,10 +1,10 @@
 // Expects date string in YYYY-MM-DD format
-function convertDateString(dateString) {
-    if (!dateString) {
+function convertDateString(dateStringFromForm) {
+    if (!dateStringFromForm) {
         return;
     }
 
-    const splitDate = dateString.split("-");
+    const splitDate = dateStringFromForm.split("-");
 
     const year = parseInt(splitDate[0]);
     const month = parseInt(splitDate[1]);

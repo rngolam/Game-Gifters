@@ -38,9 +38,11 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.onreadystatechange = () => {
         if (req.readyState == 4 && req.status == 200) {
             const responseData = JSON.parse(req.response);
-            addRowToTable(formData, responseData);
+            const insertedRowId = responseData.insertId;
+            addRowToTable(formData, insertedRowId);
+            addEmployeeToMap(formData, insertedRowId);
             clearForm(formFields);
-            close1();
+            closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -49,12 +51,11 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.send(JSON.stringify(formData));
 });
 
-function addRowToTable(formData, responseData) {
+function addRowToTable(formData, insertedRowId) {
     const employeeTable = document.getElementById("employees-table-body");
     const row = employeeTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
 
-    const insertedRowId = responseData.insertId;
     const idCell = document.createElement("td");
     const firstNameCell = document.createElement("td");
     const lastNameCell = document.createElement("td");
@@ -72,7 +73,8 @@ function addRowToTable(formData, responseData) {
     emailCell.innerText = formData.email;
     phoneCell.innerText = formData.phone;
     dobCell.innerText = convertDateString(formData.birthdate);
-    updateCell.innerHTML = `<a href="#" onclick="updateEntry(${insertedRowId})">Update</a>`;
+
+    updateCell.innerHTML = `<a href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateEmployeeFields)">Update</a>`;
 
     cells = [
         idCell,
@@ -87,6 +89,16 @@ function addRowToTable(formData, responseData) {
     cells.forEach((cell) => row.appendChild(cell));
 }
 
-function clearForm(fields) {
-    fields.forEach((field) => (field.value = ""));
+function addEmployeeToMap(formData, insertedRowId) {
+    addedEmployee = {
+        employee_id: insertedRowId,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        department: formData.department,
+        phone: formData.phone,
+        formatted_date_of_birth: convertDateString(formData.birthdate),
+    };
+
+    employeeMap.set(addedEmployee.employee_id, addedEmployee);
 }

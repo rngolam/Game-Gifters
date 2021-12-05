@@ -25,12 +25,13 @@ addGiftForm.addEventListener("submit", function (event) {
     req.onreadystatechange = () => {
         if (req.readyState == 4 && req.status == 200) {
             const responseData = JSON.parse(req.response);
-            addRowToTable(formData, responseData);
+            const insertedRowId = responseData.insertId;
+            addRowToTable(formData, insertedRowId);
 
             // Remove wish from dropdown upon successful insertion
             wishIDInput.options[wishIDInput.selectedIndex].remove();
             clearForm(formFields);
-            close1();
+            closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -39,12 +40,10 @@ addGiftForm.addEventListener("submit", function (event) {
     req.send(JSON.stringify(formData));
 });
 
-function addRowToTable(formData, responseData) {
+function addRowToTable(formData, insertedRowId) {
     const giftsTable = document.querySelector("#gifts-table-body");
     const row = giftsTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
-
-    const insertedRowId = responseData.insertId;
 
     const giftIDCell = document.createElement("td");
     const wishIDCell = document.createElement("td");
@@ -82,8 +81,4 @@ function addRowToTable(formData, responseData) {
         dateSentCell,
     ];
     cells.forEach((cell) => row.appendChild(cell));
-}
-
-function clearForm(fields) {
-    fields.forEach((field) => (field.value = ""));
 }

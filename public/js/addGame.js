@@ -24,9 +24,11 @@ addEmployeeForm.addEventListener("submit", function (event) {
 
     req.onreadystatechange = () => {
         if (req.readyState == 4 && req.status == 200) {
-            addRowToTable(formData);
+            const responseData = JSON.parse(req.response);
+            const insertedRowId = responseData.insertId;
+            addRowToTable(formData, insertedRowId);
             clearForm(formFields);
-            close1();
+            closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -35,7 +37,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.send(JSON.stringify(formData));
 });
 
-function addRowToTable(formData) {
+function addRowToTable(formData, insertedRowId) {
     const gamesTable = document.getElementById("games-table-body");
     const row = gamesTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
@@ -49,12 +51,8 @@ function addRowToTable(formData) {
     idCell.innerText = formData.appID;
     titleCell.innerText = formData.title;
     priceCell.innerText = "$" + formData.price;
-    updateCell.innerHTML = '<a href="#" onclick="updateEntry()">Update</a>';
+    updateCell.innerHTML = `<a href="#" onclick="showModal('updateModal', ${insertedRowId})">Update</a>`;
 
     cells = [idCell, titleCell, priceCell, updateCell];
     cells.forEach((cell) => row.appendChild(cell));
-}
-
-function clearForm(fields) {
-    fields.forEach((field) => (field.value = ""));
 }

@@ -37,7 +37,7 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="addEntry()"
+                            <a class="dropdown-item" onclick="showModal('addModal')"
                                 >Add Game</a
                             >
                         </li>
@@ -78,7 +78,7 @@
                                     <td><%= game.title %></td>
                                     <td>$<%= game.price.toFixed(2) %></td>
                                     <td>
-                                        <a href="#" onclick="updateEntry()"
+                                        <a href="#" onclick="showModal('updateModal')"
                                             >Update</a
                                         >
                                     </td>
@@ -96,9 +96,9 @@
         <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
         <!-- Add Game Modal -->
-        <div id="modalBox1" class="modal">
+        <div id="addModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close1()">&times;</span><br />
+                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
 
                 <h2>New Game</h2>
                 <p>Add a new game that can be wished for in the database.</p>
@@ -154,9 +154,9 @@
         </div>
 
         <!-- Update Game Modal -->
-        <div id="modalBox2" class="modal">
+        <div id="updateModal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="close2()">&times;</span><br />
+                <span class="close" onclick="closeModal('updateModal')">&times;</span><br />
 
                 <h2>Update Game</h2>
                 <p>Change information of an existing game in the database.</p>

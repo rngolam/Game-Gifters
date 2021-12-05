@@ -1,11 +1,14 @@
-const addEmployeeForm = document.getElementById("add-wish-form");
+// Prepopulate wish date field with today's date
+document.querySelector("#dateWished").valueAsDate = new Date();
+
+const addWishForm = document.getElementById("add-wish-form");
 
 // Get values from form fields
 const gameIDInput = document.querySelector("#gameID");
 const employeeIDInput = document.querySelector("#employeeID");
 const dateWishedInput = document.querySelector("#dateWished");
 
-addEmployeeForm.addEventListener("submit", function (event) {
+addWishForm.addEventListener("submit", function (event) {
     // Prevent form from submitting
     event.preventDefault();
 
@@ -25,9 +28,10 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.onreadystatechange = () => {
         if (req.readyState == 4 && req.status == 200) {
             const responseData = JSON.parse(req.response);
-            addRowToTable(formData, responseData);
+            const insertedRowId = responseData.insertId;
+            addRowToTable(formData, insertedRowId);
             clearForm(formFields);
-            close1();
+            closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -36,12 +40,10 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.send(JSON.stringify(formData));
 });
 
-function addRowToTable(formData, responseData) {
+function addRowToTable(formData, insertedRowId) {
     const wishesTable = document.querySelector("#wishes-table-body");
     const row = wishesTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
-
-    const insertedRowId = responseData.insertId;
 
     const deleteCheckboxCell = document.createElement("td");
     const wishIDCell = document.createElement("td");
@@ -53,8 +55,7 @@ function addRowToTable(formData, responseData) {
     const fulfilledCell = document.createElement("td");
 
     // Fill cells with data
-    deleteCheckboxCell.innerHTML =
-        '<input class="form-check-input" type="checkbox">';
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
     wishIDCell.innerText = insertedRowId;
     gameIDCell.innerText = formData.gameID;
@@ -71,12 +72,6 @@ function addRowToTable(formData, responseData) {
     fulfilledCell.innerHTML =
         '<span class="fa fa-dot-circle-o text-danger"></span><span class="ms-1">No</span>';
 
-    // if (formData.fulfilled) {
-    //     fulfilledCell.innerHTML = '<span class="fa fa-check-circle-o green"></span><span class="ms-1">Yes</span>'
-    // } else {
-    //     fulfilledCell.innerHTML = '<span class="fa fa-dot-circle-o text-danger"></span><span class="ms-1">No</span>'
-    // }
-
     cells = [
         deleteCheckboxCell,
         wishIDCell,
@@ -88,19 +83,4 @@ function addRowToTable(formData, responseData) {
         fulfilledCell,
     ];
     cells.forEach((cell) => row.appendChild(cell));
-}
-
-function getHiddenID(listID, formID) {
-    // Get currently selected datalist option string
-    const selectedString = $("#" + formID).val();
-
-    // First retrieves datalist option node in DOM where the displayed label = value, then access
-    // the option's hidden data-value attribute
-    return $("#" + listID + " " + '[value="' + selectedString + '"]').data(
-        "value"
-    );
-}
-
-function clearForm(fields) {
-    fields.forEach((field) => (field.value = ""));
 }

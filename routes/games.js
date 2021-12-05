@@ -10,7 +10,7 @@ function getGames(res, db) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            const scripts = ["script.js", "addGame.js"];
+            const scripts = ["modals.js", "addGame.js", "clearForm.js"];
             res.render("pages/games", {
                 page_name: "games",
                 games: results,

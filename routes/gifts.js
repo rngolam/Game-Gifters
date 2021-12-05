@@ -93,7 +93,12 @@ function addGift(res, data, db) {
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     let callbackCount = 0;
-    const scripts = ["script.js", "addGift.js", "convertDateString.js"]
+    const scripts = [
+        "modals.js",
+        "addGift.js",
+        "convertDateString.js",
+        "clearForm.js",
+    ];
     const context = { page_name: "gifts", scripts: scripts };
 
     getGifts(res, db, context, complete);

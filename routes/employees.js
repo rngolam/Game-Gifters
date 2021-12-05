@@ -12,11 +12,17 @@ function getEmployees(res, db) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            const scripts = ["script.js", "addEmployee.js", "updateEmployee.js", "convertDateString.js"]
+            const scripts = [
+                "modals.js",
+                "addEmployee.js",
+                "updateEmployee.js",
+                "convertDateString.js",
+                "clearForm.js"
+            ];
             res.render("pages/employees", {
                 page_name: "employees",
                 employees: results,
-                scripts: scripts
+                scripts: scripts,
             });
         }
     });
