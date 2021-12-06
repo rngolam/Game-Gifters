@@ -85,6 +85,14 @@ h2 {
   margin-top: 2em;
 }
 
+th, td {
+  text-align: center;
+}
+
+a.update {
+  text-decoration: none;
+}
+
 .data-desc {
   width: 80%;
   font-size: 13px;

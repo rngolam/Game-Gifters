@@ -70,7 +70,7 @@ function addRowToTable(formData, insertedRowId) {
         );
     dateWishedCell.innerText = convertDateString(formData.dateWished);
     fulfilledCell.innerHTML =
-        '<span class="fa fa-dot-circle-o text-danger"></span><span class="ms-1">No</span>';
+        '<i class="fa fa-dot-circle-o text-danger"></span><span class="ms-1"></i>No';
 
     cells = [
         deleteCheckboxCell,

@@ -48,7 +48,9 @@
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" onclick="showModal('deleteModal')"
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('deleteModal')"
                                 >Delete Employee</a
                             >
                         </li>
@@ -79,7 +81,8 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">🗑️</th>
+                                    <th scope="col">&#128465;</th>
+                                    <th scope="col">&#x270E;</th>
                                     <th scope="col">Employee ID</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
@@ -87,7 +90,6 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Birthdate</th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="employees-table-body">
@@ -95,10 +97,18 @@
                                 <tr>
                                     <td>
                                         <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        name="deleteRow"
-                                        value="<%= employee.employee_id %>"
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="deleteRow"
+                                            value="<%= employee.employee_id %>"
+                                        />
+                                    </td>
+                                    <td>
+                                        <a
+                                            class="update"
+                                            href="#"
+                                            onclick="showModal('updateModal', <%= employee.employee_id %>, populateUpdateEmployeeFields)"
+                                            >&#128221;</a
                                         >
                                     </td>
                                     <td><%= employee.employee_id %></td>
@@ -109,13 +119,6 @@
                                     <td><%= employee.phone %></td>
                                     <td>
                                         <%= employee.formatted_date_of_birth %>
-                                    </td>
-                                    <td>
-                                        <a
-                                            href="#"
-                                            onclick="showModal('updateModal', <%= employee.employee_id %>, populateUpdateEmployeeFields)"
-                                            >Update</a
-                                        >
                                     </td>
                                 </tr>
                                 <% }); %>
@@ -366,10 +369,14 @@
             <!-- Delete Employee Modal -->
             <div id="deleteModal" class="modal">
                 <div class="modal-content form-desc">
-                    <span class="close" onclick="closeModal('deleteModal')">&times;</span><br />
+                    <span class="close" onclick="closeModal('deleteModal')"
+                        >&times;</span
+                    ><br />
 
                     <h2>Remove Employee</h2>
-                    <p>Are you sure you want to remove the selected Employees?</p>
+                    <p>
+                        Are you sure you want to remove the selected Employees?
+                    </p>
                     <br />
 
                     <form id="delete-employee-form">

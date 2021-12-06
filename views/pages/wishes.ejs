@@ -80,7 +80,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">🗑️</th>
+                                    <th scope="col">&#128465;</th>
                                     <th scope="col">Wish ID</th>
                                     <th scope="col">Game ID</th>
                                     <th scope="col">Game Title</th>
@@ -112,18 +112,18 @@
                                     <td><%= wish.date_wished_formatted %></td>
                                     <td>
                                         <% if (wish.fulfilled) { %>
-                                        <span
+                                        <i
                                             class="fa fa-check-circle-o green"
-                                        ></span
-                                        ><span class="ms-1">Yes</span>
+                                        ></i
+                                        ><i class="ms-1"></i>Yes
                                         <% } else { %>
-                                        <span
+                                        <i
                                             class="
                                                 fa fa-dot-circle-o
                                                 text-danger
                                             "
-                                        ></span
-                                        ><span class="ms-1">No</span>
+                                        ></i
+                                        ><i class="ms-1"></i>No
                                         <% } %>
                                     </td>
                                 </tr>

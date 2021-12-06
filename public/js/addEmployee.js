@@ -57,6 +57,7 @@ function addRowToTable(formData, insertedRowId) {
     row.style.backgroundColor = "#c7e5ff";
 
     const deleteCheckboxCell = document.createElement("td");
+    const updateCell = document.createElement("td");
     const idCell = document.createElement("td");
     const firstNameCell = document.createElement("td");
     const lastNameCell = document.createElement("td");
@@ -64,11 +65,11 @@ function addRowToTable(formData, insertedRowId) {
     const emailCell = document.createElement("td");
     const phoneCell = document.createElement("td");
     const dobCell = document.createElement("td");
-    const updateCell = document.createElement("td");
 
     // Fill cells with data
     deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateEmployeeFields)">&#128221;</a>`;
     idCell.innerText = insertedRowId;
     firstNameCell.innerText = formData.firstName;
     lastNameCell.innerText = formData.lastName;
@@ -77,10 +78,9 @@ function addRowToTable(formData, insertedRowId) {
     phoneCell.innerText = formData.phone;
     dobCell.innerText = convertDateString(formData.birthdate);
 
-    updateCell.innerHTML = `<a href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateEmployeeFields)">Update</a>`;
-
     cells = [
         deleteCheckboxCell,
+        updateCell,
         idCell,
         firstNameCell,
         lastNameCell,
@@ -88,7 +88,6 @@ function addRowToTable(formData, insertedRowId) {
         emailCell,
         phoneCell,
         dobCell,
-        updateCell,
     ];
     cells.forEach((cell) => row.appendChild(cell));
 }
