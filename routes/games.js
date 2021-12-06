@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const https = require("https");
 
 function getGames(res, db) {
     const select_query = `SELECT app_id, title, price FROM games
@@ -82,6 +83,34 @@ function deleteGame(res, data, db) {
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     getGames(res, db);
+});
+
+router.get("/search", function (req, res) {
+    const https = req.app.get("https");
+    const searchQuery = req.query.q;
+
+    https.get(
+        `https://store.steampowered.com/api/storesearch/?term=${searchQuery}&l=english&cc=US`,
+        (storeRes) => {
+            if (res.statusCode !== 200) {
+                console.error(
+                    `Did not get an OK from the server. Code: ${res.statusCode}`
+                );
+                storeRes.resume();
+                return;
+            }
+
+            let data = "";
+
+            storeRes.on("data", (chunk) => {
+                data += chunk;
+            });
+
+            storeRes.on("close", () => {
+                res.send(data);
+            });
+        }
+    );
 });
 
 router.post("/", function (req, res) {

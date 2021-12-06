@@ -19,18 +19,17 @@ window.addEventListener("load", () => {
         // Need to use reverse proxy due to CORS policies
         searchQueryInput = document.querySelector("#steam-store-query");
         const searchQuery = searchQueryInput.value;
-        const reverseProxy = `https://cors-anywhere.herokuapp.com/`;
-        const steamStoreQuery = `http://store.steampowered.com/api/storesearch/?term=${searchQuery}&l=english&cc=US`;
 
         // Set up AJAX request
         const req = new XMLHttpRequest();
-        req.open("GET", reverseProxy + steamStoreQuery, true);
+        req.open("GET", `/games/search?q=${searchQuery}`, true);
         req.onreadystatechange = () => {
             if (req.readyState == 4 && req.status == 200) {
                 const responseData = JSON.parse(req.responseText);
                 clearResultsTable();
                 populateResultsTable(responseData.items);
             } else if (req.readyState == 4 && req.status != 200) {
+                const responseData = JSON.parse(req.responseText);
                 handleInputError(responseData, "search-error-message");
             }
         };

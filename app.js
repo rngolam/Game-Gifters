@@ -3,14 +3,18 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+const https = require("https");
 const methodOverride = require("method-override");
 const mysql = require("./config/db-connector");
 
 // Set the view engine to ejs
 app.set("view engine", "ejs");
 
-// Set global app db config
+// Set global app db
 app.set("mysql", mysql);
+
+// Set global app HTTP module
+app.set("https", https);
 
 // Handle JSON and Form Data
 app.use(express.json());
@@ -42,13 +46,13 @@ app.use("/wishes", wishes);
 
 app.use(function (req, res) {
     res.status(404);
-    res.render('pages/404');
+    res.render("pages/404");
 });
 
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500);
-    res.render('pages/500');
+    res.render("pages/500");
 });
 
 const PORT = process.env.PORT || 3000;
