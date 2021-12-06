@@ -7,6 +7,11 @@
         <% scripts.forEach(function(script) { %>
         <script src="js/<%= script %>" async></script>
         <% }) %>
+        <% if (games) { %>
+            <script>
+                let gameInfo = <%- JSON.stringify(games) %>;
+            </script>
+        <% } %>
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -187,38 +192,35 @@
                 <p>Change information of an existing game in the database.</p>
                 <br />
 
-                <form>
+                <form id="update-game-form">
                     <div class="row g-2">
                         <div class="form-floating col">
                             <input
                                 type="text"
                                 class="form-control"
-                                id="floating1"
-                                value="435150"
+                                id="update-app-id"
                                 required
                             />
-                            <label for="floating1">AppID</label>
+                            <label for="update-app-id">AppID</label>
                         </div>
                         <div class="form-floating col">
                             <input
                                 type="text"
                                 class="form-control"
-                                id="floating2"
-                                value="Divinity: Original Sin 2"
+                                id="update-title"
                                 required
                             />
-                            <label for="floating2">Game Title</label>
+                            <label for="update-title">Game Title</label>
                         </div>
                         <div class="form-floating col">
                             <input
                                 type="number"
                                 step="0.01"
                                 class="form-control"
-                                id="price"
-                                value="49.99"
+                                id="update-price"
                                 required
                             />
-                            <label for="floating3">Price</label>
+                            <label for="update-price">Price</label>
                         </div>
                     </div>
 

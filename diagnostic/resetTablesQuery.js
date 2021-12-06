@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS wishes (
   PRIMARY KEY (wish_id),
   UNIQUE KEY game_id (game_id,wished_by),
   KEY fk_employee (wished_by),
-  CONSTRAINT wishes_ibfk_1 FOREIGN KEY (game_id) REFERENCES games (app_id) ON DELETE CASCADE,
+  CONSTRAINT wishes_ibfk_1 FOREIGN KEY (game_id) REFERENCES games (app_id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT wishes_ibfk_2 FOREIGN KEY (wished_by) REFERENCES employees (employee_id) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   

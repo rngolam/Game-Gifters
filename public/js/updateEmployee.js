@@ -5,6 +5,7 @@ const updateEmailInput = document.querySelector("#update-email");
 const updateDepartmentInput = document.querySelector("#update-department");
 const updatePhoneInput = document.querySelector("#update-phone");
 const updateBirthdateInput = document.querySelector("#update-birthdate");
+
 const employeeMap = new Map();
 let employeeToUpdate;
 
@@ -22,9 +23,6 @@ function populateUpdateEmployeeFields(id) {
     updateEmailInput.value = employeeToUpdate.email;
     updateDepartmentInput.value = employeeToUpdate.department;
     updatePhoneInput.value = employeeToUpdate.phone;
-    console.log(
-        convertFormFriendlyDateString(employeeToUpdate.formatted_date_of_birth)
-    );
     updateBirthdateInput.value = convertFormFriendlyDateString(
         employeeToUpdate.formatted_date_of_birth
     );
@@ -35,7 +33,6 @@ updateEmployeeForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     // Get values from form fields
-
     formData = {
         employeeID: employeeToUpdate.employee_id,
         firstName: updateFirstNameInput.value,
