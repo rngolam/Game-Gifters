@@ -30,6 +30,7 @@ addWishForm.addEventListener("submit", function (event) {
             const responseData = JSON.parse(req.response);
             const insertedRowId = responseData.insertId;
             addRowToTable(formData, insertedRowId);
+            addWishToMap(formData, insertedRowId);
             clearForm(formFields);
             closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
@@ -46,6 +47,7 @@ function addRowToTable(formData, insertedRowId) {
     row.style.backgroundColor = "#c7e5ff";
 
     const deleteCheckboxCell = document.createElement("td");
+    const updateCell = document.createElement("td");
     const wishIDCell = document.createElement("td");
     const gameIDCell = document.createElement("td");
     const gameTitleCell = document.createElement("td");
@@ -57,6 +59,7 @@ function addRowToTable(formData, insertedRowId) {
     // Fill cells with data
     deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateWishFields)">&#128221;</a>`;
     wishIDCell.innerText = insertedRowId;
     gameIDCell.innerText = formData.gameID;
     gameTitleCell.innerText =
@@ -74,6 +77,7 @@ function addRowToTable(formData, insertedRowId) {
 
     cells = [
         deleteCheckboxCell,
+        updateCell,
         wishIDCell,
         gameIDCell,
         gameTitleCell,
@@ -83,4 +87,15 @@ function addRowToTable(formData, insertedRowId) {
         fulfilledCell,
     ];
     cells.forEach((cell) => row.appendChild(cell));
+}
+
+function addWishToMap(formData, insertedRowId) {
+    addedWish = {
+        wish_id: insertedRowId,
+        game_id: formData.gameID,
+        associated_employee_id: formData.employeeID,
+        date_wished_formatted: convertDateString(formData.dateWished),
+    };
+
+    wishMap.set(insertedRowId, addedWish);
 }
