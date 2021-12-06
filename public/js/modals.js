@@ -10,9 +10,11 @@ window.onclick = function (event) {
     // user clicks outside of modal
     if (event.target.className == "modal") {
         event.target.style.display = "none";
+        clearErrorMessage();
     }
 };
 
 function closeModal(modalID) {
     document.querySelector("#" + modalID).style.display = "none";
+    clearErrorMessage();
 }

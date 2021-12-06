@@ -15,6 +15,8 @@ function getGames(res, db) {
                 "addGame.js",
                 "updateGame.js",
                 "deleteGame.js",
+                "handleInputError.js",
+                "clearErrorMessage.js",
                 "clearForm.js",
             ];
             res.render("pages/games", {
@@ -35,7 +37,7 @@ function addGame(res, data, db) {
     db.pool.query(insert_query, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
-            res.sendStatus(400);
+            res.status(400).send(error);
         } else {
             res.send(results);
         }
@@ -54,7 +56,7 @@ function updateGame(res, data, db) {
     db.pool.query(updateQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
-            res.sendStatus(400);
+            res.status(400).send(error);
         } else {
             res.send(results);
         }
@@ -69,7 +71,7 @@ function deleteGame(res, data, db) {
     db.pool.query(deleteQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
-            res.sendStatus(400);
+            res.status(400).send(error);
         } else {
             res.send(results);
         }

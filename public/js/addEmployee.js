@@ -1,54 +1,56 @@
-const addEmployeeForm = document.querySelector("#add-employee-form");
+window.addEventListener("load", () => {
+    const addEmployeeForm = document.querySelector("#add-employee-form");
+    addEmployeeForm.addEventListener("submit", function (event) {
+        // Prevent form from submitting
+        event.preventDefault();
 
-addEmployeeForm.addEventListener("submit", function (event) {
-    // Prevent form from submitting
-    event.preventDefault();
+        // Get values from form fields
+        const firstNameInput = document.querySelector("#first-name");
+        const lastNameInput = document.querySelector("#last-name");
+        const emailInput = document.querySelector("#email");
+        const departmentInput = document.querySelector("#department");
+        const phoneInput = document.querySelector("#phone");
+        const birthdateInput = document.querySelector("#birthdate");
 
-    // Get values from form fields
-    const firstNameInput = document.querySelector("#first-name");
-    const lastNameInput = document.querySelector("#last-name");
-    const emailInput = document.querySelector("#email");
-    const departmentInput = document.querySelector("#department");
-    const phoneInput = document.querySelector("#phone");
-    const birthdateInput = document.querySelector("#birthdate");
+        const formData = {
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            email: emailInput.value,
+            department: departmentInput.value,
+            phone: phoneInput.value,
+            birthdate: birthdateInput.value,
+        };
 
-    const formData = {
-        firstName: firstNameInput.value,
-        lastName: lastNameInput.value,
-        email: emailInput.value,
-        department: departmentInput.value,
-        phone: phoneInput.value,
-        birthdate: birthdateInput.value,
-    };
+        const formFields = [
+            firstNameInput,
+            lastNameInput,
+            emailInput,
+            departmentInput,
+            phoneInput,
+            birthdateInput,
+        ];
 
-    const formFields = [
-        firstNameInput,
-        lastNameInput,
-        emailInput,
-        departmentInput,
-        phoneInput,
-        birthdateInput,
-    ];
+        // Set up AJAX request
+        const req = new XMLHttpRequest();
+        req.open("POST", "/employees/", true);
+        req.setRequestHeader("Content-type", "application/json");
 
-    // Set up AJAX request
-    const req = new XMLHttpRequest();
-    req.open("POST", "/employees/", true);
-    req.setRequestHeader("Content-type", "application/json");
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                const responseData = JSON.parse(req.response);
+                const insertedRowId = responseData.insertId;
+                addRowToTable(formData, insertedRowId);
+                addEmployeeToMap(formData, insertedRowId);
+                clearForm(formFields);
+                closeModal("add-modal");
+            } else if (req.readyState == 4 && req.status != 200) {
+                const responseData = JSON.parse(req.response);
+                handleInputError(responseData, "add-error-message");
+            }
+        };
 
-    req.onreadystatechange = () => {
-        if (req.readyState == 4 && req.status == 200) {
-            const responseData = JSON.parse(req.response);
-            const insertedRowId = responseData.insertId;
-            addRowToTable(formData, insertedRowId);
-            addEmployeeToMap(formData, insertedRowId);
-            clearForm(formFields);
-            closeModal("add-modal");
-        } else if (req.readyState == 4 && req.status != 200) {
-            console.log("There was an error with the input.");
-        }
-    };
-
-    req.send(JSON.stringify(formData));
+        req.send(JSON.stringify(formData));
+    });
 });
 
 function addRowToTable(formData, insertedRowId) {

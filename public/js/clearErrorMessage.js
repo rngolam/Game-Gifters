@@ -1,3 +1,6 @@
 function clearErrorMessage() {
-    document.querySelector('#error-message').innerHTML = "";
+    const spans = document.querySelectorAll(".error");
+    spans.forEach(function(span) {
+        span.innerText = "";
+    });
 }

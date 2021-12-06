@@ -18,6 +18,8 @@ function getEmployees(res, db) {
                 "updateEmployee.js",
                 "deleteEmployee.js",
                 "convertDateString.js",
+                "handleInputError.js",
+                "clearErrorMessage.js",
                 "clearForm.js",
             ];
             res.render("pages/employees", {

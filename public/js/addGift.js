@@ -1,45 +1,46 @@
-const addGiftForm = document.querySelector("#add-gift-form");
-
-// Get values from form fields
 const wishIDInput = document.querySelector("#wish-id");
 const senderIDInput = document.querySelector("#sender-id");
 const dateSentInput = document.querySelector("#date-sent");
 
-addGiftForm.addEventListener("submit", function (event) {
-    // Prevent form from submitting
-    event.preventDefault();
+window.addEventListener("load", () => {
+    const addGiftForm = document.querySelector("#add-gift-form");
+    addGiftForm.addEventListener("submit", function (event) {
+        // Prevent form from submitting
+        event.preventDefault();
 
-    const formData = {
-        wishID: wishIDInput.value,
-        senderID: senderIDInput.value,
-        dateSent: dateSentInput.value,
-    };
+        const formData = {
+            wishID: wishIDInput.value,
+            senderID: senderIDInput.value,
+            dateSent: dateSentInput.value,
+        };
 
-    const formFields = [wishIDInput, senderIDInput, dateSentInput];
+        const formFields = [wishIDInput, senderIDInput, dateSentInput];
 
-    // SsenderAX request
-    const req = new XMLHttpRequest();
-    req.open("POST", "/gifts/", true);
-    req.setRequestHeader("Content-type", "application/json");
+        // SsenderAX request
+        const req = new XMLHttpRequest();
+        req.open("POST", "/gifts/", true);
+        req.setRequestHeader("Content-type", "application/json");
 
-    req.onreadystatechange = () => {
-        if (req.readyState == 4 && req.status == 200) {
-            const responseData = JSON.parse(req.response);
-            const insertedRowId = responseData.insertId;
-            addRowToTable(formData, insertedRowId);
-            addGiftToMap(formData, insertedRowId);
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                const responseData = JSON.parse(req.response);
+                const insertedRowId = responseData.insertId;
+                addRowToTable(formData, insertedRowId);
+                addGiftToMap(formData, insertedRowId);
 
-            // Remove wish from dropdown upon successful insertion
-            wishIDInput.options[wishIDInput.selectedIndex].remove();
+                // Remove wish from dropdown upon successful insertion
+                wishIDInput.options[wishIDInput.selectedIndex].remove();
 
-            clearForm(formFields);
-            closeModal("add-modal");
-        } else if (req.readyState == 4 && req.status != 200) {
-            console.log("There was an error with the input.");
-        }
-    };
+                clearForm(formFields);
+                closeModal("add-modal");
+            } else if (req.readyState == 4 && req.status != 200) {
+                const responseData = JSON.parse(req.response);
+                handleInputError(responseData, "add-error-message");
+            }
+        };
 
-    req.send(JSON.stringify(formData));
+        req.send(JSON.stringify(formData));
+    });
 });
 
 function addRowToTable(formData, insertedRowId) {

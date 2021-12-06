@@ -93,6 +93,10 @@ a.update {
   text-decoration: none;
 }
 
+.error {
+  color: rgba(231, 0, 0, 0.788);
+}
+
 .data-desc {
   width: 80%;
   font-size: 13px;

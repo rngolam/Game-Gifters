@@ -1,54 +1,47 @@
-// Prepopulate wish date field with today's date
-document.querySelector("#date-wished").valueAsDate = new Date();
 
-const addWishForm = document.getElementById("add-wish-form");
-
-// Get values from form fields
 const gameIDInput = document.querySelector("#game-id");
 const employeeIDInput = document.querySelector("#employee-id");
 const dateWishedInput = document.querySelector("#date-wished");
 
-addWishForm.addEventListener("submit", function (event) {
-    // Prevent form from submitting
-    event.preventDefault();
+window.addEventListener("load", () => {
 
-    const formData = {
-        gameID: gameIDInput.value,
-        employeeID: employeeIDInput.value,
-        dateWished: dateWishedInput.value,
-    };
+    const addWishForm = document.getElementById("add-wish-form");
+    // Prepopulate wish date field with today's date
+    document.querySelector("#date-wished").valueAsDate = new Date();
 
-    const formFields = [gameIDInput, employeeIDInput, dateWishedInput];
+    addWishForm.addEventListener("submit", function (event) {
+        // Prevent form from submitting
+        event.preventDefault();
 
-    // Set up AJAX request
-    const req = new XMLHttpRequest();
-    req.open("POST", "/wishes/", true);
-    req.setRequestHeader("Content-type", "application/json");
+        const formData = {
+            gameID: gameIDInput.value,
+            employeeID: employeeIDInput.value,
+            dateWished: dateWishedInput.value,
+        };
 
-    req.onreadystatechange = () => {
-        if (req.readyState == 4 && req.status == 200) {
-            const responseData = JSON.parse(req.response);
-            const insertedRowId = responseData.insertId;
-            addRowToTable(formData, insertedRowId);
-            addWishToMap(formData, insertedRowId);
-            clearForm(formFields);
-            clearErrorMessage();
-            closeModal("add-modal");
-        } else if (req.readyState == 4 && req.status != 200) {
-            console.log("There was an error with the input.");
-            console.log(req.response);
+        const formFields = [gameIDInput, employeeIDInput, dateWishedInput];
 
-            if (req.response === "ER_DUP_ENTRY") {
-                document.querySelector("#error-message").innerText =
-                    "Error: Employee has already wished for this Game!";
-            } else {
-                document.querySelector("#error-message").innerText =
-                    "Something went wrong. Please double-check your input fields and try again.";
+        // Set up AJAX request
+        const req = new XMLHttpRequest();
+        req.open("POST", "/wishes/", true);
+        req.setRequestHeader("Content-type", "application/json");
+
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                const responseData = JSON.parse(req.response);
+                const insertedRowId = responseData.insertId;
+                addRowToTable(formData, insertedRowId);
+                addWishToMap(formData, insertedRowId);
+                clearForm(formFields);
+                closeModal("add-modal");
+            } else if (req.readyState == 4 && req.status != 200) {
+                const responseData = JSON.parse(req.response);
+                handleInputError(responseData, "add-error-message");
             }
-        }
-    };
+        };
 
-    req.send(JSON.stringify(formData));
+        req.send(JSON.stringify(formData));
+    });
 });
 
 function addRowToTable(formData, insertedRowId) {

@@ -161,6 +161,8 @@ router.get("/", function (req, res) {
         "updateGift.js",
         "deleteGift.js",
         "convertDateString.js",
+        "handleInputError.js",
+        "clearErrorMessage.js",
         "clearForm.js",
     ];
     const context = { page_name: "gifts", scripts: scripts };
