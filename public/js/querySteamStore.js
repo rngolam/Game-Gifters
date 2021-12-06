@@ -43,7 +43,7 @@ function populateResultsTable(items) {
     resultsCount.style.display = "block";
     document.querySelector(
         "#results-count"
-    ).textContent = `${items.length} results found`;
+    ).textContent = `${items.length} result(s) found`;
 
     if (items.length > 0) {
         items.forEach((item) => {

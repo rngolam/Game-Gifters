@@ -64,14 +64,16 @@
                         <div class="data-desc">
                             <h5 class="card-title">🎮 Game Database</h5>
                             <p style="font-size: 13px">
-                                The following table records a library of up to
-                                500 games curated for the employees to tailor
-                                their wishlists, and allows you to add new game
-                                titles.
-                                <br />
-                                <br />
-                                Note: Steam Store API integration is currently a
-                                WIP!
+                                The following table records Games in the
+                                company's database. To add a Game, select the
+                                Add option from the dropdown menu above and
+                                either enter the information manually or search
+                                for a title on the Steam Store to quickly
+                                populate the form fields. To update a Game,
+                                click on the memo icon in the corresponding row.
+                                To delete Games, select the corresponding
+                                checkboxes in the wastebasket column, then
+                                select the Delete option from the dropdown menu.
                             </p>
                         </div>
 
@@ -123,12 +125,14 @@
         <!-- Add Game Modal -->
         <div id="add-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('add-modal', clearResultsTable)"
+                <span
+                    class="close"
+                    onclick="closeModal('add-modal', clearResultsTable)"
                     >&times;</span
                 ><br />
 
                 <h2>New Game</h2>
-                <p>Add a new game that can be wished for in the database.</p>
+                <p>Add a new Game to the database.</p>
                 <br />
 
                 <form id="add-game-form">
@@ -182,9 +186,7 @@
                 <br />
                 <span class="error" id="add-error-message"></span>
 
-
                 <form id="search-steam-store-form">
-                    
                     <h2>Search for Game on Steam Store</h2>
 
                     <div class="row g-2" style="padding-top: 1.6em">
@@ -213,9 +215,7 @@
                 </form>
                 <span class="error" id="search-error-message"></span>
 
-
-
-                <div style="margin: auto;">
+                <div style="margin: auto">
                     <span id="results-count"></span>
                     <table class="table table-hover" id="results-table">
                         <thead>
@@ -227,8 +227,7 @@
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
-                        <tbody id="steam-search-table-body">
-                        </tbody>
+                        <tbody id="steam-search-table-body"></tbody>
                     </table>
                 </div>
             </div>

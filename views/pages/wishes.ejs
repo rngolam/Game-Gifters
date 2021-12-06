@@ -76,9 +76,13 @@
                         <div class="data-desc">
                             <h5 class="card-title">🎲 Wish Database</h5>
                             <p style="font-size: 13px">
-                                The following table records a list of wishes
-                                made by employees and allows you to add, delete,
-                                and filter the entries.
+                                The following table records all Wishes made by Employees of the company.
+                                To add a new Wish, select the Add option from the dropdown menu above.
+                                To update a Wish, click on the memo icon in the corresponding row.
+                                To delete Wishes, select the corresponding checkboxes in the wastebasket column,
+                                then select the Delete option from the dropdown menu.
+                                To search for Wishes made by a particular Employee, select the Filter option from the
+                                dropdown menu.
                             </p>
                         </div>
 
@@ -159,7 +163,7 @@
                 <span class="close" onclick="closeModal('add-modal')">&times;</span><br />
 
                 <h2>New Wish</h2>
-                <p>Add a new employee wish to the database.</p>
+                <p>Add a new Wish to the database.</p>
                 <br />
 
                 <form id="add-wish-form">
@@ -345,7 +349,7 @@
                 <span class="close" onclick="closeModal('filter-modal')">&times;</span><br />
 
                 <h2>Filter Wishes</h2>
-                <p>Enter a whole or partial employee name to search for associated wishes.</p>
+                <p>Enter a whole or partial Employee name to search for associated Wishes.</p>
                 <br />
 
                 <form id="filter-by-name" method="GET" action="/wishes">

@@ -1874,7 +1874,8 @@ progress {
     margin-bottom: 1rem;
     color: #212529;
     vertical-align: top;
-    border-color: #dee2e6
+    border-color: #dee2e6;
+    white-space: nowrap;
 }
 
 .table>:not(caption)>*>* {
@@ -4689,8 +4690,7 @@ textarea.form-control-lg {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    width: max-content;
+    min-width: fit-content;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
