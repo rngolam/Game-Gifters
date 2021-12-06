@@ -40,6 +40,17 @@ app.use("/games", games);
 app.use("/gifts", gifts);
 app.use("/wishes", wishes);
 
+app.use(function (req, res) {
+    res.status(404);
+    res.render('pages/404');
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('pages/500');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}; press Ctrl-C to terminate.`);
