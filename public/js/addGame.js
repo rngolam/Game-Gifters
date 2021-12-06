@@ -25,8 +25,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.onreadystatechange = () => {
         if (req.readyState == 4 && req.status == 200) {
             const responseData = JSON.parse(req.response);
-            const insertedRowId = responseData.insertId;
-            addRowToTable(formData, insertedRowId);
+            addRowToTable(formData, formData.appID);
             clearForm(formFields);
             closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
@@ -37,22 +36,25 @@ addEmployeeForm.addEventListener("submit", function (event) {
     req.send(JSON.stringify(formData));
 });
 
-function addRowToTable(formData, insertedRowId) {
+function addRowToTable(formData, appID) {
     const gamesTable = document.getElementById("games-table-body");
     const row = gamesTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
 
+    const deleteCheckboxCell = document.createElement("td");
+    const updateCell = document.createElement("td");
     const idCell = document.createElement("td");
     const titleCell = document.createElement("td");
     const priceCell = document.createElement("td");
-    const updateCell = document.createElement("td");
 
     // Fill cells with data
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${appID}">`;
+    deleteCheckboxCell.scope = "row";
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${appID}, populateUpdateGameFields)">&#128221;</a>`;
     idCell.innerText = formData.appID;
     titleCell.innerText = formData.title;
     priceCell.innerText = "$" + formData.price;
-    updateCell.innerHTML = `<a href="#" onclick="showModal('updateModal', ${insertedRowId})">Update</a>`;
 
-    cells = [idCell, titleCell, priceCell, updateCell];
+    cells = [deleteCheckboxCell, updateCell, idCell, titleCell, priceCell];
     cells.forEach((cell) => row.appendChild(cell));
 }
