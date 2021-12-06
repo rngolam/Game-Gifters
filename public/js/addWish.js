@@ -1,11 +1,13 @@
-
-const gameIDInput = document.querySelector("#game-id");
-const employeeIDInput = document.querySelector("#employee-id");
-const dateWishedInput = document.querySelector("#date-wished");
+let gameIDInput;
+let employeeIDInput;
+let dateWishedInput;
 
 window.addEventListener("load", () => {
-
     const addWishForm = document.getElementById("add-wish-form");
+    gameIDInput = document.querySelector("#game-id");
+    employeeIDInput = document.querySelector("#employee-id");
+    dateWishedInput = document.querySelector("#date-wished");
+
     // Prepopulate wish date field with today's date
     document.querySelector("#date-wished").valueAsDate = new Date();
 
@@ -66,14 +68,10 @@ function addRowToTable(formData, insertedRowId) {
     wishIDCell.innerText = insertedRowId;
     gameIDCell.innerText = formData.gameID;
     gameTitleCell.innerText =
-        gameIDInput.options[gameIDInput.selectedIndex].getAttribute(
-            "data-title"
-        );
+        gameIDInput.options[gameIDInput.selectedIndex].dataset.title;
     associatedEmployeeIDCell.innerText = formData.employeeID;
     employeeNameCell.innerText =
-        employeeIDInput.options[employeeIDInput.selectedIndex].getAttribute(
-            "data-employee"
-        );
+        employeeIDInput.options[employeeIDInput.selectedIndex].dataset.employee;
     dateWishedCell.innerText = convertDateString(formData.dateWished);
     fulfilledCell.innerHTML =
         '<i class="fa fa-dot-circle-o text-danger"></span><span class="ms-1"></i>No';

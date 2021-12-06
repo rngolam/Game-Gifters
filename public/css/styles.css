@@ -87,10 +87,33 @@ h2 {
 
 th, td {
   text-align: center;
+  vertical-align: middle;
+}
+
+#results-count {
+  display: none;
+}
+
+#results-table {
+  display: none;
 }
 
 a.update {
   text-decoration: none;
+}
+
+a.clear-filter {
+  text-decoration: none;
+  color: rgba(0, 39, 99, 0.884)
+}
+
+a.clear-filter:hover {
+  text-decoration: none;
+  color: rgba(36, 108, 218, 0.781)
+}
+
+img.thumbnail {
+  border-radius: 20px;
 }
 
 .error {

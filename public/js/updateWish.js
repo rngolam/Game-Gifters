@@ -1,16 +1,22 @@
-const updateEmployeeIDInput = document.querySelector("#update-employee-id");
-const updateGameIDInput = document.querySelector("#update-game-id");
-const updateDateWishedInput = document.querySelector("#update-date-wished");
+
 
 const wishMap = new Map();
 let wishToUpdate;
 
-if (wishInfo) {
-    wishInfo.forEach((wish) => wishMap.set(wish.wish_id, wish));
-}
+let updateemployeeIDInput;
+let updateGameIDInput;
+let updateDateWishedInput;
 
 window.addEventListener("load", () => {
+    
+    if (wishInfo) {
+        wishInfo.forEach((wish) => wishMap.set(wish.wish_id, wish));
+    }
+    
     const updateWishForm = document.querySelector("#update-wish-form");
+    updateEmployeeIDInput = document.querySelector("#update-employee-id");
+    updateGameIDInput = document.querySelector("#update-game-id");
+    updateDateWishedInput = document.querySelector("#update-date-wished");
 
     updateWishForm.addEventListener("submit", function (event) {
         // Prevent form from submitting

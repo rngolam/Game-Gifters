@@ -1,3 +1,10 @@
+let firstNameInput;
+let lastNameInput;
+let emailInput;
+let departmentInput;
+let phoneInput;
+let birthdateInput;
+
 window.addEventListener("load", () => {
     const addEmployeeForm = document.querySelector("#add-employee-form");
     addEmployeeForm.addEventListener("submit", function (event) {
@@ -5,12 +12,12 @@ window.addEventListener("load", () => {
         event.preventDefault();
 
         // Get values from form fields
-        const firstNameInput = document.querySelector("#first-name");
-        const lastNameInput = document.querySelector("#last-name");
-        const emailInput = document.querySelector("#email");
-        const departmentInput = document.querySelector("#department");
-        const phoneInput = document.querySelector("#phone");
-        const birthdateInput = document.querySelector("#birthdate");
+        firstNameInput = document.querySelector("#first-name");
+        lastNameInput = document.querySelector("#last-name");
+        emailInput = document.querySelector("#email");
+        departmentInput = document.querySelector("#department");
+        phoneInput = document.querySelector("#phone");
+        birthdateInput = document.querySelector("#birthdate");
 
         const formData = {
             firstName: firstNameInput.value,
@@ -47,7 +54,7 @@ window.addEventListener("load", () => {
                 const responseData = JSON.parse(req.response);
                 handleInputError(responseData, "add-error-message");
             }
-        };
+        }
 
         req.send(JSON.stringify(formData));
     });

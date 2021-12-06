@@ -1,16 +1,20 @@
-const updateAppIDInput = document.querySelector("#update-app-id");
-const updateTitleInput = document.querySelector("#update-title");
-const updatePriceInput = document.querySelector("#update-price");
-
 const gameMap = new Map();
 let gameToUpdate;
 
-if (gameInfo) {
-    gameInfo.forEach((game) => gameMap.set(game.app_id, game));
-}
+let updateAppIDInput;
+let updateTitleInput;
+let updatePriceInput;
 
 window.addEventListener("load", () => {
+
+    if (gameInfo) {
+        gameInfo.forEach((game) => gameMap.set(game.app_id, game));
+    }
+
     const updateGameForm = document.querySelector("#update-game-form");
+    updateAppIDInput = document.querySelector("#update-app-id");
+    updateTitleInput = document.querySelector("#update-title");
+    updatePriceInput = document.querySelector("#update-price");
 
     updateGameForm.addEventListener("submit", function (event) {
         // Prevent form from submitting

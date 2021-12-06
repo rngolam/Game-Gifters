@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
     <head>
         <%- include('../partials/head'); %>
-        <title>🎁 Game Gifters | Wishes</title>
+        <title>Game Gifters | Wishes</title>
 
         <% scripts.forEach(function(script) { %>
             <script src="js/<%= script %>" async></script>
@@ -65,7 +65,7 @@
                             <% if (locals.searchQuery) { %>
                                 Filter:
                             </strong>
-                                <%= searchQuery %> | <a href="/wishes">Clear Filter</a>
+                                <%= searchQuery %> | <a class="clear-filter" href="/wishes">Clear Filter</a>
                             <% } else { %>
                                 All
                             </strong>

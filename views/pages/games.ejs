@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
     <head>
         <%- include('../partials/head'); %>
-        <title>🎁 Game Gifters | Games</title>
+        <title>Game Gifters | Games</title>
 
         <% scripts.forEach(function(script) { %>
         <script src="js/<%= script %>" async></script>
@@ -123,7 +123,7 @@
         <!-- Add Game Modal -->
         <div id="add-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('add-modal')"
+                <span class="close" onclick="closeModal('add-modal', clearResultsTable)"
                     >&times;</span
                 ><br />
 
@@ -181,6 +181,56 @@
                 </form>
                 <br />
                 <span class="error" id="add-error-message"></span>
+
+
+                <form id="search-steam-store-form">
+                    
+                    <h2>Search for Game on Steam Store</h2>
+
+                    <div class="row g-2" style="padding-top: 1.6em">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="steam-store-query"
+                                    id="steam-store-query"
+                                    placeholder="Among Us"
+                                    autocomplete="off"
+                                />
+                                <label for="steam-store-query"
+                                    >Search for a game on the Steam Store</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 1em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Search
+                        </button>
+                    </div>
+                </form>
+                <span class="error" id="search-error-message"></span>
+
+
+
+                <div style="margin: auto;">
+                    <span id="results-count"></span>
+                    <table class="table table-hover" id="results-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col">AppID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="steam-search-table-body">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

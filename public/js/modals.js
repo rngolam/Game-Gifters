@@ -9,12 +9,15 @@ function showModal(modalID, rowID, populateFunction) {
 window.onclick = function (event) {
     // user clicks outside of modal
     if (event.target.className == "modal") {
-        event.target.style.display = "none";
-        clearErrorMessage();
+        closeModal(event.target.id);
     }
 };
 
-function closeModal(modalID) {
+function closeModal(modalID, clearResultsTableFunction) {
     document.querySelector("#" + modalID).style.display = "none";
     clearErrorMessage();
+
+    if (clearResultsTableFunction) {
+        clearResultsTableFunction();
+    }
 }

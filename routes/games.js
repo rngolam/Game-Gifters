@@ -18,6 +18,7 @@ function getGames(res, db) {
                 "handleInputError.js",
                 "clearErrorMessage.js",
                 "clearForm.js",
+                "querySteamStore.js",
             ];
             res.render("pages/games", {
                 page_name: "games",

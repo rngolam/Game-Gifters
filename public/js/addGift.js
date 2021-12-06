@@ -1,9 +1,13 @@
-const wishIDInput = document.querySelector("#wish-id");
-const senderIDInput = document.querySelector("#sender-id");
-const dateSentInput = document.querySelector("#date-sent");
+let wishIDInput;
+let senderIDInput;
+let dateSentInput;
 
 window.addEventListener("load", () => {
     const addGiftForm = document.querySelector("#add-gift-form");
+    wishIDInput = document.querySelector("#wish-id");
+    senderIDInput = document.querySelector("#sender-id");
+    dateSentInput = document.querySelector("#date-sent");
+
     addGiftForm.addEventListener("submit", function (event) {
         // Prevent form from submitting
         event.preventDefault();
@@ -65,18 +69,12 @@ function addRowToTable(formData, insertedRowId) {
     giftIDCell.innerText = insertedRowId;
     wishIDCell.innerText = formData.wishID;
     gameTitleCell.innerText =
-        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
-            "data-game"
-        );
+        wishIDInput.options[wishIDInput.selectedIndex].dataset.game;
     senderIDCell.innerText = formData.senderID;
     senderNameCell.innerText =
-        senderIDInput.options[senderIDInput.selectedIndex].getAttribute(
-            "data-sender"
-        );
+        senderIDInput.options[senderIDInput.selectedIndex].dataset.sender;
     recipientNameCell.innerText =
-        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
-            "data-recipient"
-        );
+        wishIDInput.options[wishIDInput.selectedIndex].dataset.recipient;
     dateSentCell.innerText = convertDateString(formData.dateSent);
 
     cells = [
@@ -95,13 +93,9 @@ function addRowToTable(formData, insertedRowId) {
 
 function addGiftToMap(formData, insertedRowId) {
     const gameTitle =
-        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
-            "data-game"
-        );
+        wishIDInput.options[wishIDInput.selectedIndex].dataset.game;
     const recipientName =
-        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
-            "data-recipient"
-        );
+        wishIDInput.options[wishIDInput.selectedIndex].dataset.recipient;
 
     addedGift = {
         gift_id: insertedRowId,

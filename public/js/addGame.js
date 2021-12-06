@@ -1,9 +1,13 @@
-const appIDInput = document.querySelector("#app-id");
-const titleInput = document.querySelector("#title");
-const priceInput = document.querySelector("#price");
+let appIDInput;
+let titleInput;
+let priceInput;
 
 window.addEventListener("load", () => {
     const addGameForm = document.querySelector("#add-game-form");
+    appIDInput = document.querySelector("#app-id");
+    titleInput = document.querySelector("#title");
+    priceInput = document.querySelector("#price");
+
     addGameForm.addEventListener("submit", function (event) {
         // Prevent form from submitting
         event.preventDefault();
@@ -14,7 +18,7 @@ window.addEventListener("load", () => {
             price: parseFloat(priceInput.value).toFixed(2),
         };
 
-        const formFields = [appIDInput, titleInput, priceInput];
+        const formFields = [appIDInput, titleInput, priceInput, searchQueryInput];
 
         // Set up AJAX request
         const req = new XMLHttpRequest();
@@ -27,7 +31,7 @@ window.addEventListener("load", () => {
                 addRowToTable(formData);
                 addGameToMap(formData);
                 clearForm(formFields);
-                closeModal("add-modal");
+                closeModal("add-modal", clearResultsTable);
             } else if (req.readyState == 4 && req.status != 200) {
                 const responseData = JSON.parse(req.response);
                 handleInputError(responseData, "add-error-message");

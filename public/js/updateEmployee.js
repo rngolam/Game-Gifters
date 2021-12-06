@@ -1,22 +1,27 @@
 const employeeMap = new Map();
-
-const updateFirstNameInput = document.querySelector("#update-first-name");
-const updateLastNameInput = document.querySelector("#update-last-name");
-const updateEmailInput = document.querySelector("#update-email");
-const updateDepartmentInput = document.querySelector("#update-department");
-const updatePhoneInput = document.querySelector("#update-phone");
-const updateBirthdateInput = document.querySelector("#update-birthdate");
-
+let updateFirstNameInput;
+let updateLastNameInput;
+let updateEmailInput;
+let updateDepartmentInput;
+let updatePhoneInput;
+let updateBirthdateInput;
 let employeeToUpdate;
 
-if (employeeInfo) {
-    employeeInfo.forEach((employee) =>
-        employeeMap.set(employee.employee_id, employee)
-    );
-}
-
 window.addEventListener("load", () => {
+
+    if (employeeInfo) {
+        employeeInfo.forEach((employee) =>
+            employeeMap.set(employee.employee_id, employee)
+        );
+    }    
+
     const updateEmployeeForm = document.querySelector("#update-employee-form");
+    updateFirstNameInput = document.querySelector("#update-first-name");
+    updateLastNameInput = document.querySelector("#update-last-name");
+    updateEmailInput = document.querySelector("#update-email");
+    updateDepartmentInput = document.querySelector("#update-department");
+    updatePhoneInput = document.querySelector("#update-phone");
+    updateBirthdateInput = document.querySelector("#update-birthdate");
 
     updateEmployeeForm.addEventListener("submit", function (event) {
         // Prevent form from submitting

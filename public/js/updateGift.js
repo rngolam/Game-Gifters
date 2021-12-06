@@ -1,16 +1,19 @@
-const editedWish = document.querySelector("#edited-wish");
-const updateSenderIDInput = document.querySelector("#update-sender-id");
-const updateDateSentInput = document.querySelector("#update-date-sent");
-
 const giftMap = new Map();
 let giftToUpdate;
 
-if (giftInfo) {
-    giftInfo.forEach((gift) => giftMap.set(gift.gift_id, gift));
-}
+let editedWish;
+let updateSenderIDInput;
+let updateSentInput;
 
 window.addEventListener("load", () => {
+    if (giftInfo) {
+        giftInfo.forEach((gift) => giftMap.set(gift.gift_id, gift));
+    }
+
     const updateGiftForm = document.querySelector("#update-gift-form");
+    editedWish = document.querySelector("#edited-wish");
+    updateSenderIDInput = document.querySelector("#update-sender-id");
+    updateDateSentInput = document.querySelector("#update-date-sent");
 
     updateGiftForm.addEventListener("submit", function (event) {
         // Prevent form from submitting
