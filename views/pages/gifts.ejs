@@ -42,6 +42,13 @@
                                 >Add Gift</a
                             >
                         </li>
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('deleteModal')"
+                                >Delete Gift</a
+                            >
+                        </li>
                     </ul>
                 </div>
 
@@ -62,6 +69,8 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">&#128465;</th>
+                                    <th scope="col">&#x270E;</th>
                                     <th scope="col">Gift ID</th>
                                     <th scope="col">Associated Wish ID</th>
                                     <th scope="col">Game Title</th>
@@ -74,6 +83,22 @@
                             <tbody id="gifts-table-body">
                                 <% gifts.forEach(function(gift) { %>
                                 <tr>
+                                    <td>
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="deleteRow"
+                                            value="<%= gift.gift_id %>"
+                                        />
+                                    </td>
+                                    <td>
+                                        <a
+                                            class="update"
+                                            href="#"
+                                            onclick="showModal('updateModal', <%= gift.gift_id %>)"
+                                            >&#128221;</a
+                                        >
+                                    </td>
                                     <td><%= gift.gift_id %></td>
                                     <td><%= gift.associated_wish_id %></td>
                                     <td><%= gift.game_title %></td>
@@ -180,6 +205,40 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Delete Gift Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="closeModal('deleteModal')"
+                    >&times;</span
+                ><br />
+
+                <h2>Remove Gift</h2>
+                <p>
+                    Are you sure you want to remove the selected Gift?
+                </p>
+                <br />
+
+                <form id="delete-gift-form">
+                    <div class="d-grid gap-2 d-md-block">
+                        <button
+                            class="btn btn-outline-danger"
+                            type="submit"
+                        >
+                            Yes
+                        </button>
+                        <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            onclick="closeModal('deleteModal')"
+                        >
+                            No
+                        </button>
+                    </div>
+                </form>
+                <br />
             </div>
         </div>
     </body>

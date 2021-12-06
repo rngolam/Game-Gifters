@@ -32,9 +32,17 @@ addWishForm.addEventListener("submit", function (event) {
             addRowToTable(formData, insertedRowId);
             addWishToMap(formData, insertedRowId);
             clearForm(formFields);
+            clearErrorMessage();
             closeModal("addModal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
+            console.log(req.response);
+            
+            if (req.response === 'ER_DUP_ENTRY') {
+                document.querySelector('#error-message').innerText = 'Error: Employee has already wished for this Game!';
+            } else {
+                document.querySelector('#error-message').innerText = 'Something went wrong. Please double-check your input fields and try again.';
+            }
         }
     };
 

@@ -83,7 +83,7 @@ function addWish(res, data, db) {
     db.pool.query(insertQuery, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
-            res.sendStatus(400);
+            res.status(400).send(error.code);
         } else {
             res.send(results);
         }
@@ -139,6 +139,7 @@ router.get("/", function (req, res) {
         "deleteWish.js",
         "convertDateString.js",
         "clearForm.js",
+        "clearErrorMessage.js"
     ];
     const context = { page_name: "wishes", scripts: scripts };
 
