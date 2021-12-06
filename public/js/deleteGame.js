@@ -6,10 +6,12 @@ deleteGameForm.addEventListener("submit", function (event) {
 
     // Get selected IDs
     const deleteIDs = [];
-    const toDelete = document.querySelectorAll("input[name=deleteRow]:checked");
+    const toDelete = document.querySelectorAll(
+        "input[name=delete-row]:checked"
+    );
 
     if (toDelete.length === 0) {
-        closeModal('deleteModal');
+        closeModal("delete-modal");
         return;
     }
 

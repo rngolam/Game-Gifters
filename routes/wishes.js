@@ -101,7 +101,7 @@ function updateWish(res, data, db) {
         data.gameID,
         data.employeeID,
         data.dateWished,
-        data.wishID
+        data.wishID,
     ];
 
     db.pool.query(updateQuery, inserts, function (error, results, fields) {
@@ -139,7 +139,7 @@ router.get("/", function (req, res) {
         "deleteWish.js",
         "convertDateString.js",
         "clearForm.js",
-        "clearErrorMessage.js"
+        "clearErrorMessage.js",
     ];
     const context = { page_name: "wishes", scripts: scripts };
 

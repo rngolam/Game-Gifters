@@ -1,16 +1,16 @@
-const addEmployeeForm = document.getElementById("add-employee-form");
+const addEmployeeForm = document.querySelector("#add-employee-form");
 
 addEmployeeForm.addEventListener("submit", function (event) {
     // Prevent form from submitting
     event.preventDefault();
 
     // Get values from form fields
-    const firstNameInput = document.getElementById("firstName");
-    const lastNameInput = document.getElementById("lastName");
-    const emailInput = document.getElementById("email");
-    const departmentInput = document.getElementById("department");
-    const phoneInput = document.getElementById("phone");
-    const birthdateInput = document.getElementById("birthdate");
+    const firstNameInput = document.querySelector("#first-name");
+    const lastNameInput = document.querySelector("#last-name");
+    const emailInput = document.querySelector("#email");
+    const departmentInput = document.querySelector("#department");
+    const phoneInput = document.querySelector("#phone");
+    const birthdateInput = document.querySelector("#birthdate");
 
     const formData = {
         firstName: firstNameInput.value,
@@ -42,7 +42,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
             addRowToTable(formData, insertedRowId);
             addEmployeeToMap(formData, insertedRowId);
             clearForm(formFields);
-            closeModal("addModal");
+            closeModal("add-modal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -52,7 +52,7 @@ addEmployeeForm.addEventListener("submit", function (event) {
 });
 
 function addRowToTable(formData, insertedRowId) {
-    const employeeTable = document.getElementById("employees-table-body");
+    const employeeTable = document.querySelector("#employees-table-body");
     const row = employeeTable.insertRow(0);
     row.style.backgroundColor = "#c7e5ff";
 
@@ -67,9 +67,9 @@ function addRowToTable(formData, insertedRowId) {
     const dobCell = document.createElement("td");
 
     // Fill cells with data
-    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="delete-row" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
-    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateEmployeeFields)">&#128221;</a>`;
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('update-modal', ${insertedRowId}, populateUpdateEmployeeFields)">&#128221;</a>`;
     idCell.innerText = insertedRowId;
     firstNameCell.innerText = formData.firstName;
     lastNameCell.innerText = formData.lastName;

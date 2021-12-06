@@ -18,7 +18,7 @@ function getEmployees(res, db) {
                 "updateEmployee.js",
                 "deleteEmployee.js",
                 "convertDateString.js",
-                "clearForm.js"
+                "clearForm.js",
             ];
             res.render("pages/employees", {
                 page_name: "employees",

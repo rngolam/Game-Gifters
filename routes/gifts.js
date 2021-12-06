@@ -96,11 +96,7 @@ function updateGift(res, data, db) {
     date_sent=?
     WHERE gift_id=?;`;
 
-    const inserts = [
-        data.senderID,
-        data.dateSent,
-        data.giftID
-    ];
+    const inserts = [data.senderID, data.dateSent, data.giftID];
 
     db.pool.query(updateQuery, inserts, function (error, results, fields) {
         if (error) {
@@ -135,7 +131,6 @@ function deleteGift(res, data, db) {
                 deleteQuery,
                 giftsToDelete,
                 function (deleteError, deleteResults, deleteFields) {
-
                     // Condense the returned wish IDs into a 1-dimensional array
                     const toUpdate = selectResults.map((row) => row.wish_id);
 

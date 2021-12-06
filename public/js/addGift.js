@@ -1,9 +1,9 @@
 const addGiftForm = document.querySelector("#add-gift-form");
 
 // Get values from form fields
-const wishIDInput = document.querySelector("#wishID");
-const senderIDInput = document.querySelector("#senderID");
-const dateSentInput = document.querySelector("#dateSent");
+const wishIDInput = document.querySelector("#wish-id");
+const senderIDInput = document.querySelector("#sender-id");
+const dateSentInput = document.querySelector("#date-sent");
 
 addGiftForm.addEventListener("submit", function (event) {
     // Prevent form from submitting
@@ -33,7 +33,7 @@ addGiftForm.addEventListener("submit", function (event) {
             wishIDInput.options[wishIDInput.selectedIndex].remove();
 
             clearForm(formFields);
-            closeModal("addModal");
+            closeModal("add-modal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
         }
@@ -58,9 +58,9 @@ function addRowToTable(formData, insertedRowId) {
     const dateSentCell = document.createElement("td");
 
     // Fill cells with data
-    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="delete-row" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
-    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateGiftFields)">&#128221;</a>`;
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('update-modal', ${insertedRowId}, populateUpdateGiftFields)">&#128221;</a>`;
     giftIDCell.innerText = insertedRowId;
     wishIDCell.innerText = formData.wishID;
     gameTitleCell.innerText =
@@ -93,17 +93,22 @@ function addRowToTable(formData, insertedRowId) {
 }
 
 function addGiftToMap(formData, insertedRowId) {
-    
-    const gameTitle = wishIDInput.options[wishIDInput.selectedIndex].getAttribute("data-game");
-    const recipientName = wishIDInput.options[wishIDInput.selectedIndex].getAttribute("data-recipient");
-    
+    const gameTitle =
+        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
+            "data-game"
+        );
+    const recipientName =
+        wishIDInput.options[wishIDInput.selectedIndex].getAttribute(
+            "data-recipient"
+        );
+
     addedGift = {
         gift_id: insertedRowId,
         associated_wish_id: formData.wishID,
         game_title: gameTitle,
         sender_id: formData.senderID,
         recipient_name_from_client: recipientName,
-        formatted_date_sent: convertDateString(formData.dateSent)
+        formatted_date_sent: convertDateString(formData.dateSent),
     };
 
     giftMap.set(addedGift.gift_id, addedGift);

@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS wishes (
   PRIMARY KEY (wish_id),
   UNIQUE KEY game_id (game_id,wished_by),
   KEY fk_employee (wished_by),
-  CONSTRAINT wishes_ibfk_1 FOREIGN KEY (game_id) REFERENCES games (app_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT wishes_ibfk_1 FOREIGN KEY (game_id) REFERENCES games (app_id) ON DELETE CASCADE,
   CONSTRAINT wishes_ibfk_2 FOREIGN KEY (wished_by) REFERENCES employees (employee_id) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
@@ -63,14 +63,15 @@ CREATE TABLE IF NOT EXISTS wishes (
   
   INSERT INTO wishes (game_id, wished_by, date_wished, fulfilled) VALUES
       (322330, 35, "2020-09-12", 1),
-      (739630, 35, "2020-10-04", 0),
+      (739630, 35, "2020-10-04", 1),
       (322330, 5, "2021-03-29", 0),
       (252950, 35, "2021-05-05", 0),
       (322330, 15, "2021-05-18", 1),
       (1085660, 45, "2021-06-21", 0);
   
   INSERT INTO gifts (wish_id, fulfilled_by, date_sent) VALUES
-      (5, 15, "2021-12-23"),
-      (45, 45, "2021-12-18");`;
+      (5, 15, "2021-11-23"),
+      (45, 45, "2021-11-18"),
+      (15, 5, "2021-12-03");`;
 
 module.exports.query = resetTableQuery;

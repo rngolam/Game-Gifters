@@ -42,17 +42,17 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="showModal('addModal')"
+                            <a class="dropdown-item" onclick="showModal('add-modal')"
                                 >Add Wish</a
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" onclick="showModal('deleteModal')"
+                            <a class="dropdown-item" onclick="showModal('delete-modal')"
                                 >Delete Wish</a
                             >
                         </li>
                         <li>
-                            <a class="dropdown-item" onclick="showModal('filterModal')"
+                            <a class="dropdown-item" onclick="showModal('filter-modal')"
                                 >Filter</a
                             >
                         </li>
@@ -111,7 +111,7 @@
                                         <a
                                             class="update"
                                             href="#"
-                                            onclick="showModal('updateModal', <%= wish.wish_id %>, populateUpdateWishFields)"
+                                            onclick="showModal('update-modal', <%= wish.wish_id %>, populateUpdateWishFields)"
                                             >&#128221;</a
                                         >
                                     </td>
@@ -154,9 +154,9 @@
         <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
         <!-- Add Wish Modal -->
-        <div id="addModal" class="modal">
+        <div id="add-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('add-modal')">&times;</span><br />
 
                 <h2>New Wish</h2>
                 <p>Add a new employee wish to the database.</p>
@@ -167,7 +167,8 @@
                         <div class="form-floating col-md">
                             <select
                                 class="form-select"
-                                id="employeeID"
+                                name="employee-id"
+                                id="employee-id"
                                 required
                             >
                                 <option value="" selected>
@@ -184,13 +185,13 @@
                                 </option>
                                 <% }); %>
                             </select>
-                            <label for="employeeID">Employee</label>
+                            <label for="employee-id">Employee</label>
                         </div>
                     </div>
 
                     <div class="row g-2" style="padding-top: 1.6em">
                         <div class="form-floating col">
-                            <select class="form-select" id="gameID" required>
+                            <select class="form-select" name="game-id" id="game-id" required>
                                 <option value="" selected>Select a game</option>
                                 <% games.forEach(function(game) { %>
                                 <option
@@ -201,18 +202,18 @@
                                 </option>
                                 <% }); %>
                             </select>
-                            <label for="gameID">Game</label>
+                            <label for="game-id">Game</label>
                         </div>
 
                         <div class="form-floating col">
                             <input
                                 type="date"
                                 class="form-control"
-                                id="dateWished"
-                                placeholder="Date Wished"
+                                name="date-wished"
+                                id="date-wished"
                                 required
                             />
-                            <label for="dateWished">Wish Date</label>
+                            <label for="date-wished">Wish Date</label>
                         </div>
                     </div>
 
@@ -228,9 +229,9 @@
         </div>
 
         <!-- Update Employee Modal -->
-        <div id="updateModal" class="modal">
+        <div id="update-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('updateModal')"
+                <span class="close" onclick="closeModal('update-modal')"
                     >&times;</span
                 ><br />
 
@@ -246,6 +247,7 @@
                         <div class="form-floating col-md">
                             <select
                                 class="form-select"
+                                name="update-employee-id"
                                 id="update-employee-id"
                                 required
                             >
@@ -269,7 +271,7 @@
 
                     <div class="row g-2" style="padding-top: 1.6em">
                         <div class="form-floating col">
-                            <select class="form-select" id="update-game-id" required>
+                            <select class="form-select" name="update-game-id" id="update-game-id" required>
                                 <option value="">Select a game</option>
                                 <% games.forEach(function(game) { %>
                                 <option
@@ -287,6 +289,7 @@
                             <input
                                 type="date"
                                 class="form-control"
+                                name="update-date-wished"
                                 id="update-date-wished"
                                 required
                             />
@@ -305,9 +308,9 @@
         </div>
 
         <!-- Delete Wish Modal -->
-        <div id="deleteModal" class="modal">
+        <div id="delete-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('deleteModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('delete-modal')">&times;</span><br />
 
                 <h2>Remove Wish</h2>
                 <p>Are you sure you want to remove the selected Wishes?</p>
@@ -324,7 +327,7 @@
                         <button
                             class="btn btn-outline-primary"
                             type="button"
-                            onclick="closeModal('deleteModal')"
+                            onclick="closeModal('delete-modal')"
                         >
                             No
                         </button>
@@ -335,9 +338,9 @@
         </div>
 
         <!-- Filter Modal -->
-        <div id="filterModal" class="modal">
+        <div id="filter-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('filterModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('filter-modal')">&times;</span><br />
 
                 <h2>Filter Wishes</h2>
                 <p>Enter a whole or partial employee name to search for associated wishes.</p>
@@ -349,7 +352,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="firstNameSearch"
+                                id="first-name-earch"
                                 name="firstName"
                                 placeholder="John"
                                 autocomplete="off"
@@ -360,7 +363,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="lastNameSearch"
+                                id="last-name-search"
                                 name="lastName"
                                 placeholder="Smith"
                                 autocomplete="off"

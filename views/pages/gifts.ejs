@@ -5,14 +5,12 @@
         <title>🎁 Game Gifters | Gifts</title>
 
         <% scripts.forEach(function(script) { %>
-            <script src="js/<%= script %>" async></script>
-        <% }) %>
-        <% if (gifts) { %>
-            <script>
-                let giftInfo = <%- JSON.stringify(gifts) %>;
-            </script>
+        <script src="js/<%= script %>" async></script>
+        <% }) %> <% if (gifts) { %>
+        <script>
+            let giftInfo = <%- JSON.stringify(gifts) %>;
+        </script>
         <% } %>
-
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -43,14 +41,16 @@
                         aria-labelledby="dropdownMenuLink"
                     >
                         <li>
-                            <a class="dropdown-item" onclick="showModal('addModal')"
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('add-modal')"
                                 >Add Gift</a
                             >
                         </li>
                         <li>
                             <a
                                 class="dropdown-item"
-                                onclick="showModal('deleteModal')"
+                                onclick="showModal('delete-modal')"
                                 >Delete Gift</a
                             >
                         </li>
@@ -92,7 +92,7 @@
                                         <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            name="deleteRow"
+                                            name="delete-row"
                                             value="<%= gift.gift_id %>"
                                         />
                                     </td>
@@ -100,7 +100,7 @@
                                         <a
                                             class="update"
                                             href="#"
-                                            onclick="showModal('updateModal', <%= gift.gift_id %>, populateUpdateGiftFields)"
+                                            onclick="showModal('update-modal', <%= gift.gift_id %>, populateUpdateGiftFields)"
                                             >&#128221;</a
                                         >
                                     </td>
@@ -117,7 +117,7 @@
                                         <%= gift.recipient_first_name + ' ' +
                                         gift.recipient_last_name %>
                                     </td>
-                                    <td><%= gift.formatteed_date_sent %></td>
+                                    <td><%= gift.formatted_date_sent %></td>
                                 </tr>
                                 <% }); %>
                             </tbody>
@@ -132,9 +132,11 @@
         <!-- Pop-up Form Hidden, Source: https://www.w3schools.com/howto/howto_css_modals.asp -->
 
         <!-- Add Gift Modal -->
-        <div id="addModal" class="modal">
+        <div id="add-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('addModal')">&times;</span><br />
+                <span class="close" onclick="closeModal('add-modal')"
+                    >&times;</span
+                ><br />
 
                 <h2>New Gift</h2>
                 <p>Add a new employee gift to the database.</p>
@@ -146,7 +148,8 @@
                             <div class="form-floating">
                                 <select
                                     class="form-select"
-                                    id="wishID"
+                                    name="wish-id"
+                                    id="wish-id"
                                     required
                                 >
                                     <option value="" selected>
@@ -165,7 +168,7 @@
                                     </option>
                                     <% }); %>
                                 </select>
-                                <label for="wishID">Wish</label>
+                                <label for="wish-id">Wish</label>
                             </div>
                         </div>
                     </div>
@@ -173,7 +176,11 @@
                     <div class="form-group row g-2" style="padding-top: 1.6em">
                         <div class="form-floating col">
                             <div class="form-floating">
-                                <select class="form-select" id="senderID">
+                                <select
+                                    class="form-select"
+                                    name="sender-id"
+                                    id="sender-id"
+                                >
                                     <option value="" selected>
                                         Select a sender (optional)
                                     </option>
@@ -188,7 +195,7 @@
                                     </option>
                                     <% }); %>
                                 </select>
-                                <label for="wishID">Sender</label>
+                                <label for="sender-id">Sender</label>
                             </div>
                         </div>
 
@@ -196,11 +203,11 @@
                             <input
                                 type="date"
                                 class="form-control"
-                                name="dateSent"
-                                id="dateSent"
+                                name="date-sent"
+                                id="date-sent"
                                 required
                             />
-                            <label for="dateSent">Date Sent</label>
+                            <label for="date-sent">Date Sent</label>
                         </div>
                     </div>
 
@@ -214,17 +221,14 @@
         </div>
 
         <!-- Update Gift Modal -->
-        <div id="updateModal" class="modal">
+        <div id="update-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('updateModal')"
+                <span class="close" onclick="closeModal('update-modal')"
                     >&times;</span
                 ><br />
 
                 <h2>Update Gift</h2>
-                <p>
-                    Change information of an existing gift in the
-                    database.
-                </p>
+                <p>Change information of an existing gift in the database.</p>
                 <br />
 
                 <form id="update-gift-form">
@@ -247,7 +251,10 @@
                     <div class="form-group row g-2" style="padding-top: 1.6em">
                         <div class="form-floating col">
                             <div class="form-floating">
-                                <select class="form-select" id="update-sender-id">
+                                <select
+                                    class="form-select"
+                                    id="update-sender-id"
+                                >
                                     <option value="">
                                         Select a sender (optional)
                                     </option>
@@ -270,7 +277,7 @@
                             <input
                                 type="date"
                                 class="form-control"
-                                name="dateSent"
+                                name="update-date-sent"
                                 id="update-date-sent"
                                 required
                             />
@@ -289,30 +296,25 @@
         </div>
 
         <!-- Delete Gift Modal -->
-        <div id="deleteModal" class="modal">
+        <div id="delete-modal" class="modal">
             <div class="modal-content form-desc">
-                <span class="close" onclick="closeModal('deleteModal')"
+                <span class="close" onclick="closeModal('delete-modal')"
                     >&times;</span
                 ><br />
 
                 <h2>Remove Gift</h2>
-                <p>
-                    Are you sure you want to remove the selected Gift?
-                </p>
+                <p>Are you sure you want to remove the selected Gift?</p>
                 <br />
 
                 <form id="delete-gift-form">
                     <div class="d-grid gap-2 d-md-block">
-                        <button
-                            class="btn btn-outline-danger"
-                            type="submit"
-                        >
+                        <button class="btn btn-outline-danger" type="submit">
                             Yes
                         </button>
                         <button
                             class="btn btn-outline-primary"
                             type="button"
-                            onclick="closeModal('deleteModal')"
+                            onclick="closeModal('delete-modal')"
                         >
                             No
                         </button>

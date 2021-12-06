@@ -2,15 +2,13 @@ const updateWishForm = document.querySelector("#update-wish-form");
 
 const updateEmployeeIDInput = document.querySelector("#update-employee-id");
 const updateGameIDInput = document.querySelector("#update-game-id");
-const updateDateWishedInput = document.querySelector("#update-date-wished")
+const updateDateWishedInput = document.querySelector("#update-date-wished");
 
 const wishMap = new Map();
 let wishToUpdate;
 
 if (wishInfo) {
-    wishInfo.forEach((wish) =>
-        wishMap.set(wish.wish_id, wish)
-    );
+    wishInfo.forEach((wish) => wishMap.set(wish.wish_id, wish));
 }
 
 function populateUpdateWishFields(id) {
@@ -18,7 +16,9 @@ function populateUpdateWishFields(id) {
 
     updateEmployeeIDInput.value = wishToUpdate.associated_employee_id;
     updateGameIDInput.value = wishToUpdate.game_id;
-    updateDateWishedInput.value = convertFormFriendlyDateString(wishToUpdate.date_wished_formatted);
+    updateDateWishedInput.value = convertFormFriendlyDateString(
+        wishToUpdate.date_wished_formatted
+    );
 }
 
 updateWishForm.addEventListener("submit", function (event) {
@@ -30,7 +30,7 @@ updateWishForm.addEventListener("submit", function (event) {
         wishID: wishToUpdate.wish_id,
         employeeID: updateEmployeeIDInput.value,
         gameID: updateGameIDInput.value,
-        dateWished: updateDateWishedInput.value
+        dateWished: updateDateWishedInput.value,
     };
 
     // Set up AJAX request

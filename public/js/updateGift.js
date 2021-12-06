@@ -14,7 +14,9 @@ if (giftInfo) {
 function populateUpdateGiftFields(id) {
     giftToUpdate = giftMap.get(id);
 
-    const recipientName = giftToUpdate.recipient_name_from_client || `${giftToUpdate.recipient_first_name} ${giftToUpdate.recipient_last_name}`
+    const recipientName =
+        giftToUpdate.recipient_name_from_client ||
+        `${giftToUpdate.recipient_first_name} ${giftToUpdate.recipient_last_name}`;
 
     editedWish.value = `${giftToUpdate.game_title} for ${recipientName} [${giftToUpdate.associated_wish_id}]`;
 

@@ -7,9 +7,7 @@ const gameMap = new Map();
 let gameToUpdate;
 
 if (gameInfo) {
-    gameInfo.forEach((game) =>
-        gameMap.set(game.app_id, game)
-    );
+    gameInfo.forEach((game) => gameMap.set(game.app_id, game));
 }
 
 function populateUpdateGameFields(id) {
@@ -29,7 +27,7 @@ updateGameForm.addEventListener("submit", function (event) {
         oldAppID: gameToUpdate.app_id,
         newAppID: updateAppIDInput.value,
         title: updateTitleInput.value,
-        price: updatePriceInput.value
+        price: updatePriceInput.value,
     };
 
     // Set up AJAX request

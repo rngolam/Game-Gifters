@@ -1,12 +1,12 @@
 // Prepopulate wish date field with today's date
-document.querySelector("#dateWished").valueAsDate = new Date();
+document.querySelector("#date-wished").valueAsDate = new Date();
 
 const addWishForm = document.getElementById("add-wish-form");
 
 // Get values from form fields
-const gameIDInput = document.querySelector("#gameID");
-const employeeIDInput = document.querySelector("#employeeID");
-const dateWishedInput = document.querySelector("#dateWished");
+const gameIDInput = document.querySelector("#game-id");
+const employeeIDInput = document.querySelector("#employee-id");
+const dateWishedInput = document.querySelector("#date-wished");
 
 addWishForm.addEventListener("submit", function (event) {
     // Prevent form from submitting
@@ -33,15 +33,17 @@ addWishForm.addEventListener("submit", function (event) {
             addWishToMap(formData, insertedRowId);
             clearForm(formFields);
             clearErrorMessage();
-            closeModal("addModal");
+            closeModal("add-modal");
         } else if (req.readyState == 4 && req.status != 200) {
             console.log("There was an error with the input.");
             console.log(req.response);
-            
-            if (req.response === 'ER_DUP_ENTRY') {
-                document.querySelector('#error-message').innerText = 'Error: Employee has already wished for this Game!';
+
+            if (req.response === "ER_DUP_ENTRY") {
+                document.querySelector("#error-message").innerText =
+                    "Error: Employee has already wished for this Game!";
             } else {
-                document.querySelector('#error-message').innerText = 'Something went wrong. Please double-check your input fields and try again.';
+                document.querySelector("#error-message").innerText =
+                    "Something went wrong. Please double-check your input fields and try again.";
             }
         }
     };
@@ -65,9 +67,9 @@ function addRowToTable(formData, insertedRowId) {
     const fulfilledCell = document.createElement("td");
 
     // Fill cells with data
-    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="deleteRow" value="${insertedRowId}">`;
+    deleteCheckboxCell.innerHTML = `<input class="form-check-input" type="checkbox" name="delete-row" value="${insertedRowId}">`;
     deleteCheckboxCell.scope = "row";
-    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('updateModal', ${insertedRowId}, populateUpdateWishFields)">&#128221;</a>`;
+    updateCell.innerHTML = `<a class="update" href="#" onclick="showModal('update-modal', ${insertedRowId}, populateUpdateWishFields)">&#128221;</a>`;
     wishIDCell.innerText = insertedRowId;
     gameIDCell.innerText = formData.gameID;
     gameTitleCell.innerText =
