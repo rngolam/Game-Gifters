@@ -43,6 +43,13 @@
                                 >Add Game</a
                             >
                         </li>
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                onclick="showModal('deleteModal')"
+                                >Delete Games</a
+                            >
+                        </li>
                     </ul>
                 </div>
 
@@ -67,25 +74,35 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">&#128465;</th>
+                                    <th scope="col">&#x270E;</th>
                                     <th scope="col">AppID</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody id="games-table-body">
                                 <% games.forEach(function(game) { %>
                                 <tr>
+                                    <td>
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="deleteRow"
+                                            value="<%= game.app_id %>"
+                                        />
+                                    </td>
+                                    <td>
+                                        <a
+                                            class="update"
+                                            href="#"
+                                            onclick="showModal('updateModal', <%= game.app_id %>, populateUpdateGameFields)"
+                                            >&#128221;</a
+                                        >
+                                    </td>
                                     <td><%= game.app_id %></td>
                                     <td><%= game.title %></td>
                                     <td>$<%= game.price.toFixed(2) %></td>
-                                    <td>
-                                        <a
-                                            href="#"
-                                            onclick="showModal('updateModal')"
-                                            >Update</a
-                                        >
-                                    </td>
                                 </tr>
                                 <% }); %>
                             </tbody>
@@ -208,6 +225,40 @@
                     <div class="col-auto" style="padding-top: 3em">
                         <button type="submit" class="btn btn-primary mb-3">
                             Update Game
+                        </button>
+                    </div>
+                </form>
+                <br />
+            </div>
+        </div>
+
+        <!-- Delete Game Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="closeModal('deleteModal')"
+                    >&times;</span
+                ><br />
+
+                <h2>Remove Game</h2>
+                <p>
+                    Are you sure you want to remove the selected Games?
+                </p>
+                <br />
+
+                <form id="delete-game-form">
+                    <div class="d-grid gap-2 d-md-block">
+                        <button
+                            class="btn btn-outline-danger"
+                            type="submit"
+                        >
+                            Yes
+                        </button>
+                        <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            onclick="closeModal('deleteModal')"
+                        >
+                            No
                         </button>
                     </div>
                 </form>

@@ -10,7 +10,7 @@ function getGames(res, db) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            const scripts = ["modals.js", "addGame.js", "clearForm.js"];
+            const scripts = ["modals.js", "addGame.js", "deleteGame.js", "clearForm.js"];
             res.render("pages/games", {
                 page_name: "games",
                 games: results,
@@ -36,6 +36,21 @@ function addGame(res, data, db) {
     });
 }
 
+function deleteGame(res, data, db) {
+    const placeholders = data.deleteIDs.map((id) => `?`);
+    const deleteQuery = `DELETE FROM games WHERE app_id IN (${placeholders})`;
+    const inserts = data.deleteIDs;
+
+    db.pool.query(deleteQuery, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
 router.get("/", function (req, res) {
     const db = req.app.get("mysql");
     getGames(res, db);
@@ -45,6 +60,12 @@ router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addGame(res, data, db);
+});
+
+router.delete("/", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    deleteGame(res, data, db);
 });
 
 module.exports = router;
