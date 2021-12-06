@@ -7,6 +7,11 @@
         <% scripts.forEach(function(script) { %>
             <script src="js/<%= script %>" async></script>
         <% }) %>
+        <% if (gifts) { %>
+            <script>
+                let giftInfo = <%- JSON.stringify(gifts) %>;
+            </script>
+        <% } %>
 
     </head>
 
@@ -95,7 +100,7 @@
                                         <a
                                             class="update"
                                             href="#"
-                                            onclick="showModal('updateModal', <%= gift.gift_id %>)"
+                                            onclick="showModal('updateModal', <%= gift.gift_id %>, populateUpdateGiftFields)"
                                             >&#128221;</a
                                         >
                                     </td>
@@ -112,7 +117,7 @@
                                         <%= gift.recipient_first_name + ' ' +
                                         gift.recipient_last_name %>
                                     </td>
-                                    <td><%= gift.date_sent_formatted %></td>
+                                    <td><%= gift.formatteed_date_sent %></td>
                                 </tr>
                                 <% }); %>
                             </tbody>
@@ -205,6 +210,81 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Update Gift Modal -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="closeModal('updateModal')"
+                    >&times;</span
+                ><br />
+
+                <h2>Update Gift</h2>
+                <p>
+                    Change information of an existing gift in the
+                    database.
+                </p>
+                <br />
+
+                <form id="update-gift-form">
+                    <div class="row g-2" style="padding-top: 1.6em">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="edited-wish"
+                                    id="edited-wish"
+                                    autocomplete="off"
+                                    readonly
+                                />
+                                <label for="edited-wish">Wish to Update</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row g-2" style="padding-top: 1.6em">
+                        <div class="form-floating col">
+                            <div class="form-floating">
+                                <select class="form-select" id="update-sender-id">
+                                    <option value="">
+                                        Select a sender (optional)
+                                    </option>
+                                    <% employees.forEach(function(employee) { %>
+                                    <option
+                                        value="<%= employee.employee_id %>"
+                                        data-sender="<%= employee.first_name %> <%= employee.last_name %>"
+                                    >
+                                        <%= employee.first_name %> <%=
+                                        employee.last_name %> [<%=
+                                        employee.employee_id %>]
+                                    </option>
+                                    <% }); %>
+                                </select>
+                                <label for="update-sender-id">Sender</label>
+                            </div>
+                        </div>
+
+                        <div class="form-floating col">
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="dateSent"
+                                id="update-date-sent"
+                                required
+                            />
+                            <label for="update-date-sent">Date Sent</label>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 3em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Update Gift
+                        </button>
+                    </div>
+                </form>
+                <br />
             </div>
         </div>
 

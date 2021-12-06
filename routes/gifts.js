@@ -4,7 +4,7 @@ const router = express.Router();
 function getGifts(res, db, context, complete) {
     const selectQuery = `SELECT gift_id, gifts.wish_id AS associated_wish_id, games.title AS game_title,
     fulfilled_by AS sender_id, sender.first_name AS sender_first_name, sender.last_name AS sender_last_name,
-    recipient.first_name AS recipient_first_name, recipient.last_name AS recipient_last_name, DATE_FORMAT(date_sent, "%c/%e/%Y") AS date_sent_formatted
+    recipient.first_name AS recipient_first_name, recipient.last_name AS recipient_last_name, DATE_FORMAT(date_sent, "%c/%e/%Y") AS formatted_date_sent
     FROM gifts
     INNER JOIN wishes ON gifts.wish_id=wishes.wish_id
     INNER JOIN games ON wishes.game_id=games.app_id
@@ -90,14 +90,36 @@ function addGift(res, data, db) {
     );
 }
 
+function updateGift(res, data, db) {
+    const updateQuery = `UPDATE gifts
+    SET fulfilled_by=?,
+    date_sent=?
+    WHERE gift_id=?;`;
+
+    const inserts = [
+        data.senderID,
+        data.dateSent,
+        data.giftID
+    ];
+
+    db.pool.query(updateQuery, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
 function deleteGift(res, data, db) {
     const placeholders = data.deleteIDs.map((id) => `?`);
-
-    const deleteQuery = `DELETE FROM gifts WHERE gift_id IN (${placeholders});`;
 
     const selectWishesQuery = `SELECT gifts.wish_id FROM gifts
     INNER JOIN wishes ON gifts.wish_id = wishes.wish_id
     WHERE gifts.gift_id IN (${placeholders});`;
+
+    const deleteQuery = `DELETE FROM gifts WHERE gift_id IN (${placeholders});`;
 
     const updateFulfilledQuery = `UPDATE wishes
     SET fulfilled=0
@@ -113,6 +135,8 @@ function deleteGift(res, data, db) {
                 deleteQuery,
                 giftsToDelete,
                 function (deleteError, deleteResults, deleteFields) {
+
+                    // Condense the returned wish IDs into a 1-dimensional array
                     const toUpdate = selectResults.map((row) => row.wish_id);
 
                     db.pool.query(
@@ -139,6 +163,7 @@ router.get("/", function (req, res) {
     const scripts = [
         "modals.js",
         "addGift.js",
+        "updateGift.js",
         "deleteGift.js",
         "convertDateString.js",
         "clearForm.js",
@@ -161,6 +186,12 @@ router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addGift(res, data, db);
+});
+
+router.put("/", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    updateGift(res, data, db);
 });
 
 router.delete("/", function (req, res) {
