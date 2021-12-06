@@ -55,7 +55,7 @@ function populateUpdateGiftFields(id) {
 
     editedWish.value = `${giftToUpdate.game_title} for ${recipientName} [${giftToUpdate.associated_wish_id}]`;
 
-    updateSenderIDInput.value = giftToUpdate.sender_id;
+    updateSenderIDInput.value = giftToUpdate.sender_id || "";
     updateDateSentInput.value = convertFormFriendlyDateString(
         giftToUpdate.formatted_date_sent
     );

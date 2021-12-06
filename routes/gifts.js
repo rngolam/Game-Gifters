@@ -96,6 +96,7 @@ function updateGift(res, data, db) {
     date_sent=?
     WHERE gift_id=?;`;
 
+    data.senderID = data.senderID || null;
     const inserts = [data.senderID, data.dateSent, data.giftID];
 
     db.pool.query(updateQuery, inserts, function (error, results, fields) {
