@@ -90,6 +90,30 @@ function addWish(res, data, db) {
     });
 }
 
+function updateWish(res, data, db) {
+    const updateQuery = `UPDATE wishes
+    SET game_id=?,
+    wished_by=?,
+    date_wished=?
+    WHERE wish_id=?;`;
+
+    const inserts = [
+        data.gameID,
+        data.employeeID,
+        data.dateWished,
+        data.wishID
+    ];
+
+    db.pool.query(updateQuery, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.send(results);
+        }
+    });
+}
+
 function deleteWish(res, data, db) {
     const placeholders = data.deleteIDs.map((id) => `?`);
     const deleteQuery = `DELETE FROM wishes WHERE wish_id IN (${placeholders})`;
@@ -111,6 +135,7 @@ router.get("/", function (req, res) {
     const scripts = [
         "modals.js",
         "addWish.js",
+        "updateWish.js",
         "deleteWish.js",
         "convertDateString.js",
         "clearForm.js",
@@ -133,6 +158,12 @@ router.post("/", function (req, res) {
     const data = req.body;
     const db = req.app.get("mysql");
     addWish(res, data, db);
+});
+
+router.put("/", function (req, res) {
+    const data = req.body;
+    const db = req.app.get("mysql");
+    updateWish(res, data, db);
 });
 
 router.delete("/", function (req, res) {

@@ -7,6 +7,11 @@
         <% scripts.forEach(function(script) { %>
             <script src="js/<%= script %>" async></script>
         <% }) %>
+        <% if (wishes) { %>
+            <script>
+                let wishInfo = <%- JSON.stringify(wishes) %>;
+            </script>
+        <% } %>
     </head>
 
     <body class="d-flex h-100 text-center text-white bg-dark table-page">
@@ -81,6 +86,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">&#128465;</th>
+                                    <th scope="col">&#x270E;</th>
                                     <th scope="col">Wish ID</th>
                                     <th scope="col">Game ID</th>
                                     <th scope="col">Game Title</th>
@@ -99,6 +105,14 @@
                                         type="checkbox"
                                         name="deleteRow"
                                         value="<%= wish.wish_id %>"
+                                        >
+                                    </td>
+                                    <td>
+                                        <a
+                                            class="update"
+                                            href="#"
+                                            onclick="showModal('updateModal', <%= wish.wish_id %>, populateUpdateWishFields)"
+                                            >&#128221;</a
                                         >
                                     </td>
                                     <td><%= wish.wish_id %></td>
@@ -205,6 +219,83 @@
                     <div class="col-auto" style="padding-top: 3em">
                         <button type="submit" class="btn btn-primary mb-3">
                             Add Wish
+                        </button>
+                    </div>
+                </form>
+                <br />
+            </div>
+        </div>
+
+        <!-- Update Employee Modal -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content form-desc">
+                <span class="close" onclick="closeModal('updateModal')"
+                    >&times;</span
+                ><br />
+
+                <h2>Update Wish</h2>
+                <p>
+                    Change information of an existing wish in the
+                    database.
+                </p>
+                <br />
+
+                <form id="update-wish-form">
+                    <div class="row mb-3" style="padding-top: 1.6em">
+                        <div class="form-floating col-md">
+                            <select
+                                class="form-select"
+                                id="update-employee-id"
+                                required
+                            >
+                                <option value="">
+                                    Select an employee
+                                </option>
+                                <% employees.forEach(function(employee) { %>
+                                <option
+                                    value="<%= employee.employee_id %>"
+                                    data-employee="<%= employee.first_name + ' ' + employee.last_name %>"
+                                >
+                                    <%= employee.first_name %> <%=
+                                    employee.last_name %> [<%=
+                                    employee.employee_id %>]
+                                </option>
+                                <% }); %>
+                            </select>
+                            <label for="update-employee-id">Employee</label>
+                        </div>
+                    </div>
+
+                    <div class="row g-2" style="padding-top: 1.6em">
+                        <div class="form-floating col">
+                            <select class="form-select" id="update-game-id" required>
+                                <option value="">Select a game</option>
+                                <% games.forEach(function(game) { %>
+                                <option
+                                    value="<%= game.app_id %>"
+                                    data-title="<%= game.title %>"
+                                >
+                                    <%= game.title %> [<%= game.app_id %>]
+                                </option>
+                                <% }); %>
+                            </select>
+                            <label for="update-game-id">Game</label>
+                        </div>
+
+                        <div class="form-floating col">
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="update-date-wished"
+                                required
+                            />
+                            <label for="update-date-wished">Wish Date</label>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="padding-top: 3em">
+                        <button type="submit" class="btn btn-primary mb-3">
+                            Update Wish
                         </button>
                     </div>
                 </form>
