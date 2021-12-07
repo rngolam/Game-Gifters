@@ -36,5 +36,4 @@ DB_NAME={YOUR DATABASE NAME}
 ![Adding a Game](https://user-images.githubusercontent.com/69094063/145112662-691efa32-c0eb-4ae8-8aec-1886cf1957e4.png)
 ![Searching the Steam Store](https://user-images.githubusercontent.com/69094063/145112739-348f1dc6-8504-49d7-9f10-2298664b430f.png)
 ![Newly-added Row](https://user-images.githubusercontent.com/69094063/145112836-2839802e-501e-4552-bdd2-6d1fbb5d9910.png)
-![Deleting multiple games](https://user-images.githubusercontent.com/69094063/1451128![image](https://user-images.githubusercontent.com/69094063/145112941-c53f6d6c-da14-4cc4-bc17-9ec500cd1a65.png)
-98-d059ac14-dacd-4ec0-98e9-f788ffad92d7.png)
+![Deleting Multiple Games](https://user-images.githubusercontent.com/69094063/145113197-11798d1a-acd7-43bd-8ced-b7757d600d8b.png)
