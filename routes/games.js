@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const https = require("https");
 
 function getGames(res, db) {
     const select_query = `SELECT app_id, title, price FROM games
