@@ -7,7 +7,7 @@ Track video game wishlists for your company's employees.
 ## Setup Environment
 - Install Node.js
 - Navigate to Game-Gifters root directory
-- Install depdencies with `npm install`
+- Install dependencies with `npm install`
 
 ## MySQL Database Setup
 - Create new `.env` file in Game-Gifters root directory
